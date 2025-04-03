@@ -1,65 +1,94 @@
+/* Kleurvariabelen */
+:root {
+    --primary-color: #E84138FF;
+    --secondary-color: white;
+}
+
 /* Algemene stijl */
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
-    color: red;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
+    margin: 0 auto;
+    padding: 5px;
     text-align: center;
 }
 
 h1 {
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
-/* Verlofinfo */
-.verlof-info {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.verlof-info p {
-    margin: 5px 0;
+/* Tabelcontainer met ronde hoeken */
+.table-container {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Tabelstijl */
-table {
+.custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
-th, td {
-    border: 1px solid red;
-    padding: 4px;
+/* Koptekst */
+.custom-table th {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 5px; /* Verminderde padding */
     text-align: center;
+    font-weight: bold;
+    font-size: 14px; /* Kleinere tekst */
 }
 
-th {
-    background-color: #f9f9f9;
-}
-
-input[type="number"] {
-    width: 80%;
-    padding: 4px;
-    font-size: 14px;
+/* Cellen */
+.custom-table td {
+    padding: 0px 0px; /* Verminderde padding */
     text-align: center;
-    border: 1px solid red;
+    color: var(--primary-color);
+    border-top: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    font-size: 13px; /* Kleinere tekst */
+}
+
+/* Voettekst */
+.custom-table tfoot td {
+    font-weight: bold;
+    border-top: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 5px; /* Verminderde padding */
+}
+
+/* Inputvelden */
+.percentage-input {
+    width: 90%;
+    padding: 0px 1px;/* Verminderde padding */
+    font-size: 13px; /* Kleinere tekst */
+    text-align: center;
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
-    color: red;
-    background-color: white;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    height: 26px; /* Vaste hoogte voor consistentie */
 }
 
-input[type="number"]::placeholder {
-    color: red;
+.percentage-input::placeholder {
+    color: var(--primary-color);
     opacity: 0.7;
+}
+
+/* Compactere rijen */
+.custom-table tr {
+    line-height: 1; /* Verminderde regelhoogte */
 }
