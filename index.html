@@ -78,6 +78,125 @@
     </table>
   </div>
 
+  <h1>Verlof dit jaar</h1>
+  <div class="verlof-info">
+    <p><strong>Max wettelijk verlof:</strong> <span id="max-wettelijk-verlof">160.00</span>H</p>
+    <p><strong>Begrensd wettelijk verlof:</strong> <span id="begrensd-wettelijk-verlof">144.00</span>H</p>
+  </div>
+
+  <!-- Tweede tabel (verloftabel) -->
+  <div class="table-container">
+    <table class="custom-table">
+      <thead>
+      <tr>
+        <th>Maand</th>
+        <th>Percentage</th>
+        <th>WV Start</th>
+        <th>WV Opgenomen</th>
+        <th>% WV Opgenomen</th>
+        <th>% WV Opgenomen Totaal</th>
+      </tr>
+      </thead>
+      <tbody id="verlof-tabel">
+      <tr>
+        <td>Januari</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-januari">128.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-januari">0.00%</td>
+        <td id="percentage-wv-totaal-januari">0.00%</td>
+      </tr>
+      <tr>
+        <td>Februari</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-februari">120.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-februari">0.00%</td>
+        <td id="percentage-wv-totaal-februari">6.25%</td>
+      </tr>
+      <tr>
+        <td>Maart</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-maart">120.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-maart">0.00%</td>
+        <td id="percentage-wv-totaal-maart">6.25%</td>
+      </tr>
+      <tr>
+        <td>April</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-april">120.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-april">0.00%</td>
+        <td id="percentage-wv-totaal-april">6.25%</td>
+      </tr>
+      <tr>
+        <td>Mei</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-mei">120.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-mei">0.00%</td>
+        <td id="percentage-wv-totaal-mei">6.25%</td>
+      </tr>
+      <tr>
+        <td>Juni</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-juni">120.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-juni">0.00%</td>
+        <td id="percentage-wv-totaal-juni">6.25%</td>
+      </tr>
+      <tr>
+        <td>Juli</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-juli">135.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-juli">61.11%</td>
+        <td id="percentage-wv-totaal-juli">67.36%</td>
+      </tr>
+      <tr>
+        <td>Augustus</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-augustus">47.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-augustus">0.00%</td>
+        <td id="percentage-wv-totaal-augustus">67.36%</td>
+      </tr>
+      <tr>
+        <td>September</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-september">47.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-september">0.00%</td>
+        <td id="percentage-wv-totaal-september">67.36%</td>
+      </tr>
+      <tr>
+        <td>Oktober</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-oktober">47.00</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-oktober">0.00%</td>
+        <td id="percentage-wv-totaal-oktober">67.36%</td>
+      </tr>
+      <tr>
+        <td>November</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-november">41.78</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-november">0.00%</td>
+        <td id="percentage-wv-totaal-november">67.36%</td>
+      </tr>
+      <tr>
+        <td>December</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
+        <td id="wv-start-december">41.78</td>
+        <td><input type="number" class="percentage-input opgenomen-uren" min="0" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-december">0.00%</td>
+        <td id="percentage-wv-totaal-december">67.36%</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <script src="script.js"></script>
 </body>

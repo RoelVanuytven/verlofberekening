@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px; /* Vergroot voor de bredere tweede tabel */
     margin: 0 auto;
     padding: 5px;
     text-align: center;
@@ -26,13 +26,22 @@ h1 {
     color: var(--primary-color);
 }
 
+/* Verlof info stijl */
+.verlof-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
 /* Tabelcontainer met ronde hoeken */
 .table-container {
     border: 2px solid var(--primary-color);
     border-radius: 10px;
     overflow: hidden;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 /* Tabelstijl */
@@ -71,7 +80,7 @@ h1 {
 }
 
 /* Inputvelden */
-.percentage-input {
+.percentage-input, .opgenomen-uren {
     width: 90%;
     padding: 0px 1px;/* Verminderde padding */
     font-size: 13px; /* Kleinere tekst */
@@ -86,6 +95,17 @@ h1 {
 .percentage-input::placeholder {
     color: var(--primary-color);
     opacity: 0.7;
+}
+
+/* Verwijder pijltjes van number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 /* Compactere rijen */
