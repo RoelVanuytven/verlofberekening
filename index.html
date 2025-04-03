@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verlofberekening</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Tewerkstellingspercentage vorig jaar</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Maand</th>
+      <th>Percentage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Januari</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Februari</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Maart</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>April</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Mei</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Juni</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Juli</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Augustus</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>September</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>Oktober</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>November</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    <tr>
+      <td>December</td>
+      <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td><strong>Gemiddelde</strong></td>
+      <td><strong id="average-percentage">100.00%</strong></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
