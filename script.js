@@ -52,6 +52,8 @@ function updateTable() {
     ];
 
     let cumulatiefPercentage = 0;
+    let vorigeWVStart = 0; // Voor het berekenen van WV Correctie
+    let vorigeOpgenomenUren = 0; // Voor het berekenen van WV Correctie
 
     // Loop door elke maand en update de waarden
     maanden.forEach((maand, index) => {
@@ -59,10 +61,11 @@ function updateTable() {
         const percentageInput = document.querySelector(`#verlof-tabel tr:nth-child(${index + 1}) .percentage-input:not(.opgenomen-uren)`);
         const opgenomenUrenInput = document.querySelector(`#verlof-tabel tr:nth-child(${index + 1}) .opgenomen-uren`);
         const wvStartCell = document.getElementById(`wv-start-${maand}`);
+        const wvCorrectieCell = document.getElementById(`wv-correctie-${maand}`);
         const percentageWVCell = document.getElementById(`percentage-wv-${maand}`);
         const percentageWVTotaalCell = document.getElementById(`percentage-wv-totaal-${maand}`);
 
-        if (!percentageInput || !opgenomenUrenInput || !wvStartCell || !percentageWVCell || !percentageWVTotaalCell) {
+        if (!percentageInput || !opgenomenUrenInput || !wvStartCell || !wvCorrectieCell || !percentageWVCell || !percentageWVTotaalCell) {
             console.error(`Elementen ontbreken voor de maand ${maand}`);
             return;
         }
@@ -88,12 +91,28 @@ function updateTable() {
         // Update de cellen met de berekende waarden
         wvStartCell.textContent = wvStart.toFixed(2);
 
+        // Bereken WV Correctie
+        let wvCorrectie;
+        if (index === 0) {
+            // Voor januari: WV Start - Max wettelijk verlof
+            wvCorrectie = wvStart - maxWettelijkVerlof;
+        } else {
+            // Voor andere maanden: WV Start - WV Start van vorige maand + WV Opgenomen vorige maand
+            wvCorrectie = wvStart - vorigeWVStart + vorigeOpgenomenUren;
+        }
+        wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
+
+        // Bereken percentage WV opgenomen
         const percentageWV = wvStart > 0 ? (opgenomenUren / wvStart) * 100 : 0;
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
         // Bereken het cumulatieve percentage
         cumulatiefPercentage += percentageWV;
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
+
+        // Bewaar WV Start en Opgenomen Uren voor de volgende iteratie
+        vorigeWVStart = wvStart;
+        vorigeOpgenomenUren = opgenomenUren;
     });
 }
 
