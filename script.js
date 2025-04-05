@@ -33,13 +33,33 @@ function showCookieConsent() {
     });
 }
 
-// Valideer de invoer om ervoor te zorgen dat deze binnen het bereik van 0-100 ligt
+// Valideer de invoer voor percentage velden (0-100)
 function validateInput(input) {
     const value = parseFloat(input.value);
     if (value < 0) {
         input.value = 0;
     } else if (value > 100) {
         input.value = 100;
+    }
+
+    // Sla de waarde op in localStorage
+    saveToLocalStorage();
+}
+
+// Valideer de opgenomen uren invoer (beperkt tot beschikbare uren)
+function validateOpgenomenUren(input, maand) {
+    const value = parseFloat(input.value);
+    if (value < 0) {
+        input.value = 0;
+    }
+
+    // Haal de beschikbare uren op voor deze maand
+    const wvStartCell = document.getElementById(`wv-start-${maand}`);
+    if (wvStartCell) {
+        const wvStart = parseFloat(wvStartCell.textContent);
+        if (value > wvStart) {
+            input.value = wvStart.toFixed(2);
+        }
     }
 
     // Sla de waarde op in localStorage
@@ -274,6 +294,11 @@ function updateTable() {
 
         // Update de cellen met de berekende waarden
         wvStartCell.textContent = wvStart.toFixed(2);
+
+        // Beperk de opgenomen uren tot het beschikbare WV Start
+        if (opgenomenUren > wvStart) {
+            opgenomenUrenInput.value = wvStart.toFixed(2);
+        }
 
         // Bereken WV Correctie
         let wvCorrectie;
@@ -718,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Voeg event listeners toe aan alle percentage-inputs in de tweede tabel
-    const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input');
+    const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
     verlofPercentageInputs.forEach(input => {
         input.addEventListener('input', function() {
             validateInput(this);
@@ -726,10 +751,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Voeg event listeners toe aan alle opgenomen-uren inputs
-    const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
-    opgenomenUrenInputs.forEach(input => {
-        input.addEventListener('input', updateTable);
+    // Voeg event listeners toe aan alle opgenomen-uren inputs met validatie
+    const maanden = [
+        'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+        'juli', 'augustus', 'september', 'oktober', 'november', 'december'
+    ];
+
+    maanden.forEach((maand, index) => {
+        const opgenomenUrenInput = document.querySelector(`#verlof-tabel tr:nth-child(${index + 1}) .opgenomen-uren`);
+        if (opgenomenUrenInput) {
+            opgenomenUrenInput.addEventListener('input', function() {
+                validateOpgenomenUren(this, maand);
+                updateTable();
+            });
+        }
     });
 
     // Voeg event listeners toe aan alle ADV opgenomen-uren inputs
