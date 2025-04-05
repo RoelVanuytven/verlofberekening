@@ -1,5 +1,4 @@
 // Functie om de cookie-melding te tonen
-// Functie om de cookie-melding te tonen
 function showCookieConsent() {
     // Controleer of de gebruiker al heeft ingestemd
     if (localStorage.getItem('cookieConsent') === 'accepted') {
@@ -46,6 +45,8 @@ function showCookieConsent() {
     // Vertaal de cookie melding
     translatePage();
 }
+
+
 
 // Valideer de invoer voor percentage velden (0-100)
 function validateInput(input) {
