@@ -1,3 +1,38 @@
+// Functie om de cookie-melding te tonen
+function showCookieConsent() {
+    // Controleer of de gebruiker al heeft ingestemd
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
+        return; // Toon geen melding als al is ingestemd
+    }
+
+    // Maak een overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'cookie-overlay';
+
+    // Maak een container voor de cookie-melding
+    const consentBox = document.createElement('div');
+    consentBox.className = 'cookie-consent';
+
+    // Voeg de tekst toe
+    consentBox.innerHTML = `
+        <h3>Cookie-melding</h3>
+        <p>Deze site gebruikt cookies van Google om services te leveren en verkeer te analyseren. 
+        Je IP-adres en user-agent worden met Google gedeeld, samen met prestatie- en beveiligingsstatistieken 
+        om servicekwaliteit te garanderen, gebruiksstatistieken te genereren, misbruik te detecteren en maatregelen te treffen.</p>
+        <button id="accept-cookies" class="cookie-button">Accepteren</button>
+    `;
+
+    // Voeg de elementen toe aan de pagina
+    overlay.appendChild(consentBox);
+    document.body.appendChild(overlay);
+
+    // Voeg een event listener toe aan de accepteer-knop
+    document.getElementById('accept-cookies').addEventListener('click', function() {
+        localStorage.setItem('cookieConsent', 'accepted');
+        overlay.style.display = 'none';
+    });
+}
+
 // Valideer de invoer om ervoor te zorgen dat deze binnen het bereik van 0-100 ligt
 function validateInput(input) {
     const value = parseFloat(input.value);
@@ -6,6 +41,130 @@ function validateInput(input) {
     } else if (value > 100) {
         input.value = 100;
     }
+
+    // Sla de waarde op in localStorage
+    saveToLocalStorage();
+}
+
+// Functie om alle invoerwaarden op te slaan in localStorage
+function saveToLocalStorage() {
+    // Sla de percentages van de eerste tabel op
+    const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
+    const percentages = Array.from(percentageInputs).map(input => input.value);
+    localStorage.setItem('percentages', JSON.stringify(percentages));
+
+    // Sla de percentages van de tweede tabel op
+    const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
+    const verlofPercentages = Array.from(verlofPercentageInputs).map(input => input.value);
+    localStorage.setItem('verlofPercentages', JSON.stringify(verlofPercentages));
+
+    // Sla de opgenomen uren van de tweede tabel op
+    const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
+    const opgenomenUren = Array.from(opgenomenUrenInputs).map(input => input.value);
+    localStorage.setItem('opgenomenUren', JSON.stringify(opgenomenUren));
+
+    // Sla de ADV opgenomen uren op
+    const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
+    const advOpgenomenUren = Array.from(advOpgenomenUrenInputs).map(input => input.value);
+    localStorage.setItem('advOpgenomenUren', JSON.stringify(advOpgenomenUren));
+
+    // Sla de EL opgenomen uren op
+    const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
+    const elOpgenomenUren = Array.from(elOpgenomenUrenInputs).map(input => input.value);
+    localStorage.setItem('elOpgenomenUren', JSON.stringify(elOpgenomenUren));
+
+    // Sla de ANC opgenomen uren op
+    const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
+    const ancOpgenomenUren = Array.from(ancOpgenomenUrenInputs).map(input => input.value);
+    localStorage.setItem('ancOpgenomenUren', JSON.stringify(ancOpgenomenUren));
+
+    // Sla de startdatum op
+    const startDate = document.getElementById('startDate').value;
+    localStorage.setItem('startDate', startDate);
+}
+
+// Functie om opgeslagen waarden uit localStorage te laden
+function loadFromLocalStorage() {
+    // Laad de percentages van de eerste tabel
+    const percentages = JSON.parse(localStorage.getItem('percentages'));
+    if (percentages) {
+        const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
+        percentages.forEach((value, index) => {
+            if (index < percentageInputs.length) {
+                percentageInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de percentages van de tweede tabel
+    const verlofPercentages = JSON.parse(localStorage.getItem('verlofPercentages'));
+    if (verlofPercentages) {
+        const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
+        verlofPercentages.forEach((value, index) => {
+            if (index < verlofPercentageInputs.length) {
+                verlofPercentageInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de opgenomen uren van de tweede tabel
+    const opgenomenUren = JSON.parse(localStorage.getItem('opgenomenUren'));
+    if (opgenomenUren) {
+        const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
+        opgenomenUren.forEach((value, index) => {
+            if (index < opgenomenUrenInputs.length) {
+                opgenomenUrenInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de ADV opgenomen uren
+    const advOpgenomenUren = JSON.parse(localStorage.getItem('advOpgenomenUren'));
+    if (advOpgenomenUren) {
+        const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
+        advOpgenomenUren.forEach((value, index) => {
+            if (index < advOpgenomenUrenInputs.length) {
+                advOpgenomenUrenInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de EL opgenomen uren
+    const elOpgenomenUren = JSON.parse(localStorage.getItem('elOpgenomenUren'));
+    if (elOpgenomenUren) {
+        const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
+        elOpgenomenUren.forEach((value, index) => {
+            if (index < elOpgenomenUrenInputs.length) {
+                elOpgenomenUrenInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de ANC opgenomen uren
+    const ancOpgenomenUren = JSON.parse(localStorage.getItem('ancOpgenomenUren'));
+    if (ancOpgenomenUren) {
+        const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
+        ancOpgenomenUren.forEach((value, index) => {
+            if (index < ancOpgenomenUrenInputs.length) {
+                ancOpgenomenUrenInputs[index].value = value;
+            }
+        });
+    }
+
+    // Laad de startdatum
+    const startDate = localStorage.getItem('startDate');
+    if (startDate) {
+        document.getElementById('startDate').value = startDate;
+    } else {
+        setDefaultDate(); // Als er geen opgeslagen datum is, gebruik de huidige datum
+    }
+
+    // Bereken alles opnieuw met de geladen waarden
+    calculateAverage();
+    updateTable();
+    updateADVTable();
+    updateELTable();
+    updateANCTable();
 }
 
 // Bereken het gemiddelde van de percentages
@@ -26,6 +185,9 @@ function calculateAverage() {
 
     // Bereken het begrensde wettelijk verlof op basis van het gemiddelde percentage
     updateBegrensdWettelijkVerlof(average);
+
+    // Sla de waarden op in localStorage
+    saveToLocalStorage();
 
     return average; // Return de waarde voor gebruik in andere functies
 }
@@ -152,6 +314,9 @@ function updateTable() {
     updateADVTable();
     updateELTable();
     updateANCTable();
+
+    // Sla de waarden op in localStorage
+    saveToLocalStorage();
 }
 
 // Functie voor het bijwerken van de ADV tabel
@@ -247,6 +412,9 @@ function updateADVTable() {
         vorigeADVOpgenomen = isNaN(parseFloat(advOpgenomenInput.value)) ? 0 : parseFloat(advOpgenomenInput.value);
         vorigePercentage = percentage;
     });
+
+    // Sla de waarden op in localStorage
+    saveToLocalStorage();
 }
 
 // Functie voor het bijwerken van de EL (extralegaal verlof) tabel
@@ -342,6 +510,9 @@ function updateELTable() {
         vorigeELOpgenomen = isNaN(parseFloat(elOpgenomenInput.value)) ? 0 : parseFloat(elOpgenomenInput.value);
         vorigePercentage = percentage;
     });
+
+    // Sla de waarden op in localStorage
+    saveToLocalStorage();
 }
 
 // Functie voor het bijwerken van de ANC (ancienniteitsverlof) tabel
@@ -437,6 +608,9 @@ function updateANCTable() {
         vorigeANCOpgenomen = isNaN(parseFloat(ancOpgenomenInput.value)) ? 0 : parseFloat(ancOpgenomenInput.value);
         vorigePercentage = percentage;
     });
+
+    // Sla de waarden op in localStorage
+    saveToLocalStorage();
 }
 
 // Functie om de huidige datum in te stellen als standaardwaarde
@@ -449,6 +623,9 @@ function setDefaultDate() {
 
     const dateInput = document.getElementById('startDate');
     dateInput.value = formattedDate;
+
+    // Sla de datum op in localStorage
+    localStorage.setItem('startDate', formattedDate);
 }
 
 // Functie om het ancienniteitsverlof te berekenen op basis van jaren dienst
@@ -501,11 +678,35 @@ function updateStartDate() {
     updateADVTable();
     updateELTable();
     updateANCTable();
+
+    // Sla de datum op in localStorage
+    localStorage.setItem('startDate', selectedDate);
+}
+
+// Functie om alle opgeslagen gegevens te wissen, behalve de cookie consent
+function clearLocalStorage() {
+    // Bewaar de cookie consent instelling
+    const cookieConsent = localStorage.getItem('cookieConsent');
+
+    // Wis alle localStorage
+    localStorage.clear();
+
+    // Herstel de cookie consent instelling als die bestond
+    if (cookieConsent) {
+        localStorage.setItem('cookieConsent', cookieConsent);
+    }
+
+    // Vernieuw de pagina om alle velden te resetten
+    location.reload();
 }
 
 // Bereken het gemiddelde bij het laden van de pagina
 document.addEventListener('DOMContentLoaded', function() {
-    calculateAverage();
+    // Toon de cookie-melding
+    showCookieConsent();
+
+    // Laad opgeslagen waarden uit localStorage
+    loadFromLocalStorage();
 
     // Voeg event listeners toe aan alle percentage-inputs in de eerste tabel
     const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
@@ -543,10 +744,12 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', updateELTable);
     });
 
-    // Initialiseer de ADV en EL tabellen
-    updateADVTable();
-    updateELTable();
-    setDefaultDate();
-    const ancienniteitsverlof = berekenAncienniteitsverlof();
-    document.getElementById('max-ancieniteits-verlof').textContent = ancienniteitsverlof.toFixed(2);
+    // Voeg event listeners toe aan alle ANC opgenomen-uren inputs
+    const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
+    ancOpgenomenUrenInputs.forEach(input => {
+        input.addEventListener('input', updateANCTable);
+    });
+
+    // Voeg een event listener toe aan de startdatum
+    document.getElementById('startDate').addEventListener('change', updateStartDate);
 });
