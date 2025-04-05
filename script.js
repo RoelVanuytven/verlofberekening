@@ -66,6 +66,9 @@ function updateTable() {
         const percentageWVCell = document.getElementById(`percentage-wv-${maand}`);
         const percentageWVTotaalCell = document.getElementById(`percentage-wv-totaal-${maand}`);
 
+        // Selecteer ook het element in de detailtabel (als het bestaat)
+        const detailPercentageCell = document.getElementById(`detail-percentage-${maand}`);
+
         if (!percentageInput || !opgenomenUrenInput || !wvStartCell || !wvCorrectieCell || !percentageWVCell || !percentageWVTotaalCell) {
             console.error(`Elementen ontbreken voor de maand ${maand}`);
             return;
@@ -74,6 +77,11 @@ function updateTable() {
         // Bereken de waarden
         const percentage = isNaN(parseFloat(percentageInput.value)) ? 0 : parseFloat(percentageInput.value) / 100;
         const opgenomenUren = isNaN(parseFloat(opgenomenUrenInput.value)) ? 0 : parseFloat(opgenomenUrenInput.value);
+
+        // Update de detailtabel als het element bestaat
+        if (detailPercentageCell) {
+            detailPercentageCell.textContent = (percentage * 100).toFixed(0);
+        }
 
         let wvStart;
         if (index === 0) {
@@ -139,6 +147,104 @@ function updateTable() {
         vorigeOpgenomenUren = opgenomenUren;
         vorigePercentage = percentage;
     });
+
+    // Update de ADV tabel
+    updateADVTable();
+}
+
+// Functie voor het bijwerken van de ADV tabel
+function updateADVTable() {
+    const maxADVVerlof = parseFloat(document.getElementById('max-adv-verlof').textContent);
+    const maandelijksADV = maxADVVerlof / 12; // 16.33 uren per maand
+
+    // Array met alle maanden
+    const maanden = [
+        'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+        'juli', 'augustus', 'september', 'oktober', 'november', 'december'
+    ];
+
+    let vorigeADVStart = 0;
+    let vorigeADVOpgenomen = 0;
+    let vorigePercentage = null;
+
+    // Loop door elke maand en update de waarden
+    maanden.forEach((maand, index) => {
+        // Selecteer de elementen voor deze maand
+        const percentageCell = document.getElementById(`detail-percentage-${maand}`);
+        const advStartCell = document.getElementById(`adv-start-${maand}`);
+        const advCorrectieCell = document.getElementById(`adv-correctie-${maand}`);
+        const advOpgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${index + 1}) .adv-opgenomen-uren`);
+
+        if (!percentageCell || !advStartCell || !advCorrectieCell || !advOpgenomenInput) {
+            console.error(`Elementen ontbreken voor de maand ${maand}`);
+            return;
+        }
+
+        // Bereken de waarden
+        const percentage = parseFloat(percentageCell.textContent) / 100;
+        const advOpgenomen = isNaN(parseFloat(advOpgenomenInput.value)) ? 0 : parseFloat(advOpgenomenInput.value);
+
+        let advStart;
+        let advCorrectie = 0;
+
+        if (index === 0) {
+            // Voor januari: bereken ADV start op basis van percentage
+            advStart = maxADVVerlof * percentage;
+            advCorrectie = advStart - maxADVVerlof;
+        } else {
+            // Voor andere maanden
+            const percentageGewijzigd = percentage !== vorigePercentage;
+
+            if (percentageGewijzigd) {
+                // Als het percentage is gewijzigd, bereken een nieuwe startwaarde en correctie
+                const maandenTeGaan = 12 - index;
+                const nieuweADVPerMaand = maandelijksADV * percentage;
+                const totaalNieuwADV = nieuweADVPerMaand * maandenTeGaan;
+
+                // Bereken hoeveel ADV er al is opgenomen
+                let totaalOpgenomen = 0;
+                for (let i = 0; i < index; i++) {
+                    const opgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${i + 1}) .adv-opgenomen-uren`);
+                    if (opgenomenInput) {
+                        totaalOpgenomen += isNaN(parseFloat(opgenomenInput.value)) ? 0 : parseFloat(opgenomenInput.value);
+                    }
+                }
+
+                // Bereken hoeveel ADV er al is toegekend
+                let totaalToegekend = 0;
+                for (let i = 0; i < index; i++) {
+                    const maandPercentage = parseFloat(document.getElementById(`detail-percentage-${maanden[i]}`).textContent) / 100;
+                    totaalToegekend += maandelijksADV * maandPercentage;
+                }
+
+                // Bereken wat er nog beschikbaar is
+                const beschikbaarADV = (totaalToegekend - totaalOpgenomen) + totaalNieuwADV;
+
+                // Bereken correctie (verschil tussen nieuwe beschikbare ADV en wat er zou zijn zonder wijziging)
+                const oudeADVStart = Math.max(0, vorigeADVStart - vorigeADVOpgenomen);
+                advCorrectie = beschikbaarADV - oudeADVStart;
+                advStart = beschikbaarADV;
+            } else {
+                // Als het percentage niet is gewijzigd, gebruik de vorige ADV Start min opgenomen uren
+                advStart = Math.max(0, vorigeADVStart - vorigeADVOpgenomen);
+                advCorrectie = 0;
+            }
+        }
+
+        // Update de cellen met de berekende waarden
+        advStartCell.textContent = advStart.toFixed(2);
+        advCorrectieCell.textContent = advCorrectie.toFixed(2);
+
+        // Beperk de opgenomen uren tot het beschikbare ADV
+        if (advOpgenomen > advStart) {
+            advOpgenomenInput.value = advStart.toFixed(2);
+        }
+
+        // Bewaar waarden voor de volgende iteratie
+        vorigeADVStart = advStart;
+        vorigeADVOpgenomen = isNaN(parseFloat(advOpgenomenInput.value)) ? 0 : parseFloat(advOpgenomenInput.value);
+        vorigePercentage = percentage;
+    });
 }
 
 // Bereken het gemiddelde bij het laden van de pagina
@@ -168,4 +274,13 @@ document.addEventListener('DOMContentLoaded', function() {
     opgenomenUrenInputs.forEach(input => {
         input.addEventListener('input', updateTable);
     });
+
+    // Voeg event listeners toe aan alle ADV opgenomen-uren inputs
+    const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
+    advOpgenomenUrenInputs.forEach(input => {
+        input.addEventListener('input', updateADVTable);
+    });
+
+    // Initialiseer de ADV tabel
+    updateADVTable();
 });

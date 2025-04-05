@@ -51,6 +51,14 @@ h1 {
     border-collapse: collapse;
 }
 
+
+.header-groot {
+    font-size: 24px !important;
+    font-weight: bold; /* Optioneel: maakt de tekst vet */
+    text-align: center; /* Optioneel: centreert de tekst */
+    padding: 10px; /* Optioneel: voegt wat ruimte toe */
+}
+
 /* Koptekst */
 .custom-table th {
     background-color: var(--primary-color);
@@ -58,7 +66,7 @@ h1 {
     padding: 5px; /* Verminderde padding */
     text-align: center;
     font-weight: bold;
-    font-size: 14px; /* Kleinere tekst */
+    font-size: 12px; /* Kleinere tekst */
 }
 
 /* Cellen */
