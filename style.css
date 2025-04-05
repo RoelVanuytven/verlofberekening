@@ -21,6 +21,39 @@ body {
     text-align: center;
 }
 
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 5px 10px;
+    margin: 0;
+    border-bottom: 1px solid var(--primary-color);
+    position: relative;
+}
+
+.date-selector {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.date-selector label {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: 14px;
+}
+
+.date-selector input {
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    height: 24px;
+}
+
 h1 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -53,10 +86,13 @@ h1 {
 
 
 .header-groot {
-    font-size: 24px !important;
-    font-weight: bold; /* Optioneel: maakt de tekst vet */
-    text-align: center; /* Optioneel: centreert de tekst */
-    padding: 10px; /* Optioneel: voegt wat ruimte toe */
+    font-size: 18px !important;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: var(--secondary-color);
+    text-align: center;
+    flex-grow: 1;
 }
 
 /* Koptekst */

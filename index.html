@@ -215,13 +215,19 @@
     <p><strong>Ander verlof dit jaar:</strong></p>
     <p><strong>Max ADV verlof:</strong> <span id="max-adv-verlof">196.00</span>H</p>
     <p><strong>Max extralegaal verlof:</strong> <span id="max-extralegaal-verlof">24.00</span>H</p>
-    <p><strong>Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">24.00</span>H</p>
+    <p><strong>Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">0.00</span>H</p>
   </div>
 
   <div class="table-container">
+    <div class="header-container">
+      <h2 class="header-groot">Andere verlofsoorten</h2>
+      <div class="date-selector">
+        <label for="startDate">Startdatum:</label>
+        <input type="date" id="startDate" onchange="updateStartDate()">
+      </div>
+    </div>
     <table class="custom-table">
       <thead>
-      <th colspan="8" class="header-groot">Andere verlofsoorten</th>
       <tr>
         <th>Maand</th>
         <th>Percentage</th>
@@ -231,6 +237,9 @@
         <th>EL Start</th>
         <th>EL Correctie</th>
         <th>EL Opgenomen</th>
+        <th>ANC Start</th>
+        <th>ANC Correctie</th>
+        <th>ANC Opgenomen</th>
       </tr>
       </thead>
       <tbody id="details-tabel">
@@ -243,6 +252,9 @@
         <td id="el-start-januari">24.00</td>
         <td id="el-correctie-januari">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-januari">0.00</td>
+        <td id="anc-correctie-januari">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Februari</td>
@@ -253,6 +265,9 @@
         <td id="el-start-februari">24.00</td>
         <td id="el-correctie-februari">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-februari">0.00</td>
+        <td id="anc-correctie-februari">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Maart</td>
@@ -263,6 +278,9 @@
         <td id="el-start-maart">24.00</td>
         <td id="el-correctie-maart">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-maart">0.00</td>
+        <td id="anc-correctie-maart">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>April</td>
@@ -273,6 +291,9 @@
         <td id="el-start-april">24.00</td>
         <td id="el-correctie-april">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-april">0.00</td>
+        <td id="anc-correctie-april">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Mei</td>
@@ -283,6 +304,9 @@
         <td id="el-start-mei">24.00</td>
         <td id="el-correctie-mei">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-mei">0.00</td>
+        <td id="anc-correctie-mei">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Juni</td>
@@ -293,6 +317,9 @@
         <td id="el-start-juni">24.00</td>
         <td id="el-correctie-juni">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-juni">0.00</td>
+        <td id="anc-correctie-juni">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Juli</td>
@@ -303,6 +330,9 @@
         <td id="el-start-juli">24.00</td>
         <td id="el-correctie-juli">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-juli">0.00</td>
+        <td id="anc-correctie-juli">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Augustus</td>
@@ -313,6 +343,9 @@
         <td id="el-start-augustus">24.00</td>
         <td id="el-correctie-augustus">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-augustus">0.00</td>
+        <td id="anc-correctie-augustus">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>September</td>
@@ -323,6 +356,9 @@
         <td id="el-start-september">24.00</td>
         <td id="el-correctie-september">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-september">0.00</td>
+        <td id="anc-correctie-september">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>Oktober</td>
@@ -333,6 +369,9 @@
         <td id="el-start-oktober">24.00</td>
         <td id="el-correctie-oktober">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-oktober">0.00</td>
+        <td id="anc-correctie-oktober">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>November</td>
@@ -343,6 +382,9 @@
         <td id="el-start-november">24.00</td>
         <td id="el-correctie-november">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-november">0.00</td>
+        <td id="anc-correctie-november">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
         <td>December</td>
@@ -353,6 +395,9 @@
         <td id="el-start-december">24.00</td>
         <td id="el-correctie-december">0.00</td>
         <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
+        <td id="anc-start-december">0.00</td>
+        <td id="anc-correctie-december">0.00</td>
+        <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       </tbody>
     </table>

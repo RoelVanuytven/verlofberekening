@@ -151,6 +151,7 @@ function updateTable() {
     // Update de ADV en EL tabellen
     updateADVTable();
     updateELTable();
+    updateANCTable();
 }
 
 // Functie voor het bijwerken van de ADV tabel
@@ -343,6 +344,165 @@ function updateELTable() {
     });
 }
 
+// Functie voor het bijwerken van de ANC (ancienniteitsverlof) tabel
+function updateANCTable() {
+    const maxANCVerlof = parseFloat(document.getElementById('max-ancieniteits-verlof').textContent);
+    const maandelijksANC = maxANCVerlof / 12; // Uren per maand
+
+    // Array met alle maanden
+    const maanden = [
+        'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+        'juli', 'augustus', 'september', 'oktober', 'november', 'december'
+    ];
+
+    let vorigeANCStart = 0;
+    let vorigeANCOpgenomen = 0;
+    let vorigePercentage = null;
+
+    // Loop door elke maand en update de waarden
+    maanden.forEach((maand, index) => {
+        // Selecteer de elementen voor deze maand
+        const percentageCell = document.getElementById(`detail-percentage-${maand}`);
+        const ancStartCell = document.getElementById(`anc-start-${maand}`);
+        const ancCorrectieCell = document.getElementById(`anc-correctie-${maand}`);
+        const ancOpgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${index + 1}) .anc-opgenomen-uren`);
+
+        if (!percentageCell || !ancStartCell || !ancCorrectieCell || !ancOpgenomenInput) {
+            console.error(`Elementen ontbreken voor de maand ${maand}`);
+            return;
+        }
+
+        // Bereken de waarden
+        const percentage = parseFloat(percentageCell.textContent) / 100;
+        const ancOpgenomen = isNaN(parseFloat(ancOpgenomenInput.value)) ? 0 : parseFloat(ancOpgenomenInput.value);
+
+        let ancStart;
+        let ancCorrectie = 0;
+
+        if (index === 0) {
+            // Voor januari: bereken ANC start op basis van percentage
+            ancStart = maxANCVerlof * percentage;
+            ancCorrectie = ancStart - maxANCVerlof;
+        } else {
+            // Voor andere maanden
+            const percentageGewijzigd = percentage !== vorigePercentage;
+
+            if (percentageGewijzigd) {
+                // Als het percentage is gewijzigd, bereken een nieuwe startwaarde en correctie
+                const maandenTeGaan = 12 - index;
+                const nieuweANCPerMaand = maandelijksANC * percentage;
+                const totaalNieuwANC = nieuweANCPerMaand * maandenTeGaan;
+
+                // Bereken hoeveel ANC er al is opgenomen
+                let totaalOpgenomen = 0;
+                for (let i = 0; i < index; i++) {
+                    const opgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${i + 1}) .anc-opgenomen-uren`);
+                    if (opgenomenInput) {
+                        totaalOpgenomen += isNaN(parseFloat(opgenomenInput.value)) ? 0 : parseFloat(opgenomenInput.value);
+                    }
+                }
+
+                // Bereken hoeveel ANC er al is toegekend
+                let totaalToegekend = 0;
+                for (let i = 0; i < index; i++) {
+                    const maandPercentage = parseFloat(document.getElementById(`detail-percentage-${maanden[i]}`).textContent) / 100;
+                    totaalToegekend += maandelijksANC * maandPercentage;
+                }
+
+                // Bereken wat er nog beschikbaar is
+                const beschikbaarANC = (totaalToegekend - totaalOpgenomen) + totaalNieuwANC;
+
+                // Bereken correctie (verschil tussen nieuwe beschikbare ANC en wat er zou zijn zonder wijziging)
+                const oudeANCStart = Math.max(0, vorigeANCStart - vorigeANCOpgenomen);
+                ancCorrectie = beschikbaarANC - oudeANCStart;
+                ancStart = beschikbaarANC;
+            } else {
+                // Als het percentage niet is gewijzigd, gebruik de vorige ANC Start min opgenomen uren
+                ancStart = Math.max(0, vorigeANCStart - vorigeANCOpgenomen);
+                ancCorrectie = 0;
+            }
+        }
+
+        // Update de cellen met de berekende waarden
+        ancStartCell.textContent = ancStart.toFixed(2);
+        ancCorrectieCell.textContent = ancCorrectie.toFixed(2);
+
+        // Beperk de opgenomen uren tot het beschikbare ANC
+        if (ancOpgenomen > ancStart) {
+            ancOpgenomenInput.value = ancStart.toFixed(2);
+        }
+
+        // Bewaar waarden voor de volgende iteratie
+        vorigeANCStart = ancStart;
+        vorigeANCOpgenomen = isNaN(parseFloat(ancOpgenomenInput.value)) ? 0 : parseFloat(ancOpgenomenInput.value);
+        vorigePercentage = percentage;
+    });
+}
+
+// Functie om de huidige datum in te stellen als standaardwaarde
+function setDefaultDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const dateInput = document.getElementById('startDate');
+    dateInput.value = formattedDate;
+}
+
+// Functie om het ancienniteitsverlof te berekenen op basis van jaren dienst
+function berekenAncienniteitsverlof() {
+    const startDate = document.getElementById('startDate').value;
+    if (!startDate) return 0;
+
+    const startDatum = new Date(startDate);
+    const huidigeDatum = new Date();
+    const huidigJaar = huidigeDatum.getFullYear();
+
+    // Bereken het aantal jaren dienst (inclusief het huidige jaar)
+    let jarenDienst = huidigJaar - startDatum.getFullYear();
+
+    // Bepaal het aantal uren op basis van de tabel
+    let aantalUren = 0;
+
+    if (jarenDienst >= 35) {
+        aantalUren = 64;
+    } else if (jarenDienst >= 30) {
+        aantalUren = 56;
+    } else if (jarenDienst >= 25) {
+        aantalUren = 48;
+    } else if (jarenDienst >= 20) {
+        aantalUren = 40;
+    } else if (jarenDienst >= 15) {
+        aantalUren = 32;
+    } else if (jarenDienst >= 10) {
+        aantalUren = 24;
+    } else if (jarenDienst >= 5) {
+        aantalUren = 16;
+    } else if (jarenDienst >= 1) {
+        aantalUren = 8;
+    }
+
+    return aantalUren;
+}
+
+// Functie om de startdatum bij te werken
+function updateStartDate() {
+    const selectedDate = document.getElementById('startDate').value;
+    console.log('Geselecteerde startdatum:', selectedDate);
+
+    // Bereken het ancienniteitsverlof op basis van de startdatum
+    const ancienniteitsverlof = berekenAncienniteitsverlof();
+    document.getElementById('max-ancieniteits-verlof').textContent = ancienniteitsverlof.toFixed(2);
+
+    // Update de tabellen
+    updateTable();
+    updateADVTable();
+    updateELTable();
+    updateANCTable();
+}
+
 // Bereken het gemiddelde bij het laden van de pagina
 document.addEventListener('DOMContentLoaded', function() {
     calculateAverage();
@@ -386,4 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialiseer de ADV en EL tabellen
     updateADVTable();
     updateELTable();
+    setDefaultDate();
+    const ancienniteitsverlof = berekenAncienniteitsverlof();
+    document.getElementById('max-ancieniteits-verlof').textContent = ancienniteitsverlof.toFixed(2);
 });
