@@ -221,13 +221,16 @@
   <div class="table-container">
     <table class="custom-table">
       <thead>
-      <th colspan="5" class="header-groot">Andere soorten verlof</th>
+      <th colspan="8" class="header-groot">Andere verlofsoorten</th>
       <tr>
         <th>Maand</th>
         <th>Percentage</th>
         <th>ADV Start</th>
         <th>ADV Correctie</th>
         <th>ADV Opgenomen</th>
+        <th>EL Start</th>
+        <th>EL Correctie</th>
+        <th>EL Opgenomen</th>
       </tr>
       </thead>
       <tbody id="details-tabel">
@@ -237,6 +240,9 @@
         <td id="adv-start-januari">196.00</td>
         <td id="adv-correctie-januari">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-januari">24.00</td>
+        <td id="el-correctie-januari">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Februari</td>
@@ -244,6 +250,9 @@
         <td id="adv-start-februari">196.00</td>
         <td id="adv-correctie-februari">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-februari">24.00</td>
+        <td id="el-correctie-februari">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Maart</td>
@@ -251,6 +260,9 @@
         <td id="adv-start-maart">196.00</td>
         <td id="adv-correctie-maart">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-maart">24.00</td>
+        <td id="el-correctie-maart">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>April</td>
@@ -258,6 +270,9 @@
         <td id="adv-start-april">196.00</td>
         <td id="adv-correctie-april">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-april">24.00</td>
+        <td id="el-correctie-april">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Mei</td>
@@ -265,6 +280,9 @@
         <td id="adv-start-mei">196.00</td>
         <td id="adv-correctie-mei">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-mei">24.00</td>
+        <td id="el-correctie-mei">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Juni</td>
@@ -272,6 +290,9 @@
         <td id="adv-start-juni">196.00</td>
         <td id="adv-correctie-juni">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-juni">24.00</td>
+        <td id="el-correctie-juni">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Juli</td>
@@ -279,6 +300,9 @@
         <td id="adv-start-juli">196.00</td>
         <td id="adv-correctie-juli">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-juli">24.00</td>
+        <td id="el-correctie-juli">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Augustus</td>
@@ -286,6 +310,9 @@
         <td id="adv-start-augustus">196.00</td>
         <td id="adv-correctie-augustus">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-augustus">24.00</td>
+        <td id="el-correctie-augustus">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>September</td>
@@ -293,6 +320,9 @@
         <td id="adv-start-september">196.00</td>
         <td id="adv-correctie-september">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-september">24.00</td>
+        <td id="el-correctie-september">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>Oktober</td>
@@ -300,6 +330,9 @@
         <td id="adv-start-oktober">196.00</td>
         <td id="adv-correctie-oktober">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-oktober">24.00</td>
+        <td id="el-correctie-oktober">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>November</td>
@@ -307,6 +340,9 @@
         <td id="adv-start-november">196.00</td>
         <td id="adv-correctie-november">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-november">24.00</td>
+        <td id="el-correctie-november">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       <tr>
         <td>December</td>
@@ -314,6 +350,9 @@
         <td id="adv-start-december">196.00</td>
         <td id="adv-correctie-december">0.00</td>
         <td><input type="number" class="percentage-input adv-opgenomen-uren" min="0" value="0" oninput="updateADVTable()"></td>
+        <td id="el-start-december">24.00</td>
+        <td id="el-correctie-december">0.00</td>
+        <td><input type="number" class="percentage-input el-opgenomen-uren" min="0" value="0" oninput="updateELTable()"></td>
       </tr>
       </tbody>
     </table>

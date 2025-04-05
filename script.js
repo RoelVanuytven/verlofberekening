@@ -148,8 +148,9 @@ function updateTable() {
         vorigePercentage = percentage;
     });
 
-    // Update de ADV tabel
+    // Update de ADV en EL tabellen
     updateADVTable();
+    updateELTable();
 }
 
 // Functie voor het bijwerken van de ADV tabel
@@ -247,6 +248,101 @@ function updateADVTable() {
     });
 }
 
+// Functie voor het bijwerken van de EL (extralegaal verlof) tabel
+function updateELTable() {
+    const maxELVerlof = parseFloat(document.getElementById('max-extralegaal-verlof').textContent);
+    const maandelijksEL = maxELVerlof / 12; // 2 uren per maand
+
+    // Array met alle maanden
+    const maanden = [
+        'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+        'juli', 'augustus', 'september', 'oktober', 'november', 'december'
+    ];
+
+    let vorigeELStart = 0;
+    let vorigeELOpgenomen = 0;
+    let vorigePercentage = null;
+
+    // Loop door elke maand en update de waarden
+    maanden.forEach((maand, index) => {
+        // Selecteer de elementen voor deze maand
+        const percentageCell = document.getElementById(`detail-percentage-${maand}`);
+        const elStartCell = document.getElementById(`el-start-${maand}`);
+        const elCorrectieCell = document.getElementById(`el-correctie-${maand}`);
+        const elOpgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${index + 1}) .el-opgenomen-uren`);
+
+        if (!percentageCell || !elStartCell || !elCorrectieCell || !elOpgenomenInput) {
+            console.error(`Elementen ontbreken voor de maand ${maand}`);
+            return;
+        }
+
+        // Bereken de waarden
+        const percentage = parseFloat(percentageCell.textContent) / 100;
+        const elOpgenomen = isNaN(parseFloat(elOpgenomenInput.value)) ? 0 : parseFloat(elOpgenomenInput.value);
+
+        let elStart;
+        let elCorrectie = 0;
+
+        if (index === 0) {
+            // Voor januari: bereken EL start op basis van percentage
+            elStart = maxELVerlof * percentage;
+            elCorrectie = elStart - maxELVerlof;
+        } else {
+            // Voor andere maanden
+            const percentageGewijzigd = percentage !== vorigePercentage;
+
+            if (percentageGewijzigd) {
+                // Als het percentage is gewijzigd, bereken een nieuwe startwaarde en correctie
+                const maandenTeGaan = 12 - index;
+                const nieuweELPerMaand = maandelijksEL * percentage;
+                const totaalNieuwEL = nieuweELPerMaand * maandenTeGaan;
+
+                // Bereken hoeveel EL er al is opgenomen
+                let totaalOpgenomen = 0;
+                for (let i = 0; i < index; i++) {
+                    const opgenomenInput = document.querySelector(`#details-tabel tr:nth-child(${i + 1}) .el-opgenomen-uren`);
+                    if (opgenomenInput) {
+                        totaalOpgenomen += isNaN(parseFloat(opgenomenInput.value)) ? 0 : parseFloat(opgenomenInput.value);
+                    }
+                }
+
+                // Bereken hoeveel EL er al is toegekend
+                let totaalToegekend = 0;
+                for (let i = 0; i < index; i++) {
+                    const maandPercentage = parseFloat(document.getElementById(`detail-percentage-${maanden[i]}`).textContent) / 100;
+                    totaalToegekend += maandelijksEL * maandPercentage;
+                }
+
+                // Bereken wat er nog beschikbaar is
+                const beschikbaarEL = (totaalToegekend - totaalOpgenomen) + totaalNieuwEL;
+
+                // Bereken correctie (verschil tussen nieuwe beschikbare EL en wat er zou zijn zonder wijziging)
+                const oudeELStart = Math.max(0, vorigeELStart - vorigeELOpgenomen);
+                elCorrectie = beschikbaarEL - oudeELStart;
+                elStart = beschikbaarEL;
+            } else {
+                // Als het percentage niet is gewijzigd, gebruik de vorige EL Start min opgenomen uren
+                elStart = Math.max(0, vorigeELStart - vorigeELOpgenomen);
+                elCorrectie = 0;
+            }
+        }
+
+        // Update de cellen met de berekende waarden
+        elStartCell.textContent = elStart.toFixed(2);
+        elCorrectieCell.textContent = elCorrectie.toFixed(2);
+
+        // Beperk de opgenomen uren tot het beschikbare EL
+        if (elOpgenomen > elStart) {
+            elOpgenomenInput.value = elStart.toFixed(2);
+        }
+
+        // Bewaar waarden voor de volgende iteratie
+        vorigeELStart = elStart;
+        vorigeELOpgenomen = isNaN(parseFloat(elOpgenomenInput.value)) ? 0 : parseFloat(elOpgenomenInput.value);
+        vorigePercentage = percentage;
+    });
+}
+
 // Bereken het gemiddelde bij het laden van de pagina
 document.addEventListener('DOMContentLoaded', function() {
     calculateAverage();
@@ -281,6 +377,13 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', updateADVTable);
     });
 
-    // Initialiseer de ADV tabel
+    // Voeg event listeners toe aan alle EL opgenomen-uren inputs
+    const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
+    elOpgenomenUrenInputs.forEach(input => {
+        input.addEventListener('input', updateELTable);
+    });
+
+    // Initialiseer de ADV en EL tabellen
     updateADVTable();
+    updateELTable();
 });
