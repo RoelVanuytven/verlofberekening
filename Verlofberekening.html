@@ -16,81 +16,86 @@
       <span>BBTK SCK-CEN</span>
     </a>
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="verlofberekening.html" class="active">Verlofberekening</a></li>
-      <li><a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" target="_blank">Blog</a></li>
+      <li><a href="index.html" data-i18n="home">Home</a></li>
+      <li><a href="verlofberekening.html" class="active" data-i18n="vacation_calc">Verlofberekening</a></li>
+      <li><a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" target="_blank" data-i18n="blog">Blog</a></li>
     </ul>
+    <div class="language-selector">
+      <button class="lang-btn active" data-lang="nl"><img src="https://flagcdn.com/w20/nl.png" alt="Nederlands"></button>
+      <button class="lang-btn" data-lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Français"></button>
+      <button class="lang-btn" data-lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="English"></button>
+    </div>
   </div>
 </header>
 
 <div class="button-container">
-  <button onclick="clearLocalStorage()" class="clear-button">Gegevens wissen</button>
+  <button onclick="clearLocalStorage()" class="clear-button" data-i18n="clear_data">Gegevens wissen</button>
 </div>
 <div class="container">
-  <h1>Tewerkstellingspercentage vorig jaar</h1>
+  <h1 data-i18n="employment_percentage">Tewerkstellingspercentage vorig jaar</h1>
 
   <!-- Eerste tabel (hoofdtabel) -->
   <div class="table-container">
     <table class="custom-table">
       <thead>
       <tr>
-        <th>Maand</th>
-        <th>Percentage</th>
+        <th data-i18n="month">Maand</th>
+        <th data-i18n="percentage">Percentage</th>
       </tr>
       </thead>
       <tbody>
       <tr>
-        <td>Januari</td>
+        <td data-i18n="january">Januari</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Februari</td>
+        <td data-i18n="february">Februari</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Maart</td>
+        <td data-i18n="march">Maart</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>April</td>
+        <td data-i18n="april">April</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Mei</td>
+        <td data-i18n="may">Mei</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Juni</td>
+        <td data-i18n="june">Juni</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Juli</td>
+        <td data-i18n="july">Juli</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Augustus</td>
+        <td data-i18n="august">Augustus</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>September</td>
+        <td data-i18n="september">September</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>Oktober</td>
+        <td data-i18n="october">Oktober</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>November</td>
+        <td data-i18n="november">November</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       <tr>
-        <td>December</td>
+        <td data-i18n="december">December</td>
         <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100.00"></td>
       </tr>
       </tbody>
       <tfoot>
       <tr>
-        <td><strong>Gemiddelde</strong></td>
+        <td><strong data-i18n="average">Gemiddelde</strong></td>
         <td><strong id="average-percentage">100.00%</strong></td>
       </tr>
       </tfoot>
@@ -98,29 +103,29 @@
   </div>
 
   <div class="verlof-info">
-    <p><strong>Verlof dit jaar: </strong></p>
-    <p><strong>Max wettelijk verlof:</strong> <span id="max-wettelijk-verlof">160.00</span>H</p>
-    <p><strong>Begrensd wettelijk verlof:</strong> <span id="begrensd-wettelijk-verlof">144.00</span>H</p>
+    <p><strong data-i18n="vacation_this_year">Verlof dit jaar: </strong></p>
+    <p><strong data-i18n="max_legal_vacation">Max wettelijk verlof:</strong> <span id="max-wettelijk-verlof">160.00</span>H</p>
+    <p><strong data-i18n="limited_legal_vacation">Begrensd wettelijk verlof:</strong> <span id="begrensd-wettelijk-verlof">144.00</span>H</p>
   </div>
 
   <!-- Tweede tabel (verloftabel) -->
   <div class="table-container">
     <table class="custom-table">
       <thead>
-      <th colspan="7" class="header-groot">Wettelijk verlof</th>
+      <th colspan="7" class="header-groot" data-i18n="legal_vacation">Wettelijk verlof</th>
       <tr>
-        <th>Maand</th>
-        <th>Percentage</th>
-        <th>WV Start</th>
-        <th>WV Correctie</th>
-        <th>WV Opgenomen</th>
-        <th>% WV Opgenomen</th>
-        <th>% WV Opgenomen Totaal</th>
+        <th data-i18n="month">Maand</th>
+        <th data-i18n="percentage">Percentage</th>
+        <th data-i18n="wv_start">WV Start</th>
+        <th data-i18n="wv_correction">WV Correctie</th>
+        <th data-i18n="wv_taken">WV Opgenomen</th>
+        <th data-i18n="wv_taken_percentage">% WV Opgenomen</th>
+        <th data-i18n="wv_taken_total">% WV Opgenomen Totaal</th>
       </tr>
       </thead>
       <tbody id="verlof-tabel">
       <tr>
-        <td>Januari</td>
+        <td data-i18n="january">Januari</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-januari">160.00</td>
         <td id="wv-correctie-januari">0.00</td>
@@ -129,7 +134,7 @@
         <td id="percentage-wv-totaal-januari">0.00%</td>
       </tr>
       <tr>
-        <td>Februari</td>
+        <td data-i18n="february">Februari</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-februari">160.00</td>
         <td id="wv-correctie-februari">0.00</td>
@@ -138,7 +143,7 @@
         <td id="percentage-wv-totaal-februari">0.00%</td>
       </tr>
       <tr>
-        <td>Maart</td>
+        <td data-i18n="march">Maart</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-maart">160.00</td>
         <td id="wv-correctie-maart">0.00</td>
@@ -147,7 +152,7 @@
         <td id="percentage-wv-totaal-maart">0.00%</td>
       </tr>
       <tr>
-        <td>April</td>
+        <td data-i18n="april">April</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-april">160.00</td>
         <td id="wv-correctie-april">0.00</td>
@@ -156,7 +161,7 @@
         <td id="percentage-wv-totaal-april">0.00%</td>
       </tr>
       <tr>
-        <td>Mei</td>
+        <td data-i18n="may">Mei</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-mei">160.00</td>
         <td id="wv-correctie-mei">0.00</td>
@@ -165,7 +170,7 @@
         <td id="percentage-wv-totaal-mei">0.00%</td>
       </tr>
       <tr>
-        <td>Juni</td>
+        <td data-i18n="june">Juni</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-juni">160.00</td>
         <td id="wv-correctie-juni">0.00</td>
@@ -174,7 +179,7 @@
         <td id="percentage-wv-totaal-juni">0.00%</td>
       </tr>
       <tr>
-        <td>Juli</td>
+        <td data-i18n="july">Juli</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-juli">160.00</td>
         <td id="wv-correctie-juli">0.00</td>
@@ -183,7 +188,7 @@
         <td id="percentage-wv-totaal-juli">0.00%</td>
       </tr>
       <tr>
-        <td>Augustus</td>
+        <td data-i18n="august">Augustus</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-augustus">160.00</td>
         <td id="wv-correctie-augustus">0.00</td>
@@ -192,7 +197,7 @@
         <td id="percentage-wv-totaal-augustus">0.00%</td>
       </tr>
       <tr>
-        <td>September</td>
+        <td data-i18n="september">September</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-september">160.00</td>
         <td id="wv-correctie-september">0.00</td>
@@ -201,7 +206,7 @@
         <td id="percentage-wv-totaal-september">0.00%</td>
       </tr>
       <tr>
-        <td>Oktober</td>
+        <td data-i18n="october">Oktober</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-oktober">160.00</td>
         <td id="wv-correctie-oktober">0.00</td>
@@ -210,7 +215,7 @@
         <td id="percentage-wv-totaal-oktober">0.00%</td>
       </tr>
       <tr>
-        <td>November</td>
+        <td data-i18n="november">November</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-november">160.008</td>
         <td id="wv-correctie-november">0.00</td>
@@ -219,7 +224,7 @@
         <td id="percentage-wv-totaal-november">0.00%</td>
       </tr>
       <tr>
-        <td>December</td>
+        <td data-i18n="december">December</td>
         <td><input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()"></td>
         <td id="wv-start-december">160.00</td>
         <td id="wv-correctie-december">0.00</td>
@@ -231,39 +236,39 @@
     </table>
   </div>
   <div class="verlof-info">
-    <p><strong>Ander verlof dit jaar:</strong></p>
-    <p><strong>Max ADV verlof:</strong> <span id="max-adv-verlof">196.00</span>H</p>
-    <p><strong>Max extralegaal verlof:</strong> <span id="max-extralegaal-verlof">24.00</span>H</p>
-    <p><strong>Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">0.00</span>H</p>
+    <p><strong data-i18n="other_vacation_this_year">Ander verlof dit jaar:</strong></p>
+    <p><strong data-i18n="max_adv_vacation">Max ADV verlof:</strong> <span id="max-adv-verlof">196.00</span>H</p>
+    <p><strong data-i18n="max_extra_vacation">Max extralegaal verlof:</strong> <span id="max-extralegaal-verlof">24.00</span>H</p>
+    <p><strong data-i18n="max_seniority_vacation">Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">0.00</span>H</p>
   </div>
 
   <div class="table-container">
     <div class="header-container">
-      <h2 class="header-groot">Andere verlofsoorten</h2>
+      <h2 class="header-groot" data-i18n="other_vacation_types">Andere verlofsoorten</h2>
       <div class="date-selector">
-        <label for="startDate">Startdatum:</label>
+        <label for="startDate" data-i18n="start_date">Startdatum:</label>
         <input type="date" id="startDate" onchange="updateStartDate()">
       </div>
     </div>
     <table class="custom-table">
       <thead>
       <tr>
-        <th>Maand</th>
-        <th>Percentage</th>
-        <th>ADV Start</th>
-        <th>ADV Correctie</th>
-        <th>ADV Opgenomen</th>
-        <th>EL Start</th>
-        <th>EL Correctie</th>
-        <th>EL Opgenomen</th>
-        <th>ANC Start</th>
-        <th>ANC Correctie</th>
-        <th>ANC Opgenomen</th>
+        <th data-i18n="month">Maand</th>
+        <th data-i18n="percentage">Percentage</th>
+        <th data-i18n="adv_start">ADV Start</th>
+        <th data-i18n="adv_correction">ADV Correctie</th>
+        <th data-i18n="adv_taken">ADV Opgenomen</th>
+        <th data-i18n="el_start">EL Start</th>
+        <th data-i18n="el_correction">EL Correctie</th>
+        <th data-i18n="el_taken">EL Opgenomen</th>
+        <th data-i18n="anc_start">ANC Start</th>
+        <th data-i18n="anc_correction">ANC Correctie</th>
+        <th data-i18n="anc_taken">ANC Opgenomen</th>
       </tr>
       </thead>
       <tbody id="details-tabel">
       <tr>
-        <td>Januari</td>
+        <td data-i18n="january">Januari</td>
         <td id="detail-percentage-januari">100</td>
         <td id="adv-start-januari">196.00</td>
         <td id="adv-correctie-januari">0.00</td>
@@ -276,7 +281,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Februari</td>
+        <td data-i18n="february">Februari</td>
         <td id="detail-percentage-februari">100</td>
         <td id="adv-start-februari">196.00</td>
         <td id="adv-correctie-februari">0.00</td>
@@ -289,7 +294,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Maart</td>
+        <td data-i18n="march">Maart</td>
         <td id="detail-percentage-maart">100</td>
         <td id="adv-start-maart">196.00</td>
         <td id="adv-correctie-maart">0.00</td>
@@ -302,7 +307,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>April</td>
+        <td data-i18n="april">April</td>
         <td id="detail-percentage-april">100</td>
         <td id="adv-start-april">196.00</td>
         <td id="adv-correctie-april">0.00</td>
@@ -315,7 +320,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Mei</td>
+        <td data-i18n="may">Mei</td>
         <td id="detail-percentage-mei">100</td>
         <td id="adv-start-mei">196.00</td>
         <td id="adv-correctie-mei">0.00</td>
@@ -328,7 +333,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Juni</td>
+        <td data-i18n="june">Juni</td>
         <td id="detail-percentage-juni">100</td>
         <td id="adv-start-juni">196.00</td>
         <td id="adv-correctie-juni">0.00</td>
@@ -341,7 +346,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Juli</td>
+        <td data-i18n="july">Juli</td>
         <td id="detail-percentage-juli">100</td>
         <td id="adv-start-juli">196.00</td>
         <td id="adv-correctie-juli">0.00</td>
@@ -354,7 +359,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Augustus</td>
+        <td data-i18n="august">Augustus</td>
         <td id="detail-percentage-augustus">100</td>
         <td id="adv-start-augustus">196.00</td>
         <td id="adv-correctie-augustus">0.00</td>
@@ -367,7 +372,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>September</td>
+        <td data-i18n="september">September</td>
         <td id="detail-percentage-september">100</td>
         <td id="adv-start-september">196.00</td>
         <td id="adv-correctie-september">0.00</td>
@@ -380,7 +385,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>Oktober</td>
+        <td data-i18n="october">Oktober</td>
         <td id="detail-percentage-oktober">100</td>
         <td id="adv-start-oktober">196.00</td>
         <td id="adv-correctie-oktober">0.00</td>
@@ -393,7 +398,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>November</td>
+        <td data-i18n="november">November</td>
         <td id="detail-percentage-november">100</td>
         <td id="adv-start-november">196.00</td>
         <td id="adv-correctie-november">0.00</td>
@@ -406,7 +411,7 @@
         <td><input type="number" class="percentage-input anc-opgenomen-uren" min="0" value="0" oninput="updateANCTable()"></td>
       </tr>
       <tr>
-        <td>December</td>
+        <td data-i18n="december">December</td>
         <td id="detail-percentage-december">100</td>
         <td id="adv-start-december">196.00</td>
         <td id="adv-correctie-december">0.00</td>
@@ -427,7 +432,7 @@
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-info">
-      <p>&copy; 2025 BBTK SCK-CEN. Alle rechten voorbehouden.</p>
+      <p>&copy; 2025 BBTK SCK-CEN. <span data-i18n="rights_reserved">Alle rechten voorbehouden.</span></p>
     </div>
     <div class="social-links">
       <a href="https://www.facebook.com/BBTKSCKCEN" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -437,5 +442,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
 </body>
 </html>

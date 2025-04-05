@@ -16,50 +16,55 @@
       <span>BBTK SCK-CEN</span>
     </a>
     <ul class="nav-menu">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="verlofberekening.html">Verlofberekening</a></li>
-      <li><a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" target="_blank">Blog</a></li>
+      <li><a href="index.html" class="active" data-i18n="home">Home</a></li>
+      <li><a href="verlofberekening.html" data-i18n="vacation_calc">Verlofberekening</a></li>
+      <li><a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" target="_blank" data-i18n="blog">Blog</a></li>
     </ul>
+    <div class="language-selector">
+      <button class="lang-btn active" data-lang="nl"><img src="https://flagcdn.com/w20/nl.png" alt="Nederlands"></button>
+      <button class="lang-btn" data-lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Français"></button>
+      <button class="lang-btn" data-lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="English"></button>
+    </div>
   </div>
 </header>
 
 <div class="container">
   <section class="hero">
-    <h1>Welkom bij BBTK SCK-CEN</h1>
-    <p>De vakbond die opkomt voor de belangen van werknemers bij het Studiecentrum voor Kernenergie</p>
+    <h1 data-i18n="welcome">Welkom bij BBTK SCK-CEN</h1>
+    <p data-i18n="welcome_text">De vakbond die opkomt voor de belangen van werknemers bij het Studiecentrum voor Kernenergie</p>
   </section>
 
   <section class="features">
     <div class="feature-card">
       <i class="fas fa-calculator"></i>
-      <h2>Verlofberekening</h2>
-      <p>Bereken eenvoudig je verlofrechten op basis van je tewerkstellingspercentage</p>
-      <a href="verlofberekening.html" class="btn">Naar de calculator</a>
+      <h2 data-i18n="calculator">Verlofberekening</h2>
+      <p data-i18n="calculator_text">Bereken eenvoudig je verlofrechten op basis van je tewerkstellingspercentage</p>
+      <a href="verlofberekening.html" class="btn" data-i18n="to_calculator">Naar de calculator</a>
     </div>
 
     <div class="feature-card">
       <i class="fas fa-blog"></i>
-      <h2>Blog</h2>
-      <p>Blijf op de hoogte van het laatste nieuws en updates van BBTK SCK-CEN</p>
-      <a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" class="btn" target="_blank">Bezoek onze blog</a>
+      <h2 data-i18n="blog">Blog</h2>
+      <p data-i18n="blog_text">Blijf op de hoogte van het laatste nieuws en updates van BBTK SCK-CEN</p>
+      <a href="https://bbtk-sckcen.blogspot.com/2019/06/bbtk-tools.html" class="btn" target="_blank" data-i18n="visit_blog">Bezoek onze blog</a>
     </div>
 
     <div class="feature-card">
       <i class="fas fa-users"></i>
-      <h2>Over ons</h2>
-      <p>BBTK SCK-CEN vertegenwoordigt de belangen van bedienden en kaderleden</p>
-      <a href="https://bbtk-sckcen.blogspot.com/p/bbtk-ploeg.html" class="btn" target="_blank">Bekijk onze ploeg</a>
+      <h2 data-i18n="about_us">Over ons</h2>
+      <p data-i18n="about_us_text">BBTK SCK-CEN vertegenwoordigt de belangen van bedienden en kaderleden</p>
+      <a href="https://bbtk-sckcen.blogspot.com/p/bbtk-ploeg.html" class="btn" target="_blank" data-i18n="more_info">Bekijk onze ploeg</a>
     </div>
   </section>
 
   <section class="about">
-    <h2>Over BBTK SCK-CEN</h2>
-    <p>BBTK SCK-CEN komt op voor de rechten en belangen van alle werknemers en streven naar eerlijke arbeidsvoorwaarden en een veilige werkomgeving.</p>
-    <p>Onze diensten omvatten:</p>
+    <h2 data-i18n="about_bbtk">Over BBTK SCK-CEN</h2>
+    <p data-i18n="about_bbtk_text">BBTK SCK-CEN komt op voor de rechten en belangen van alle werknemers en streven naar eerlijke arbeidsvoorwaarden en een veilige werkomgeving.</p>
+    <p data-i18n="our_services">Onze diensten omvatten:</p>
     <ul>
-      <li>Juridisch advies bij arbeidsconflicten</li>
-      <li>Ondersteuning bij onderhandelingen</li>
-      <li>Informatieverstrekking over rechten en plichten</li>
+      <li data-i18n="service_1">Juridisch advies bij arbeidsconflicten</li>
+      <li data-i18n="service_2">Ondersteuning bij onderhandelingen</li>
+      <li data-i18n="service_3">Informatieverstrekking over rechten en plichten</li>
     </ul>
   </section>
 </div>
@@ -68,7 +73,7 @@
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-info">
-      <p>&copy; 2025 BBTK SCK-CEN. Alle rechten voorbehouden.</p>
+      <p>&copy; 2025 BBTK SCK-CEN. <span data-i18n="rights_reserved">Alle rechten voorbehouden.</span></p>
     </div>
     <div class="social-links">
       <a href="https://www.facebook.com/BBTKSCKCEN" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -76,5 +81,7 @@
     </div>
   </div>
 </footer>
+<script src="translations.js"></script>
+<script src="language.js"></script>
 </body>
 </html>

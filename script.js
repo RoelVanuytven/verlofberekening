@@ -1,4 +1,5 @@
 // Functie om de cookie-melding te tonen
+// Functie om de cookie-melding te tonen
 function showCookieConsent() {
     // Controleer of de gebruiker al heeft ingestemd
     if (localStorage.getItem('cookieConsent') === 'accepted') {
@@ -13,14 +14,24 @@ function showCookieConsent() {
     const consentBox = document.createElement('div');
     consentBox.className = 'cookie-consent';
 
-    // Voeg de tekst toe
-    consentBox.innerHTML = `
-        <h3>Cookie-melding</h3>
-        <p>Deze site gebruikt cookies van Google om services te leveren en verkeer te analyseren. 
-        Je IP-adres en user-agent worden met Google gedeeld, samen met prestatie- en beveiligingsstatistieken 
-        om servicekwaliteit te garanderen, gebruiksstatistieken te genereren, misbruik te detecteren en maatregelen te treffen.</p>
-        <button id="accept-cookies" class="cookie-button">Accepteren</button>
-    `;
+    // Voeg de tekst toe met data-i18n attributen
+    const cookieTitle = document.createElement('h3');
+    cookieTitle.setAttribute('data-i18n', 'cookie_title');
+    cookieTitle.textContent = 'Cookie-melding';
+
+    const cookieText = document.createElement('p');
+    cookieText.setAttribute('data-i18n', 'cookie_text');
+    cookieText.textContent = 'Deze site gebruikt cookies om uw ervaring te verbeteren en uw voorkeuren op te slaan.';
+
+    const acceptButton = document.createElement('button');
+    acceptButton.id = 'accept-cookies';
+    acceptButton.className = 'cookie-button';
+    acceptButton.setAttribute('data-i18n', 'accept_cookies');
+    acceptButton.textContent = 'Accepteren';
+
+    consentBox.appendChild(cookieTitle);
+    consentBox.appendChild(cookieText);
+    consentBox.appendChild(acceptButton);
 
     // Voeg de elementen toe aan de pagina
     overlay.appendChild(consentBox);
@@ -31,6 +42,9 @@ function showCookieConsent() {
         localStorage.setItem('cookieConsent', 'accepted');
         overlay.style.display = 'none';
     });
+
+    // Vertaal de cookie melding
+    translatePage();
 }
 
 // Valideer de invoer voor percentage velden (0-100)
@@ -766,6 +780,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+
 
     // Voeg event listeners toe aan alle ADV opgenomen-uren inputs
     const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');

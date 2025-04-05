@@ -446,3 +446,35 @@ input[type="number"] {
         margin-top: 15px;
     }
 }
+
+.language-selector {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lang-btn:hover, .lang-btn.active {
+    border-color: var(--secondary-color);
+}
+
+.lang-btn img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .language-selector {
+        margin: 15px 0 0;
+    }
+}
