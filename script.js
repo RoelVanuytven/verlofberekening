@@ -238,6 +238,7 @@ function updateBegrensdWettelijkVerlof(averagePercentage) {
 }
 
 // Functie voor het bijwerken van de verloftabel
+// Functie voor het bijwerken van de verloftabel
 function updateTable() {
     const maxWettelijkVerlof = parseFloat(document.getElementById('max-wettelijk-verlof').textContent);
     const begrensdWettelijkVerlof = parseFloat(document.getElementById('begrensd-wettelijk-verlof').textContent);
@@ -248,12 +249,10 @@ function updateTable() {
         'juli', 'augustus', 'september', 'oktober', 'november', 'december'
     ];
 
-    let cumulatiefPercentage = 0;
-    let vorigeWVStart = 0; // Voor het berekenen van WV Correctie
-    let vorigeOpgenomenUren = 0; // Voor het berekenen van WV Correctie
-    let vorigePercentage = null; // Voor het vergelijken van percentages
-    let totaalOpgenomenUren = 0; // Voor het berekenen van cumulatief percentage
-    let totaalBeschikbareUren = 0; // Voor het berekenen van cumulatief percentage
+    let totaalOpgenomenUren = 0;
+    let vorigeWVStart = 0;
+    let vorigeOpgenomenUren = 0;
+    let vorigePercentage = null;
 
     // Loop door elke maand en update de waarden
     maanden.forEach((maand, index) => {
@@ -329,19 +328,18 @@ function updateTable() {
         wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
 
         // Bereken percentage WV opgenomen voor deze maand
-        // Bepaal het referentiegetal voor de berekening (160 of begrensd wettelijk verlof)
-        const referentieWaarde = percentage === 1 ? begrensdWettelijkVerlof : maxWettelijkVerlof;
-        const percentageWV = referentieWaarde > 0 ? (opgenomenUren / referentieWaarde) * 100 : 0;
+        // Gebruik het juiste referentiegetal op basis van het percentage
+        const maandelijksRecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
+        const percentageWV = maandelijksRecht > 0 ? (opgenomenUren / maandelijksRecht) * 100 : 0;
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
-        // Bijhouden van totalen voor cumulatief percentage
+        // Bijhouden van totaal opgenomen uren
         totaalOpgenomenUren += opgenomenUren;
-        
-        // Bepaal het totale beschikbare verlof voor deze maand
-        const totaalBeschikbaar = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-        
-        // Bereken het cumulatieve percentage op basis van totaal opgenomen uren en totaal beschikbaar
-        const cumulatiefPercentage = totaalBeschikbaar > 0 ? (totaalOpgenomenUren / totaalBeschikbaar) * 100 : 0;
+
+        // Bereken het cumulatieve percentage op basis van totaal opgenomen uren
+        // en het totale recht voor deze maand (rekening houdend met percentage)
+        const totaalRecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
+        const cumulatiefPercentage = totaalRecht > 0 ? (totaalOpgenomenUren / totaalRecht) * 100 : 0;
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
 
         // Bewaar waarden voor de volgende iteratie
