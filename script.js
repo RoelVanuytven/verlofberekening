@@ -239,6 +239,7 @@ function updateBegrensdWettelijkVerlof(averagePercentage) {
 
 // Functie voor het bijwerken van de verloftabel
 // Functie voor het bijwerken van de verloftabel
+// Functie voor het bijwerken van de verloftabel
 function updateTable() {
     const maxWettelijkVerlof = parseFloat(document.getElementById('max-wettelijk-verlof').textContent);
     const begrensdWettelijkVerlof = parseFloat(document.getElementById('begrensd-wettelijk-verlof').textContent);
@@ -250,6 +251,7 @@ function updateTable() {
     ];
 
     let totaalOpgenomenUren = 0;
+    let totaalBeschikbareUren = 0;
     let vorigeWVStart = 0;
     let vorigeOpgenomenUren = 0;
     let vorigePercentage = null;
@@ -333,13 +335,16 @@ function updateTable() {
         const percentageWV = maandelijksRecht > 0 ? (opgenomenUren / maandelijksRecht) * 100 : 0;
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
-        // Bijhouden van totaal opgenomen uren
+        // Bijhouden van totalen voor cumulatief percentage
         totaalOpgenomenUren += opgenomenUren;
-
-        // Bereken het cumulatieve percentage op basis van totaal opgenomen uren
-        // en het totale recht voor deze maand (rekening houdend met percentage)
-        const totaalRecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-        const cumulatiefPercentage = totaalRecht > 0 ? (totaalOpgenomenUren / totaalRecht) * 100 : 0;
+        
+        // Voor het cumulatieve percentage moeten we het totale beschikbare verlof bijhouden
+        // Dit is het oorspronkelijke recht voor elke maand
+        const maandRecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
+        totaalBeschikbareUren += maandRecht;
+        
+        // Bereken het cumulatieve percentage
+        const cumulatiefPercentage = totaalBeschikbareUren > 0 ? (totaalOpgenomenUren / totaalBeschikbareUren) * 100 : 0;
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
 
         // Bewaar waarden voor de volgende iteratie
