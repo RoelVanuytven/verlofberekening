@@ -248,11 +248,10 @@ function updateTable() {
         'juli', 'augustus', 'september', 'oktober', 'november', 'december'
     ];
 
-    let totaalOpgenomenUren = 0;
+    let cumulatiefPercentage = 0;
     let vorigeWVStart = 0;
     let vorigeOpgenomenUren = 0;
     let vorigePercentage = null;
-    let huidigeJaarTotaal = 0; // Totaal beschikbare uren voor het hele jaar
 
     // Loop door elke maand en update de waarden
     maanden.forEach((maand, index) => {
@@ -285,29 +284,23 @@ function updateTable() {
         if (index === 0) {
             // Voor januari: gebruik het juiste wettelijk verlof op basis van percentage
             wvStart = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-            huidigeJaarTotaal = wvStart; // Initialiseer het jaartotaal
         } else {
             // Voor andere maanden
             const percentageGewijzigd = percentage !== vorigePercentage;
 
             if (percentageGewijzigd) {
                 // Als het percentage is gewijzigd, bereken een nieuwe startwaarde
+                // Bereken hoeveel procent van het totale verlof al is opgenomen
+                const vorigeMaand = maanden[index - 1];
+                const vorigePercentageWVTotaalElem = document.getElementById(`percentage-wv-totaal-${vorigeMaand}`);
+                const vorigePercentageWVTotaal = vorigePercentageWVTotaalElem ?
+                    parseFloat(vorigePercentageWVTotaalElem.textContent.replace('%', '')) / 100 : 0;
+
+                // Bepaal het totale verlofrecht voor dit percentage
                 const totaalVerlofrecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-                
-                // Bereken hoeveel er al is opgenomen
-                let totaalOpgenomenTotNu = 0;
-                for (let i = 0; i < index; i++) {
-                    const opgenomenInput = document.querySelector(`#verlof-tabel tr:nth-child(${i + 1}) .opgenomen-uren`);
-                    if (opgenomenInput) {
-                        totaalOpgenomenTotNu += isNaN(parseFloat(opgenomenInput.value)) ? 0 : parseFloat(opgenomenInput.value);
-                    }
-                }
-                
-                // Bereken het nieuwe jaartotaal
-                huidigeJaarTotaal = totaalVerlofrecht;
-                
-                // Bereken wat er nog beschikbaar is
-                wvStart = Math.max(0, totaalVerlofrecht - totaalOpgenomenTotNu);
+
+                // Bereken hoeveel verlof nog beschikbaar is op basis van wat al is opgenomen
+                wvStart = totaalVerlofrecht * (1 - vorigePercentageWVTotaal);
             } else {
                 // Als het percentage niet is gewijzigd, gebruik de vorige WV Start min opgenomen uren
                 wvStart = Math.max(0, vorigeWVStart - vorigeOpgenomenUren);
@@ -339,11 +332,8 @@ function updateTable() {
         const percentageWV = maandelijksRecht > 0 ? (opgenomenUren / maandelijksRecht) * 100 : 0;
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
-        // Bijhouden van totaal opgenomen uren
-        totaalOpgenomenUren += opgenomenUren;
-
-        // Bereken het cumulatieve percentage op basis van totaal opgenomen uren en het huidige jaartotaal
-        const cumulatiefPercentage = huidigeJaarTotaal > 0 ? (totaalOpgenomenUren / huidigeJaarTotaal) * 100 : 0;
+        // Bereken het cumulatieve percentage (som van alle percentages tot nu toe)
+        cumulatiefPercentage += percentageWV;
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
 
         // Bewaar waarden voor de volgende iteratie
