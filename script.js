@@ -252,6 +252,8 @@ function updateTable() {
     let vorigeWVStart = 0; // Voor het berekenen van WV Correctie
     let vorigeOpgenomenUren = 0; // Voor het berekenen van WV Correctie
     let vorigePercentage = null; // Voor het vergelijken van percentages
+    let totaalOpgenomenUren = 0; // Voor het berekenen van cumulatief percentage
+    let totaalBeschikbareUren = 0; // Voor het berekenen van cumulatief percentage
 
     // Loop door elke maand en update de waarden
     maanden.forEach((maand, index) => {
@@ -327,21 +329,19 @@ function updateTable() {
         wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
 
         // Bereken percentage WV opgenomen voor deze maand
-        const percentageWV = wvStart > 0 ? (opgenomenUren / wvStart) * 100 : 0;
+        // Bepaal het referentiegetal voor de berekening (160 of begrensd wettelijk verlof)
+        const referentieWaarde = percentage === 1 ? begrensdWettelijkVerlof : maxWettelijkVerlof;
+        const percentageWV = referentieWaarde > 0 ? (opgenomenUren / referentieWaarde) * 100 : 0;
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
-        // Bereken het cumulatieve percentage
-        if (index === 0) {
-            // Voor januari is het cumulatieve percentage gelijk aan het percentage van deze maand
-            cumulatiefPercentage = percentageWV;
-        } else {
-            // Voor andere maanden, tel het percentage van deze maand op bij het cumulatieve percentage
-            // Maar alleen als er daadwerkelijk uren zijn opgenomen
-            if (opgenomenUren > 0) {
-                cumulatiefPercentage += percentageWV;
-            }
-        }
-
+        // Bijhouden van totalen voor cumulatief percentage
+        totaalOpgenomenUren += opgenomenUren;
+        
+        // Bepaal het totale beschikbare verlof voor deze maand
+        const totaalBeschikbaar = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
+        
+        // Bereken het cumulatieve percentage op basis van totaal opgenomen uren en totaal beschikbaar
+        const cumulatiefPercentage = totaalBeschikbaar > 0 ? (totaalOpgenomenUren / totaalBeschikbaar) * 100 : 0;
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
 
         // Bewaar waarden voor de volgende iteratie
