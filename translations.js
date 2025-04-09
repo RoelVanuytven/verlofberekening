@@ -53,6 +53,8 @@ const translations = {
 
         // Buttons
         "clear_data": "Gegevens wissen",
+        "export_data": "Gegevens exporteren",
+        "import_data": "Gegevens importeren",
 
         // Footer
         "rights_reserved": "Alle rechten voorbehouden.",
@@ -135,6 +137,8 @@ const translations = {
 
         // Buttons
         "clear_data": "Effacer les données",
+        "export_data": "Exporter les données",
+        "import_data": "Importer les données",
 
         // Footer
         "rights_reserved": "Tous droits réservés.",
@@ -217,6 +221,8 @@ const translations = {
 
         // Buttons
         "clear_data": "Clear data",
+        "export_data": "Export data",
+        "import_data": "Import data",
 
         // Footer
         "rights_reserved": "All rights reserved.",
@@ -245,5 +251,4 @@ const translations = {
         "cookie_text": "This website uses cookies to enhance your experience and store your preferences.",
         "accept_cookies": "Accept"
     }
-
 };
