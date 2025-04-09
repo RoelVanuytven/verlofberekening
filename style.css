@@ -1,11 +1,12 @@
-/* Kleurvariabelen */
+/* Kleurvariabelen - Basiskleuren voor de hele website */
 :root {
-    --primary-color: #E84138FF;
-    --secondary-color: white;
-    --tertiary-color: #7B7A80FF;
+    --primary-color: #E84138FF;    /* Rood - hoofdkleur */
+    --secondary-color: white;      /* Wit - achtergrondkleur */
+    --tertiary-color: #7B7A80FF;   /* Grijs - accentkleur */
 }
 
-/* Algemene stijl */
+/* ===== ALGEMENE STIJLEN ===== */
+/* Basisstijl voor het hele document */
 body {
     font-family: Arial, sans-serif;
     background-color: var(--secondary-color);
@@ -14,53 +15,155 @@ body {
     padding: 10px;
 }
 
+/* Container voor de inhoud */
 .container {
-    max-width: 800px; /* Vergroot voor de bredere tweede tabel */
+    max-width: 800px;
     margin: 0 auto;
     padding: 5px;
     text-align: center;
 }
 
-.header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 5px 10px;
-    margin: 0;
-    border-bottom: 1px solid var(--primary-color);
-    position: relative;
-}
-
-.date-selector {
-    position: absolute;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.date-selector label {
-    font-weight: bold;
-    color: var(--secondary-color);
-    font-size: 14px;
-}
-
-.date-selector input {
-    padding: 2px 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    height: 24px;
-}
-
+/* Standaard koptekst stijl */
 h1 {
     font-size: 20px;
     margin-bottom: 10px;
     color: var(--primary-color);
 }
 
-/* Verlof info stijl */
+/* Verwijder pijltjes van numerieke invoervelden */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ===== HEADER EN NAVIGATIE ===== */
+/* Header container */
+.site-header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px var(--tertiary-color);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo stijl */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Grote header tekst */
+.header-groot {
+    font-size: 18px !important;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: var(--secondary-color);
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Navigatiemenu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Taalselector */
+.language-selector {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+    border-color: var(--secondary-color);
+}
+
+.lang-btn img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: block;
+}
+
+/* Datumselector */
+.date-selector {
+    position: relative; /* Veranderd van absolute naar relative */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px auto; /* Toegevoegd voor centrering */
+    justify-content: center; /* Toegevoegd voor centrering */
+}
+
+.date-selector label {
+    font-weight: bold;
+    color: var(--primary-color); /* Veranderd naar primary color voor betere zichtbaarheid */
+    font-size: 14px;
+}
+
+.date-selector input {
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid var(--tertiary-color);
+    height: 24px;
+}
+
+/* ===== TABEL STIJLEN ===== */
+/* Verlof informatie weergave */
 .verlof-info {
     display: flex;
     justify-content: center;
@@ -78,63 +181,58 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Tabelstijl */
+/* Basisstijl voor tabellen */
 .custom-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-
-.header-groot {
-    font-size: 18px !important;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    color: var(--secondary-color);
-    text-align: center;
-    flex-grow: 1;
-}
-
-/* Koptekst */
+/* Tabelkoptekst */
 .custom-table th {
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 5px; /* Verminderde padding */
+    padding: 5px;
     text-align: center;
     font-weight: bold;
-    font-size: 12px; /* Kleinere tekst */
+    font-size: 12px;
 }
 
-/* Cellen */
+/* Tabelcellen */
 .custom-table td {
-    padding: 0px 0px; /* Verminderde padding */
+    padding: 0px 0px;
     text-align: center;
     color: var(--secondary-color);
     border-top: 1px solid var(--primary-color);
     background-color: var(--tertiary-color);
-    font-size: 13px; /* Kleinere tekst */
+    font-size: 13px;
 }
 
-/* Voettekst */
+/* Tabelvoettekst */
 .custom-table tfoot td {
     font-weight: bold;
     border-top: 2px solid var(--primary-color);
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 5px; /* Verminderde padding */
+    padding: 5px;
 }
 
-/* Inputvelden */
-.percentage-input, .opgenomen-uren {
+/* Compactere tabelrijen */
+.custom-table tr {
+    line-height: 1;
+}
+
+/* Invoervelden in tabellen */
+.percentage-input,
+.opgenomen-uren {
     width: 90%;
-    padding: 0px 1px;/* Verminderde padding */
-    font-size: 13px; /* Kleinere tekst */
+    padding: 0px 1px;
+    font-size: 13px;
     text-align: center;
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     color: var(--primary-color);
     background-color: var(--secondary-color);
-    height: 26px; /* Vaste hoogte voor consistentie */
+    height: 26px;
 }
 
 .percentage-input::placeholder {
@@ -142,27 +240,96 @@ h1 {
     opacity: 0.7;
 }
 
-/* Verwijder pijltjes van number input */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+/* Titel voor de laatste tabel (Andere verlofsoorten) */
+.verlof-titel {
+    background-color: transparent;
+    color: var(--secondary-color);
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center; /* Gecentreerd */
+    flex-grow: 1; /* Neemt beschikbare ruimte in */
+}
+
+/* Header container in de tabel */
+.table-container .header-container {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centreren van inhoud */
+    align-items: center;
+    padding: 5px 10px;
+    margin: 0;
+    border-bottom: 0;
+    position: relative; /* Voor absolute positionering van datumselector */
+}
+
+/* Datumselector binnen de tabelheader */
+.table-container .date-selector {
+    position: absolute;
+    right: 10px; /* Rechts uitlijnen */
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin: 0;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
+.table-container .date-selector label {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: 14px;
 }
 
-/* Compactere rijen */
-.custom-table tr {
-    line-height: 1; /* Verminderde regelhoogte */
+.table-container .date-selector input {
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid var(--secondary-color);
+    height: 24px;
 }
 
+/* ===== KNOPPEN EN ACTIES ===== */
+/* Container voor knoppen */
 .button-container {
-    margin-top: 20px;
-    text-align: left;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
+/* Standaard knop */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Actieknoppen (import/export) */
+.action-button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.action-button:hover {
+    background-color: var(--tertiary-color);
+}
+
+/* Knop om gegevens te wissen */
 .clear-button {
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -177,7 +344,8 @@ input[type="number"] {
     opacity: 0.9;
 }
 
-/* Cookie consent styling */
+/* ===== COOKIE MELDING ===== */
+/* Overlay voor cookie melding */
 .cookie-overlay {
     position: fixed;
     top: 0;
@@ -191,6 +359,7 @@ input[type="number"] {
     z-index: 9999;
 }
 
+/* Cookie melding box */
 .cookie-consent {
     background-color: white;
     padding: 20px;
@@ -216,32 +385,11 @@ input[type="number"] {
 }
 
 .cookie-consent button:hover {
-    background-color: #c00;
+    background-color: var(--tertiary-color);
 }
 
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.action-button {
-    padding: 8px 16px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.action-button:hover {
-    background-color: #45a049;
-}
-
-/* Extra stijlen voor de homepage */
+/* ===== HOMEPAGE STIJLEN ===== */
+/* Hero sectie */
 .hero {
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -264,6 +412,7 @@ input[type="number"] {
     margin: 0 auto;
 }
 
+/* Functiekaarten */
 .features {
     display: flex;
     justify-content: space-between;
@@ -298,21 +447,7 @@ input[type="number"] {
     color: var(--tertiary-color);
 }
 
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: opacity 0.3s;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
+/* Over ons sectie */
 .about {
     background-color: var(--secondary-color);
     border: 2px solid var(--primary-color);
@@ -343,77 +478,8 @@ input[type="number"] {
     margin-bottom: 5px;
 }
 
-@media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-    }
-
-    .feature-card {
-        margin-bottom: 20px;
-    }
-}
-
-/* Header en Footer stijlen */
-:root {
-    --primary-color: #E84138FF;
-    --secondary-color: white;
-    --tertiary-color: #7B7A80FF;
-}
-
-.site-header {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--secondary-color);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-menu li {
-    margin-left: 20px;
-}
-
-.nav-menu a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.nav-menu a:hover, .nav-menu a.active {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
+/* ===== FOOTER ===== */
+/* Footer container */
 .site-footer {
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -434,6 +500,7 @@ input[type="number"] {
     font-size: 14px;
 }
 
+/* Sociale media links */
 .social-links a {
     color: var(--secondary-color);
     margin-left: 15px;
@@ -445,9 +512,11 @@ input[type="number"] {
     opacity: 0.8;
 }
 
-/* Responsive aanpassingen */
+/* ===== RESPONSIEVE AANPASSINGEN ===== */
 @media (max-width: 768px) {
-    .header-container, .footer-container {
+    /* Responsieve header en footer */
+    .header-container,
+    .footer-container {
         flex-direction: column;
         text-align: center;
     }
@@ -463,36 +532,18 @@ input[type="number"] {
     .social-links {
         margin-top: 15px;
     }
-}
 
-.language-selector {
-    display: flex;
-    gap: 10px;
-    margin-left: 20px;
-}
-
-.lang-btn {
-    background: none;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    padding: 2px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.lang-btn:hover, .lang-btn.active {
-    border-color: var(--secondary-color);
-}
-
-.lang-btn img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: block;
-}
-
-@media (max-width: 768px) {
+    /* Responsieve taalselector */
     .language-selector {
         margin: 15px 0 0;
+    }
+
+    /* Responsieve functiekaarten */
+    .features {
+        flex-direction: column;
+    }
+
+    .feature-card {
+        margin-bottom: 20px;
     }
 }
