@@ -29,7 +29,10 @@
 </header>
 
 <div class="button-container">
-  <button onclick="clearLocalStorage()" class="clear-button" data-i18n="clear_data">Gegevens wissen</button>
+  <button onclick="clearSessionStorage()" class="action-button" data-i18n="clear_data">Gegevens wissen</button>
+  <button onclick="exportToCSV()" class="action-button" data-i18n="export_data">Gegevens exporteren</button>
+  <button onclick="importFromCSV()" class="action-button" data-i18n="import_data">Gegevens importeren</button>
+  <input type="file" id="importFile" accept=".csv" style="display: none;">
 </div>
 <div class="container">
   <h1 data-i18n="employment_percentage">Tewerkstellingspercentage vorig jaar</h1>

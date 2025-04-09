@@ -1,7 +1,7 @@
 // Functie om de cookie-melding te tonen
 function showCookieConsent() {
     // Controleer of de gebruiker al heeft ingestemd
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
+    if (sessionStorage.getItem('cookieConsent') === 'accepted') {
         return; // Toon geen melding als al is ingestemd
     }
 
@@ -38,15 +38,13 @@ function showCookieConsent() {
 
     // Voeg een event listener toe aan de accepteer-knop
     document.getElementById('accept-cookies').addEventListener('click', function() {
-        localStorage.setItem('cookieConsent', 'accepted');
+        sessionStorage.setItem('cookieConsent', 'accepted');
         overlay.style.display = 'none';
     });
 
     // Vertaal de cookie melding
     translatePage();
 }
-
-
 
 // Valideer de invoer voor percentage velden (0-100)
 function validateInput(input) {
@@ -57,8 +55,8 @@ function validateInput(input) {
         input.value = 100;
     }
 
-    // Sla de waarde op in localStorage
-    saveToLocalStorage();
+    // Sla de waarde op in sessionStorage
+    saveToSessionStorage();
 }
 
 // Valideer de opgenomen uren invoer (beperkt tot beschikbare uren)
@@ -73,55 +71,55 @@ function validateOpgenomenUren(input, maand) {
     if (wvStartCell) {
         const wvStart = parseFloat(wvStartCell.textContent);
         if (value > wvStart) {
-            input.value = wvStart.toFixed(2);
+            input.value = wvStart.toFixed(1);
         }
     }
 
-    // Sla de waarde op in localStorage
-    saveToLocalStorage();
+    // Sla de waarde op in sessionStorage
+    saveToSessionStorage();
 }
 
-// Functie om alle invoerwaarden op te slaan in localStorage
-function saveToLocalStorage() {
+// Functie om alle invoerwaarden op te slaan in sessionStorage
+function saveToSessionStorage() {
     // Sla de percentages van de eerste tabel op
     const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
     const percentages = Array.from(percentageInputs).map(input => input.value);
-    localStorage.setItem('percentages', JSON.stringify(percentages));
+    sessionStorage.setItem('percentages', JSON.stringify(percentages));
 
     // Sla de percentages van de tweede tabel op
     const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
     const verlofPercentages = Array.from(verlofPercentageInputs).map(input => input.value);
-    localStorage.setItem('verlofPercentages', JSON.stringify(verlofPercentages));
+    sessionStorage.setItem('verlofPercentages', JSON.stringify(verlofPercentages));
 
     // Sla de opgenomen uren van de tweede tabel op
     const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
     const opgenomenUren = Array.from(opgenomenUrenInputs).map(input => input.value);
-    localStorage.setItem('opgenomenUren', JSON.stringify(opgenomenUren));
+    sessionStorage.setItem('opgenomenUren', JSON.stringify(opgenomenUren));
 
     // Sla de ADV opgenomen uren op
     const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
     const advOpgenomenUren = Array.from(advOpgenomenUrenInputs).map(input => input.value);
-    localStorage.setItem('advOpgenomenUren', JSON.stringify(advOpgenomenUren));
+    sessionStorage.setItem('advOpgenomenUren', JSON.stringify(advOpgenomenUren));
 
     // Sla de EL opgenomen uren op
     const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
     const elOpgenomenUren = Array.from(elOpgenomenUrenInputs).map(input => input.value);
-    localStorage.setItem('elOpgenomenUren', JSON.stringify(elOpgenomenUren));
+    sessionStorage.setItem('elOpgenomenUren', JSON.stringify(elOpgenomenUren));
 
     // Sla de ANC opgenomen uren op
     const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
     const ancOpgenomenUren = Array.from(ancOpgenomenUrenInputs).map(input => input.value);
-    localStorage.setItem('ancOpgenomenUren', JSON.stringify(ancOpgenomenUren));
+    sessionStorage.setItem('ancOpgenomenUren', JSON.stringify(ancOpgenomenUren));
 
     // Sla de startdatum op
     const startDate = document.getElementById('startDate').value;
-    localStorage.setItem('startDate', startDate);
+    sessionStorage.setItem('startDate', startDate);
 }
 
-// Functie om opgeslagen waarden uit localStorage te laden
-function loadFromLocalStorage() {
+// Functie om opgeslagen waarden uit sessionStorage te laden
+function loadFromSessionStorage() {
     // Laad de percentages van de eerste tabel
-    const percentages = JSON.parse(localStorage.getItem('percentages'));
+    const percentages = JSON.parse(sessionStorage.getItem('percentages'));
     if (percentages) {
         const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
         percentages.forEach((value, index) => {
@@ -132,7 +130,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de percentages van de tweede tabel
-    const verlofPercentages = JSON.parse(localStorage.getItem('verlofPercentages'));
+    const verlofPercentages = JSON.parse(sessionStorage.getItem('verlofPercentages'));
     if (verlofPercentages) {
         const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
         verlofPercentages.forEach((value, index) => {
@@ -143,7 +141,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de opgenomen uren van de tweede tabel
-    const opgenomenUren = JSON.parse(localStorage.getItem('opgenomenUren'));
+    const opgenomenUren = JSON.parse(sessionStorage.getItem('opgenomenUren'));
     if (opgenomenUren) {
         const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
         opgenomenUren.forEach((value, index) => {
@@ -154,7 +152,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de ADV opgenomen uren
-    const advOpgenomenUren = JSON.parse(localStorage.getItem('advOpgenomenUren'));
+    const advOpgenomenUren = JSON.parse(sessionStorage.getItem('advOpgenomenUren'));
     if (advOpgenomenUren) {
         const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
         advOpgenomenUren.forEach((value, index) => {
@@ -165,7 +163,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de EL opgenomen uren
-    const elOpgenomenUren = JSON.parse(localStorage.getItem('elOpgenomenUren'));
+    const elOpgenomenUren = JSON.parse(sessionStorage.getItem('elOpgenomenUren'));
     if (elOpgenomenUren) {
         const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
         elOpgenomenUren.forEach((value, index) => {
@@ -176,7 +174,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de ANC opgenomen uren
-    const ancOpgenomenUren = JSON.parse(localStorage.getItem('ancOpgenomenUren'));
+    const ancOpgenomenUren = JSON.parse(sessionStorage.getItem('ancOpgenomenUren'));
     if (ancOpgenomenUren) {
         const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
         ancOpgenomenUren.forEach((value, index) => {
@@ -187,7 +185,7 @@ function loadFromLocalStorage() {
     }
 
     // Laad de startdatum
-    const startDate = localStorage.getItem('startDate');
+    const startDate = sessionStorage.getItem('startDate');
     if (startDate) {
         document.getElementById('startDate').value = startDate;
     } else {
@@ -221,8 +219,8 @@ function calculateAverage() {
     // Bereken het begrensde wettelijk verlof op basis van het gemiddelde percentage
     updateBegrensdWettelijkVerlof(average);
 
-    // Sla de waarden op in localStorage
-    saveToLocalStorage();
+    // Sla de waarden op in sessionStorage
+    saveToSessionStorage();
 
     return average; // Return de waarde voor gebruik in andere functies
 }
@@ -230,7 +228,7 @@ function calculateAverage() {
 // Update het begrensde wettelijk verlof op basis van het gemiddelde percentage
 function updateBegrensdWettelijkVerlof(averagePercentage) {
     const maxWettelijkVerlof = parseFloat(document.getElementById('max-wettelijk-verlof').textContent);
-    const begrensdWettelijkVerlof = (maxWettelijkVerlof * (averagePercentage / 100)).toFixed(2);
+    const begrensdWettelijkVerlof = (maxWettelijkVerlof * (averagePercentage / 100)).toFixed(1);
     document.getElementById('begrensd-wettelijk-verlof').textContent = begrensdWettelijkVerlof;
 
     // Update de tweede tabel met de nieuwe waarden
@@ -308,11 +306,11 @@ function updateTable() {
         }
 
         // Update de cellen met de berekende waarden
-        wvStartCell.textContent = wvStart.toFixed(2);
+        wvStartCell.textContent = wvStart.toFixed(1);
 
         // Beperk de opgenomen uren tot het beschikbare WV Start
         if (opgenomenUren > wvStart) {
-            opgenomenUrenInput.value = wvStart.toFixed(2);
+            opgenomenUrenInput.value = wvStart.toFixed(1);
         }
 
         // Bereken WV Correctie
@@ -324,7 +322,7 @@ function updateTable() {
             // Voor andere maanden: WV Start - WV Start van vorige maand + WV Opgenomen vorige maand
             wvCorrectie = wvStart - vorigeWVStart + vorigeOpgenomenUren;
         }
-        wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
+        wvCorrectieCell.textContent = wvCorrectie.toFixed(1);
 
         // Bereken percentage WV opgenomen voor deze maand
         // Gebruik het juiste referentiegetal op basis van het percentage
@@ -347,8 +345,8 @@ function updateTable() {
     updateELTable();
     updateANCTable();
 
-    // Sla de waarden op in localStorage
-    saveToLocalStorage();
+    // Sla de waarden op in sessionStorage
+    saveToSessionStorage();
 }
 
 // Functie voor het bijwerken van de ADV tabel
@@ -431,12 +429,12 @@ function updateADVTable() {
         }
 
         // Update de cellen met de berekende waarden
-        advStartCell.textContent = advStart.toFixed(2);
-        advCorrectieCell.textContent = advCorrectie.toFixed(2);
+        advStartCell.textContent = advStart.toFixed(1);
+        advCorrectieCell.textContent = advCorrectie.toFixed(1);
 
         // Beperk de opgenomen uren tot het beschikbare ADV
         if (advOpgenomen > advStart) {
-            advOpgenomenInput.value = advStart.toFixed(2);
+            advOpgenomenInput.value = advStart.toFixed(1);
         }
 
         // Bewaar waarden voor de volgende iteratie
@@ -445,8 +443,8 @@ function updateADVTable() {
         vorigePercentage = percentage;
     });
 
-    // Sla de waarden op in localStorage
-    saveToLocalStorage();
+    // Sla de waarden op in sessionStorage
+    saveToSessionStorage();
 }
 
 // Functie voor het bijwerken van de EL (extralegaal verlof) tabel
@@ -529,12 +527,12 @@ function updateELTable() {
         }
 
         // Update de cellen met de berekende waarden
-        elStartCell.textContent = elStart.toFixed(2);
-        elCorrectieCell.textContent = elCorrectie.toFixed(2);
+        elStartCell.textContent = elStart.toFixed(1);
+        elCorrectieCell.textContent = elCorrectie.toFixed(1);
 
         // Beperk de opgenomen uren tot het beschikbare EL
         if (elOpgenomen > elStart) {
-            elOpgenomenInput.value = elStart.toFixed(2);
+            elOpgenomenInput.value = elStart.toFixed(1);
         }
 
         // Bewaar waarden voor de volgende iteratie
@@ -543,12 +541,23 @@ function updateELTable() {
         vorigePercentage = percentage;
     });
 
-    // Sla de waarden op in localStorage
-    saveToLocalStorage();
+    // Sla de waarden op in sessionStorage
+    saveToSessionStorage();
 }
 
 // Functie voor het bijwerken van de ANC (ancienniteitsverlof) tabel
 function updateANCTable() {
+    // Zorg ervoor dat de max ancienniteitsverlof waarde correct is ingesteld
+    const maxAncElement = document.getElementById('max-ancieniteits-verlof');
+    if (!maxAncElement || maxAncElement.textContent === '' || maxAncElement.textContent === '0') {
+        // Bereken het ancienniteitsverlof op basis van de startdatum
+        const ancienniteitsverlof = berekenAncienniteitsverlof();
+        if (maxAncElement) {
+            maxAncElement.textContent = ancienniteitsverlof.toFixed(1);
+            console.log('Max ancienniteitsverlof ingesteld op:', ancienniteitsverlof);
+        }
+    }
+
     const maxANCVerlof = parseFloat(document.getElementById('max-ancieniteits-verlof').textContent);
     const maandelijksANC = maxANCVerlof / 12; // Uren per maand
 
@@ -627,12 +636,12 @@ function updateANCTable() {
         }
 
         // Update de cellen met de berekende waarden
-        ancStartCell.textContent = ancStart.toFixed(2);
-        ancCorrectieCell.textContent = ancCorrectie.toFixed(2);
+        ancStartCell.textContent = ancStart.toFixed(1);
+        ancCorrectieCell.textContent = ancCorrectie.toFixed(1);
 
         // Beperk de opgenomen uren tot het beschikbare ANC
         if (ancOpgenomen > ancStart) {
-            ancOpgenomenInput.value = ancStart.toFixed(2);
+            ancOpgenomenInput.value = ancStart.toFixed(1);
         }
 
         // Bewaar waarden voor de volgende iteratie
@@ -641,8 +650,8 @@ function updateANCTable() {
         vorigePercentage = percentage;
     });
 
-    // Sla de waarden op in localStorage
-    saveToLocalStorage();
+    // Sla de waarden op in sessionStorage
+    saveToSessionStorage();
 }
 
 // Functie om de huidige datum in te stellen als standaardwaarde
@@ -656,14 +665,14 @@ function setDefaultDate() {
     const dateInput = document.getElementById('startDate');
     dateInput.value = formattedDate;
 
-    // Sla de datum op in localStorage
-    localStorage.setItem('startDate', formattedDate);
+    // Sla de datum op in sessionStorage
+    sessionStorage.setItem('startDate', formattedDate);
 }
 
 // Functie om het ancienniteitsverlof te berekenen op basis van jaren dienst
 function berekenAncienniteitsverlof() {
     const startDate = document.getElementById('startDate').value;
-    if (!startDate) return 0;
+    if (!startDate) return 24; // Standaardwaarde als er geen datum is
 
     const startDatum = new Date(startDate);
     const huidigeDatum = new Date();
@@ -671,6 +680,8 @@ function berekenAncienniteitsverlof() {
 
     // Bereken het aantal jaren dienst (inclusief het huidige jaar)
     let jarenDienst = huidigJaar - startDatum.getFullYear();
+
+    console.log('Jaren dienst:', jarenDienst);
 
     // Bepaal het aantal uren op basis van de tabel
     let aantalUren = 0;
@@ -691,6 +702,8 @@ function berekenAncienniteitsverlof() {
         aantalUren = 16;
     } else if (jarenDienst >= 1) {
         aantalUren = 8;
+    } else {
+        aantalUren = 24; // Standaardwaarde als er minder dan 1 jaar dienst is
     }
 
     return aantalUren;
@@ -703,7 +716,10 @@ function updateStartDate() {
 
     // Bereken het ancienniteitsverlof op basis van de startdatum
     const ancienniteitsverlof = berekenAncienniteitsverlof();
-    document.getElementById('max-ancieniteits-verlof').textContent = ancienniteitsverlof.toFixed(2);
+
+    // Zorg ervoor dat de waarde altijd wordt ingesteld, zelfs als het 0 is
+    document.getElementById('max-ancieniteits-verlof').textContent = ancienniteitsverlof.toFixed(1);
+    console.log('Berekend ancienniteitsverlof:', ancienniteitsverlof);
 
     // Update de tabellen
     updateTable();
@@ -711,25 +727,204 @@ function updateStartDate() {
     updateELTable();
     updateANCTable();
 
-    // Sla de datum op in localStorage
-    localStorage.setItem('startDate', selectedDate);
+    // Sla de datum op in sessionStorage
+    sessionStorage.setItem('startDate', selectedDate);
 }
 
 // Functie om alle opgeslagen gegevens te wissen, behalve de cookie consent
-function clearLocalStorage() {
+function clearSessionStorage() {
     // Bewaar de cookie consent instelling
-    const cookieConsent = localStorage.getItem('cookieConsent');
+    const cookieConsent = sessionStorage.getItem('cookieConsent');
 
-    // Wis alle localStorage
-    localStorage.clear();
+    // Wis alle sessionStorage
+    sessionStorage.clear();
 
     // Herstel de cookie consent instelling als die bestond
     if (cookieConsent) {
-        localStorage.setItem('cookieConsent', cookieConsent);
+        sessionStorage.setItem('cookieConsent', cookieConsent);
     }
 
     // Vernieuw de pagina om alle velden te resetten
     location.reload();
+}
+
+// Functie om alle invoerwaarden te exporteren naar CSV
+function exportToCSV() {
+    // Verzamel alle gegevens
+    const data = {
+        percentages: Array.from(document.querySelectorAll('.table-container:first-of-type .percentage-input')).map(input => input.value || "100"),
+        verlofPercentages: Array.from(document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)')).map(input => input.value || "100"),
+        opgenomenUren: Array.from(document.querySelectorAll('.opgenomen-uren')).map(input => input.value || "0"),
+        advOpgenomenUren: Array.from(document.querySelectorAll('.adv-opgenomen-uren')).map(input => input.value || "0"),
+        elOpgenomenUren: Array.from(document.querySelectorAll('.el-opgenomen-uren')).map(input => input.value || "0"),
+        ancOpgenomenUren: Array.from(document.querySelectorAll('.anc-opgenomen-uren')).map(input => input.value || "0"),
+        startDate: document.getElementById('startDate').value
+    };
+
+    // Converteer naar CSV-formaat
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "type,value\n";
+    csvContent += `startDate,${data.startDate}\n`;
+
+    // Voeg percentages toe
+    data.percentages.forEach((value, index) => {
+        csvContent += `percentage_${index},${value}\n`;
+    });
+
+    // Voeg verlofpercentages toe
+    data.verlofPercentages.forEach((value, index) => {
+        csvContent += `verlofPercentage_${index},${value}\n`;
+    });
+
+    // Voeg opgenomen uren toe
+    data.opgenomenUren.forEach((value, index) => {
+        csvContent += `opgenomenUren_${index},${value}\n`;
+    });
+
+    // Voeg ADV opgenomen uren toe
+    data.advOpgenomenUren.forEach((value, index) => {
+        csvContent += `advOpgenomenUren_${index},${value}\n`;
+    });
+
+    // Voeg EL opgenomen uren toe
+    data.elOpgenomenUren.forEach((value, index) => {
+        csvContent += `elOpgenomenUren_${index},${value}\n`;
+    });
+
+    // Voeg ANC opgenomen uren toe
+    data.ancOpgenomenUren.forEach((value, index) => {
+        csvContent += `ancOpgenomenUren_${index},${value}\n`;
+    });
+
+    // Maak een downloadbare link
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "verlofgegevens.csv");
+    document.body.appendChild(link);
+
+    // Klik op de link om het bestand te downloaden
+    link.click();
+
+    // Verwijder de link
+    document.body.removeChild(link);
+}
+
+// Functie om gegevens te importeren uit een CSV-bestand
+// Functie om gegevens te importeren uit een CSV-bestand
+function importFromCSV() {
+    // Controleer of het bestandsinvoerelement bestaat, zo niet, maak het aan
+    let fileInput = document.getElementById('importFile');
+    if (!fileInput) {
+        fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.id = 'importFile';
+        fileInput.accept = '.csv';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+        // Voeg de event listener toe aan het nieuwe element
+        fileInput.addEventListener('change', handleFileImport);
+    }
+    // Klik op het bestandsinvoerelement om de bestandskiezer te openen
+    fileInput.click();
+}
+
+// Functie om het geïmporteerde CSV-bestand te verwerken
+function handleFileImport(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const csvData = event.target.result;
+        const lines = csvData.split('\n');
+
+        // Sla de gegevens op in een object
+        const data = {};
+
+        // Sla de header over (eerste regel)
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line) {
+                const [key, value] = line.split(',');
+                data[key] = value;
+            }
+        }
+
+        // Vul de startdatum in
+        if (data.startDate) {
+            document.getElementById('startDate').value = data.startDate;
+        }
+
+        // Vul de percentages in
+        const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
+        percentageInputs.forEach((input, index) => {
+            const value = data[`percentage_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Vul de verlofpercentages in
+        const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
+        verlofPercentageInputs.forEach((input, index) => {
+            const value = data[`verlofPercentage_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Vul de opgenomen uren in
+        const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
+        opgenomenUrenInputs.forEach((input, index) => {
+            const value = data[`opgenomenUren_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Vul de ADV opgenomen uren in
+        const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
+        advOpgenomenUrenInputs.forEach((input, index) => {
+            const value = data[`advOpgenomenUren_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Vul de EL opgenomen uren in
+        const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
+        elOpgenomenUrenInputs.forEach((input, index) => {
+            const value = data[`elOpgenomenUren_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Vul de ANC opgenomen uren in
+        const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
+        ancOpgenomenUrenInputs.forEach((input, index) => {
+            const value = data[`ancOpgenomenUren_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
+        });
+
+        // Bereken alles opnieuw met de geïmporteerde waarden
+        updateStartDate(); // Dit zal ook de ancienniteitsverlof berekenen
+        calculateAverage();
+        updateTable();
+        updateADVTable();
+        updateELTable();
+        updateANCTable();
+
+        // Sla de geïmporteerde waarden op in sessionStorage
+        saveToSessionStorage();
+
+        alert('Gegevens succesvol geïmporteerd!');
+    };
+
+    reader.readAsText(file);
 }
 
 // Bereken het gemiddelde bij het laden van de pagina
@@ -737,8 +932,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toon de cookie-melding
     showCookieConsent();
 
-    // Laad opgeslagen waarden uit localStorage
-    loadFromLocalStorage();
+    const exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportToCSV);
+    }
+
+    const importBtn = document.getElementById('importBtn');
+    if (importBtn) {
+        importBtn.addEventListener('click', importFromCSV);
+    }
+
+    const importFile = document.getElementById('importFile');
+    if (importFile) {
+        importFile.addEventListener('change', handleFileImport);
+    }
+
+    // Zorg ervoor dat de max ancienniteitsverlof waarde correct wordt ingesteld
+    const maxAncElement = document.getElementById('max-ancieniteits-verlof');
+    if (!maxAncElement || maxAncElement.textContent === '' || maxAncElement.textContent === '0') {
+        // Bereken het ancienniteitsverlof op basis van de startdatum
+        const ancienniteitsverlof = berekenAncienniteitsverlof();
+        if (maxAncElement) {
+            maxAncElement.textContent = ancienniteitsverlof.toFixed(1);
+            console.log('Max ancienniteitsverlof ingesteld op:', ancienniteitsverlof);
+        }
+    }
+
+    // Laad opgeslagen waarden uit sessionStorage
+    loadFromSessionStorage();
 
     // Voeg event listeners toe aan alle percentage-inputs in de eerste tabel
     const percentageInputs = document.querySelectorAll('.table-container:first-of-type .percentage-input');
@@ -774,8 +995,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
     // Voeg event listeners toe aan alle ADV opgenomen-uren inputs
     const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
     advOpgenomenUrenInputs.forEach(input => {
@@ -796,4 +1015,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Voeg een event listener toe aan de startdatum
     document.getElementById('startDate').addEventListener('change', updateStartDate);
+
+    // Voeg event listeners toe aan de export/import knoppen
+    document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+    document.getElementById('importBtn').addEventListener('click', importFromCSV);
+    document.getElementById('importFile').addEventListener('change', handleFileImport);
 });

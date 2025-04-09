@@ -245,4 +245,5 @@ const translations = {
         "cookie_text": "This website uses cookies to enhance your experience and store your preferences.",
         "accept_cookies": "Accept"
     }
+
 };
