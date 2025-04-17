@@ -49,6 +49,11 @@ function showCookieConsent() {
 // Valideer de invoer voor percentage velden (0-100)
 function validateInput(input) {
     const value = parseFloat(input.value);
+    if (isNaN(value)) {
+        input.value = '';
+        return;
+    }
+
     if (value < 0) {
         input.value = 0;
     } else if (value > 100) {
@@ -62,6 +67,11 @@ function validateInput(input) {
 // Valideer de opgenomen uren invoer (beperkt tot beschikbare uren)
 function validateOpgenomenUren(input, maand) {
     const value = parseFloat(input.value);
+    if (isNaN(value)) {
+        input.value = 0;
+        return;
+    }
+
     if (value < 0) {
         input.value = 0;
     }
@@ -72,6 +82,33 @@ function validateOpgenomenUren(input, maand) {
         const wvStart = parseFloat(wvStartCell.textContent);
         if (value > wvStart) {
             input.value = wvStart.toFixed(1);
+        }
+    }
+
+    // Sla de waarde op in sessionStorage
+    saveToSessionStorage();
+}
+
+// Valideer opgenomen uren voor ADV, EL en ANC
+function validateOpgenomenVerlof(input, type) {
+    const value = parseFloat(input.value);
+    if (isNaN(value)) {
+        input.value = 0;
+        return;
+    }
+
+    if (value < 0) {
+        input.value = 0;
+    }
+
+    // Haal de beschikbare uren op voor dit type verlof
+    const beschikbaarId = `${type}-beschikbaar`;
+    const beschikbaarCell = document.getElementById(beschikbaarId);
+
+    if (beschikbaarCell) {
+        const beschikbaar = parseFloat(beschikbaarCell.textContent);
+        if (value > beschikbaar) {
+            input.value = beschikbaar.toFixed(1);
         }
     }
 
@@ -811,7 +848,6 @@ function exportToCSV() {
 }
 
 // Functie om gegevens te importeren uit een CSV-bestand
-// Functie om gegevens te importeren uit een CSV-bestand
 function importFromCSV() {
     // Controleer of het bestandsinvoerelement bestaat, zo niet, maak het aan
     let fileInput = document.getElementById('importFile');
@@ -932,6 +968,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toon de cookie-melding
     showCookieConsent();
 
+    // Voeg validatie toe aan alle numerieke invoervelden
+    const allNumericInputs = document.querySelectorAll('input[type="number"]');
+    allNumericInputs.forEach(input => {
+        // Voorkom negatieve waarden bij handmatige invoer
+        input.addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            if (value < 0) {
+                this.value = 0;
+            }
+        });
+
+        // Valideer bij blur (wanneer het veld verlaten wordt)
+        input.addEventListener('blur', function() {
+            if (this.classList.contains('percentage-input') && !this.classList.contains('opgenomen-uren')) {
+                validateInput(this);
+            } else if (this.classList.contains('opgenomen-uren')) {
+                // Vind de bijbehorende maand
+                const row = this.closest('tr');
+                const maandCell = row.querySelector('td:first-child');
+                const maandText = maandCell.textContent.toLowerCase();
+                validateOpgenomenUren(this, maandText);
+            } else if (this.classList.contains('adv-opgenomen-uren')) {
+                validateOpgenomenVerlof(this, 'adv');
+            } else if (this.classList.contains('el-opgenomen-uren')) {
+                validateOpgenomenVerlof(this, 'el');
+            } else if (this.classList.contains('anc-opgenomen-uren')) {
+                validateOpgenomenVerlof(this, 'anc');
+            } else {
+                // Voor andere numerieke velden, controleer alleen op negatieve waarden
+                const value = parseFloat(this.value);
+                if (isNaN(value)) {
+                    this.value = 0;
+                } else if (value < 0) {
+                    this.value = 0;
+                }
+                saveToSessionStorage();
+            }
+        });
+    });
+
     const exportBtn = document.getElementById('exportBtn');
     if (exportBtn) {
         exportBtn.addEventListener('click', exportToCSV);
@@ -998,19 +1074,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Voeg event listeners toe aan alle ADV opgenomen-uren inputs
     const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
     advOpgenomenUrenInputs.forEach(input => {
-        input.addEventListener('input', updateADVTable);
+        input.addEventListener('input', function() {
+            validateOpgenomenVerlof(this, 'adv');
+            updateADVTable();
+        });
     });
 
     // Voeg event listeners toe aan alle EL opgenomen-uren inputs
     const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
     elOpgenomenUrenInputs.forEach(input => {
-        input.addEventListener('input', updateELTable);
+        input.addEventListener('input', function() {
+            validateOpgenomenVerlof(this, 'el');
+            updateELTable();
+        });
     });
 
     // Voeg event listeners toe aan alle ANC opgenomen-uren inputs
     const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
     ancOpgenomenUrenInputs.forEach(input => {
-        input.addEventListener('input', updateANCTable);
+        input.addEventListener('input', function() {
+            validateOpgenomenVerlof(this, 'anc');
+            updateANCTable();
+        });
     });
 
     // Voeg een event listener toe aan de startdatum
