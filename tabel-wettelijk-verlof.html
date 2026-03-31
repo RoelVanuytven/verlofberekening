@@ -1,0 +1,151 @@
+<div class="table-container" id="tabel-wettelijk-verlof">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th colspan="6" class="header-groot" data-i18n="legal_vacation">Wettelijk verlof</th>
+      </tr>
+      <tr>
+        <th data-i18n="month">Maand</th>
+        <th data-i18n="wv_start">WV Start</th>
+        <th data-i18n="wv_correction">WV Correctie</th>
+        <th data-i18n="wv_taken">WV Opgenomen</th>
+        <th data-i18n="wv_taken_percentage">% WV Opgenomen</th>
+        <th data-i18n="wv_taken_total">% WV Opgenomen Totaal</th>
+      </tr>
+    </thead>
+    <tbody id="verlof-tabel">
+      <tr>
+        <td data-i18n="january">Januari</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-januari">160.00</span>
+        </td>
+        <td id="wv-correctie-januari">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-januari">0.00%</td>
+        <td id="percentage-wv-totaal-januari">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="february">Februari</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-februari">160.00</span>
+        </td>
+        <td id="wv-correctie-februari">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-februari">0.00%</td>
+        <td id="percentage-wv-totaal-februari">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="march">Maart</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-maart">160.00</span>
+        </td>
+        <td id="wv-correctie-maart">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-maart">0.00%</td>
+        <td id="percentage-wv-totaal-maart">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="april">April</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-april">160.00</span>
+        </td>
+        <td id="wv-correctie-april">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-april">0.00%</td>
+        <td id="percentage-wv-totaal-april">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="may">Mei</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-mei">160.00</span>
+        </td>
+        <td id="wv-correctie-mei">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-mei">0.00%</td>
+        <td id="percentage-wv-totaal-mei">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="june">Juni</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-juni">160.00</span>
+        </td>
+        <td id="wv-correctie-juni">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-juni">0.00%</td>
+        <td id="percentage-wv-totaal-juni">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="july">Juli</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-juli">160.00</span>
+        </td>
+        <td id="wv-correctie-juli">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-juli">0.00%</td>
+        <td id="percentage-wv-totaal-juli">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="august">Augustus</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-augustus">160.00</span>
+        </td>
+        <td id="wv-correctie-augustus">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-augustus">0.00%</td>
+        <td id="percentage-wv-totaal-augustus">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="september">September</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-september">160.00</span>
+        </td>
+        <td id="wv-correctie-september">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-september">0.00%</td>
+        <td id="percentage-wv-totaal-september">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="october">Oktober</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-oktober">160.00</span>
+        </td>
+        <td id="wv-correctie-oktober">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-oktober">0.00%</td>
+        <td id="percentage-wv-totaal-oktober">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="november">November</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-november">160.00</span>
+        </td>
+        <td id="wv-correctie-november">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-november">0.00%</td>
+        <td id="percentage-wv-totaal-november">0.00%</td>
+      </tr>
+      <tr>
+        <td data-i18n="december">December</td>
+        <td>
+          <input type="number" class="percentage-input" min="0" max="100" value="100" oninput="updateTable()" style="display: none;">
+          <span id="wv-start-december">160.00</span>
+        </td>
+        <td id="wv-correctie-december">0.00</td>
+        <td><input type="text" inputmode="decimal" class="percentage-input opgenomen-uren" value="0" oninput="updateTable()"></td>
+        <td id="percentage-wv-december">0.00%</td>
+        <td id="percentage-wv-totaal-december">0.00%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

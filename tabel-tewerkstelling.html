@@ -1,0 +1,80 @@
+<div class="table-container" id="tabel-tewerkstelling">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th data-i18n="month">Maand</th>
+        <th>Percentage vorig jaar</th>
+        <th>Percentage huidig jaar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-i18n="january">Januari</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-januari" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="february">Februari</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-februari" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="march">Maart</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-maart" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="april">April</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-april" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="may">Mei</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-mei" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="june">Juni</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-juni" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="july">Juli</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-juli" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="august">Augustus</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-augustus" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="september">September</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-september" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="october">Oktober</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-oktober" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="november">November</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-november" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+      <tr>
+        <td data-i18n="december">December</td>
+        <td><input type="number" class="percentage-input" min="0" max="100" oninput="validateInput(this); calculateAverage()" placeholder="100"></td>
+        <td><input type="number" id="huidig-percentage-december" class="percentage-input huidig-percentage-input" min="0" max="100" value="100" oninput="validateInput(this); updateTable()"></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><strong data-i18n="average">Gemiddelde</strong></td>
+        <td><strong id="average-percentage-vorig-jaar">100.00%</strong></td>
+        <td><strong id="average-percentage-huidig-jaar">100.00%</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
