@@ -6,7 +6,7 @@ const translations = {
         "blog": "Blog",
 
         // Titles
-        "employment_percentage": "Tewerkstellingspercentage vorig jaar",
+        "employment_percentage": "Tewerkstellingspercentage",
         "vacation_this_year": "Verlof dit jaar:",
         "max_legal_vacation": "Max wettelijk verlof:",
         "limited_legal_vacation": "Begrensd wettelijk verlof:",
@@ -27,6 +27,8 @@ const translations = {
         "wv_taken": "WV Opgenomen",
         "wv_taken_percentage": "% WV Opgenomen",
         "wv_taken_total": "% WV Opgenomen Totaal",
+        "cascade_available": "Cascadeverlof beschikbaar",
+        "cascade_taken": "Cascadeverlof Opgenomen",
         "adv_start": "ADV Start",
         "adv_correction": "ADV Correctie",
         "adv_taken": "ADV Opgenomen",
@@ -90,7 +92,7 @@ const translations = {
         "blog": "Blog",
 
         // Titles
-        "employment_percentage": "Pourcentage d'emploi de l'année précédente",
+        "employment_percentage": "Pourcentage d'emploi",
         "vacation_this_year": "Congés cette année :",
         "max_legal_vacation": "Congés légaux max :",
         "limited_legal_vacation": "Congés légaux limités :",
@@ -111,6 +113,8 @@ const translations = {
         "wv_taken": "WV Pris",
         "wv_taken_percentage": "% WV Pris",
         "wv_taken_total": "% WV Pris Total",
+        "cascade_available": "Congé cascade disponible",
+        "cascade_taken": "Congé cascade pris",
         "adv_start": "ADV Début",
         "adv_correction": "ADV Correction",
         "adv_taken": "ADV Pris",
@@ -174,7 +178,7 @@ const translations = {
         "blog": "Blog",
 
         // Titles
-        "employment_percentage": "Employment percentage last year",
+        "employment_percentage": "Employment percentage",
         "vacation_this_year": "Vacation this year:",
         "max_legal_vacation": "Max legal vacation:",
         "limited_legal_vacation": "Limited legal vacation:",
@@ -195,6 +199,8 @@ const translations = {
         "wv_taken": "WV Taken",
         "wv_taken_percentage": "% WV Taken",
         "wv_taken_total": "% WV Taken Total",
+        "cascade_available": "Cascade leave available",
+        "cascade_taken": "Cascade leave taken",
         "adv_start": "ADV Start",
         "adv_correction": "ADV Correction",
         "adv_taken": "ADV Taken",
