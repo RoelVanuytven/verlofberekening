@@ -20,6 +20,8 @@ const translations = {
         // Table headers
         "month": "Maand",
         "percentage": "Percentage",
+        "percentage_previous_year": "Percentage vorig jaar",
+        "percentage_current_year": "Percentage huidig jaar",
         "average": "Gemiddelde",
         "start_date": "Startdatum:",
         "wv_start": "WV Start",
@@ -57,6 +59,8 @@ const translations = {
         "clear_data": "Gegevens wissen",
         "export_data": "Gegevens exporteren",
         "import_data": "Gegevens importeren",
+        "show_details": "Toon details",
+        "hide_details": "Verberg details",
 
         // Footer
         "rights_reserved": "Alle rechten voorbehouden.",
@@ -106,6 +110,8 @@ const translations = {
         // Table headers
         "month": "Mois",
         "percentage": "Pourcentage",
+        "percentage_previous_year": "Pourcentage année précédente",
+        "percentage_current_year": "Pourcentage année en cours",
         "average": "Moyenne",
         "start_date": "Date de début :",
         "wv_start": "WV Début",
@@ -143,6 +149,8 @@ const translations = {
         "clear_data": "Effacer les données",
         "export_data": "Exporter les données",
         "import_data": "Importer les données",
+        "show_details": "Afficher les détails",
+        "hide_details": "Masquer les détails",
 
         // Footer
         "rights_reserved": "Tous droits réservés.",
@@ -192,6 +200,8 @@ const translations = {
         // Table headers
         "month": "Month",
         "percentage": "Percentage",
+        "percentage_previous_year": "Percentage previous year",
+        "percentage_current_year": "Percentage current year",
         "average": "Average",
         "start_date": "Start date:",
         "wv_start": "WV Start",
@@ -229,6 +239,8 @@ const translations = {
         "clear_data": "Clear data",
         "export_data": "Export data",
         "import_data": "Import data",
+        "show_details": "Show details",
+        "hide_details": "Hide details",
 
         // Footer
         "rights_reserved": "All rights reserved.",
