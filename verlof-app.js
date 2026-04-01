@@ -174,56 +174,52 @@ function validateOpgenomenVerlof(input, type) {
     saveToSessionStorage();
 }
 
+// Geef enkel de velden terug die effectief invulbaar zijn
+function getOpslaanbareGegevens() {
+    const vorigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling tbody tr td:nth-child(2) .percentage-input');
+    const huidigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling .huidig-percentage-input');
+    const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
+    const cascadeOpgenomenInputs = document.querySelectorAll('.cascade-opgenomen-uren');
+    const startDateInput = document.getElementById('startDate');
+
+    return {
+        vorigJaarPercentages: Array.from(vorigJaarInputs).map(input => input.value || '100'),
+        huidigJaarPercentages: Array.from(huidigJaarInputs).map(input => input.value || '100'),
+        opgenomenUren: Array.from(opgenomenUrenInputs).map(input => input.value || '0'),
+        cascadeOpgenomenUren: Array.from(cascadeOpgenomenInputs).map(input => input.value || '0'),
+        startDate: startDateInput ? startDateInput.value : ''
+    };
+}
+
 // Sla alle invoerwaarden op in sessionStorage
 function saveToSessionStorage() {
-    const percentageInputs = document.querySelectorAll('#tabel-tewerkstelling .percentage-input');
-    const percentages = Array.from(percentageInputs).map(input => input.value);
-    sessionStorage.setItem('percentages', JSON.stringify(percentages));
+    const data = getOpslaanbareGegevens();
 
-    const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
-    const verlofPercentages = Array.from(verlofPercentageInputs).map(input => input.value);
-    sessionStorage.setItem('verlofPercentages', JSON.stringify(verlofPercentages));
-
-    const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
-    const opgenomenUren = Array.from(opgenomenUrenInputs).map(input => input.value);
-    sessionStorage.setItem('opgenomenUren', JSON.stringify(opgenomenUren));
-
-    const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
-    const advOpgenomenUren = Array.from(advOpgenomenUrenInputs).map(input => input.value);
-    sessionStorage.setItem('advOpgenomenUren', JSON.stringify(advOpgenomenUren));
-
-    const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
-    const elOpgenomenUren = Array.from(elOpgenomenUrenInputs).map(input => input.value);
-    sessionStorage.setItem('elOpgenomenUren', JSON.stringify(elOpgenomenUren));
-
-    const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
-    const ancOpgenomenUren = Array.from(ancOpgenomenUrenInputs).map(input => input.value);
-    sessionStorage.setItem('ancOpgenomenUren', JSON.stringify(ancOpgenomenUren));
-
-    const startDateInput = document.getElementById('startDate');
-    if (startDateInput) {
-        sessionStorage.setItem('startDate', startDateInput.value);
-    }
+    sessionStorage.setItem('vorigJaarPercentages', JSON.stringify(data.vorigJaarPercentages));
+    sessionStorage.setItem('huidigJaarPercentages', JSON.stringify(data.huidigJaarPercentages));
+    sessionStorage.setItem('opgenomenUren', JSON.stringify(data.opgenomenUren));
+    sessionStorage.setItem('cascadeOpgenomenUren', JSON.stringify(data.cascadeOpgenomenUren));
+    sessionStorage.setItem('startDate', data.startDate);
 }
 
 // Laad opgeslagen waarden uit sessionStorage
 function loadFromSessionStorage() {
-    const percentages = JSON.parse(sessionStorage.getItem('percentages'));
-    if (percentages) {
-        const percentageInputs = document.querySelectorAll('#tabel-tewerkstelling .percentage-input');
-        percentages.forEach((value, index) => {
-            if (index < percentageInputs.length) {
-                percentageInputs[index].value = value;
+    const vorigJaarPercentages = JSON.parse(sessionStorage.getItem('vorigJaarPercentages'));
+    if (vorigJaarPercentages) {
+        const vorigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling tbody tr td:nth-child(2) .percentage-input');
+        vorigJaarPercentages.forEach((value, index) => {
+            if (index < vorigJaarInputs.length) {
+                vorigJaarInputs[index].value = value;
             }
         });
     }
 
-    const verlofPercentages = JSON.parse(sessionStorage.getItem('verlofPercentages'));
-    if (verlofPercentages) {
-        const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
-        verlofPercentages.forEach((value, index) => {
-            if (index < verlofPercentageInputs.length) {
-                verlofPercentageInputs[index].value = value;
+    const huidigJaarPercentages = JSON.parse(sessionStorage.getItem('huidigJaarPercentages'));
+    if (huidigJaarPercentages) {
+        const huidigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling .huidig-percentage-input');
+        huidigJaarPercentages.forEach((value, index) => {
+            if (index < huidigJaarInputs.length) {
+                huidigJaarInputs[index].value = value;
             }
         });
     }
@@ -238,32 +234,12 @@ function loadFromSessionStorage() {
         });
     }
 
-    const advOpgenomenUren = JSON.parse(sessionStorage.getItem('advOpgenomenUren'));
-    if (advOpgenomenUren) {
-        const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
-        advOpgenomenUren.forEach((value, index) => {
-            if (index < advOpgenomenUrenInputs.length) {
-                advOpgenomenUrenInputs[index].value = value;
-            }
-        });
-    }
-
-    const elOpgenomenUren = JSON.parse(sessionStorage.getItem('elOpgenomenUren'));
-    if (elOpgenomenUren) {
-        const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
-        elOpgenomenUren.forEach((value, index) => {
-            if (index < elOpgenomenUrenInputs.length) {
-                elOpgenomenUrenInputs[index].value = value;
-            }
-        });
-    }
-
-    const ancOpgenomenUren = JSON.parse(sessionStorage.getItem('ancOpgenomenUren'));
-    if (ancOpgenomenUren) {
-        const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
-        ancOpgenomenUren.forEach((value, index) => {
-            if (index < ancOpgenomenUrenInputs.length) {
-                ancOpgenomenUrenInputs[index].value = value;
+    const cascadeOpgenomenUren = JSON.parse(sessionStorage.getItem('cascadeOpgenomenUren'));
+    if (cascadeOpgenomenUren) {
+        const cascadeOpgenomenInputs = document.querySelectorAll('.cascade-opgenomen-uren');
+        cascadeOpgenomenUren.forEach((value, index) => {
+            if (index < cascadeOpgenomenInputs.length) {
+                cascadeOpgenomenInputs[index].value = value;
             }
         });
     }
@@ -373,42 +349,26 @@ function clearSessionStorage() {
 
 // Exporteer alle invoerwaarden naar CSV
 function exportToCSV() {
-    const data = {
-        percentages: Array.from(document.querySelectorAll('#tabel-tewerkstelling .percentage-input')).map(input => input.value || '100'),
-        verlofPercentages: Array.from(document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)')).map(input => input.value || '100'),
-        opgenomenUren: Array.from(document.querySelectorAll('.opgenomen-uren')).map(input => input.value || '0'),
-        advOpgenomenUren: Array.from(document.querySelectorAll('.adv-opgenomen-uren')).map(input => input.value || '0'),
-        elOpgenomenUren: Array.from(document.querySelectorAll('.el-opgenomen-uren')).map(input => input.value || '0'),
-        ancOpgenomenUren: Array.from(document.querySelectorAll('.anc-opgenomen-uren')).map(input => input.value || '0'),
-        startDate: document.getElementById('startDate') ? document.getElementById('startDate').value : ''
-    };
+    const data = getOpslaanbareGegevens();
 
     let csvContent = 'data:text/csv;charset=utf-8,';
     csvContent += 'type,value\n';
     csvContent += `startDate,${data.startDate}\n`;
 
-    data.percentages.forEach((value, index) => {
-        csvContent += `percentage_${index},${value}\n`;
+    data.vorigJaarPercentages.forEach((value, index) => {
+        csvContent += `vorigJaarPercentage_${index},${value}\n`;
     });
 
-    data.verlofPercentages.forEach((value, index) => {
-        csvContent += `verlofPercentage_${index},${value}\n`;
+    data.huidigJaarPercentages.forEach((value, index) => {
+        csvContent += `huidigJaarPercentage_${index},${value}\n`;
     });
 
     data.opgenomenUren.forEach((value, index) => {
         csvContent += `opgenomenUren_${index},${value}\n`;
     });
 
-    data.advOpgenomenUren.forEach((value, index) => {
-        csvContent += `advOpgenomenUren_${index},${value}\n`;
-    });
-
-    data.elOpgenomenUren.forEach((value, index) => {
-        csvContent += `elOpgenomenUren_${index},${value}\n`;
-    });
-
-    data.ancOpgenomenUren.forEach((value, index) => {
-        csvContent += `ancOpgenomenUren_${index},${value}\n`;
+    data.cascadeOpgenomenUren.forEach((value, index) => {
+        csvContent += `cascadeOpgenomenUren_${index},${value}\n`;
     });
 
     const encodedUri = encodeURI(csvContent);
@@ -461,40 +421,36 @@ function handleFileImport(event) {
             document.getElementById('startDate').value = data.startDate;
         }
 
-        const percentageInputs = document.querySelectorAll('#tabel-tewerkstelling .percentage-input');
-        percentageInputs.forEach((input, index) => {
-            const value = data[`percentage_${index}`];
-            if (value !== undefined) input.value = value;
+        const vorigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling tbody tr td:nth-child(2) .percentage-input');
+        vorigJaarInputs.forEach((input, index) => {
+            const value = data[`vorigJaarPercentage_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
         });
 
-        const verlofPercentageInputs = document.querySelectorAll('#verlof-tabel .percentage-input:not(.opgenomen-uren)');
-        verlofPercentageInputs.forEach((input, index) => {
-            const value = data[`verlofPercentage_${index}`];
-            if (value !== undefined) input.value = value;
+        const huidigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling .huidig-percentage-input');
+        huidigJaarInputs.forEach((input, index) => {
+            const value = data[`huidigJaarPercentage_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
         });
 
         const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
         opgenomenUrenInputs.forEach((input, index) => {
             const value = data[`opgenomenUren_${index}`];
-            if (value !== undefined) input.value = value;
+            if (value !== undefined) {
+                input.value = value;
+            }
         });
 
-        const advOpgenomenUrenInputs = document.querySelectorAll('.adv-opgenomen-uren');
-        advOpgenomenUrenInputs.forEach((input, index) => {
-            const value = data[`advOpgenomenUren_${index}`];
-            if (value !== undefined) input.value = value;
-        });
-
-        const elOpgenomenUrenInputs = document.querySelectorAll('.el-opgenomen-uren');
-        elOpgenomenUrenInputs.forEach((input, index) => {
-            const value = data[`elOpgenomenUren_${index}`];
-            if (value !== undefined) input.value = value;
-        });
-
-        const ancOpgenomenUrenInputs = document.querySelectorAll('.anc-opgenomen-uren');
-        ancOpgenomenUrenInputs.forEach((input, index) => {
-            const value = data[`ancOpgenomenUren_${index}`];
-            if (value !== undefined) input.value = value;
+        const cascadeOpgenomenInputs = document.querySelectorAll('.cascade-opgenomen-uren');
+        cascadeOpgenomenInputs.forEach((input, index) => {
+            const value = data[`cascadeOpgenomenUren_${index}`];
+            if (value !== undefined) {
+                input.value = value;
+            }
         });
 
         updateStartDate();
