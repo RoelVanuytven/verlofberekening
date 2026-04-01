@@ -1,211 +1,220 @@
 <div class="table-container" id="tabel-andere-verlofsoorten">
-  <div class="header-container">
-    <h3 class="verlof-titel" data-i18n="other_vacation_types">Andere verlofsoorten</h3>
-    <div class="date-selector">
-      <label for="startDate" data-i18n="start_date">Startdatum:</label>
-      <input type="date" id="startDate" onchange="updateStartDate()">
-    </div>
-  </div>
+  <div class="andere-verlof-layout">
+    <div class="andere-verlof-main">
+      <div class="header-container">
+        <h3 class="verlof-titel" data-i18n="other_vacation_types">Andere verlofsoorten</h3>
 
-  <table class="custom-table">
-    <thead>
-      <tr>
-        <th data-i18n="month">Maand</th>
-        <th data-i18n="percentage">Percentage</th>
-        <th data-i18n="cascade_available">Cascadeverlof beschikbaar</th>
-        <th data-i18n="cascade_taken">Cascadeverlof Opgenomen</th>
-        <th data-i18n="adv_start">ADV Start</th>
-        <th data-i18n="adv_correction">ADV Correctie</th>
-        <th data-i18n="adv_taken">ADV Opgenomen</th>
-        <th data-i18n="el_start">EL Start</th>
-        <th data-i18n="el_correction">EL Correctie</th>
-        <th data-i18n="el_taken">EL Opgenomen</th>
-        <th data-i18n="anc_start">ANC Start</th>
-        <th data-i18n="anc_correction">ANC Correctie</th>
-        <th data-i18n="anc_taken">ANC Opgenomen</th>
-      </tr>
-    </thead>
-    <tbody id="details-tabel">
-      <tr>
-        <td data-i18n="january">Januari</td>
-        <td id="detail-percentage-januari">100</td>
-        <td id="cascade-beschikbaar-januari">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-januari">196.00</td>
-        <td id="adv-correctie-januari">0.00</td>
-        <td id="adv-opgenomen-januari">0.00</td>
-        <td id="el-start-januari">24.00</td>
-        <td id="el-correctie-januari">0.00</td>
-        <td id="el-opgenomen-januari">0.00</td>
-        <td id="anc-start-januari">0.00</td>
-        <td id="anc-correctie-januari">0.00</td>
-        <td id="anc-opgenomen-januari">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="february">Februari</td>
-        <td id="detail-percentage-februari">100</td>
-        <td id="cascade-beschikbaar-februari">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-februari">196.00</td>
-        <td id="adv-correctie-februari">0.00</td>
-        <td id="adv-opgenomen-februari">0.00</td>
-        <td id="el-start-februari">24.00</td>
-        <td id="el-correctie-februari">0.00</td>
-        <td id="el-opgenomen-februari">0.00</td>
-        <td id="anc-start-februari">0.00</td>
-        <td id="anc-correctie-februari">0.00</td>
-        <td id="anc-opgenomen-februari">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="march">Maart</td>
-        <td id="detail-percentage-maart">100</td>
-        <td id="cascade-beschikbaar-maart">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-maart">196.00</td>
-        <td id="adv-correctie-maart">0.00</td>
-        <td id="adv-opgenomen-maart">0.00</td>
-        <td id="el-start-maart">24.00</td>
-        <td id="el-correctie-maart">0.00</td>
-        <td id="el-opgenomen-maart">0.00</td>
-        <td id="anc-start-maart">0.00</td>
-        <td id="anc-correctie-maart">0.00</td>
-        <td id="anc-opgenomen-maart">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="april">April</td>
-        <td id="detail-percentage-april">100</td>
-        <td id="cascade-beschikbaar-april">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-april">196.00</td>
-        <td id="adv-correctie-april">0.00</td>
-        <td id="adv-opgenomen-april">0.00</td>
-        <td id="el-start-april">24.00</td>
-        <td id="el-correctie-april">0.00</td>
-        <td id="el-opgenomen-april">0.00</td>
-        <td id="anc-start-april">0.00</td>
-        <td id="anc-correctie-april">0.00</td>
-        <td id="anc-opgenomen-april">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="may">Mei</td>
-        <td id="detail-percentage-mei">100</td>
-        <td id="cascade-beschikbaar-mei">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-mei">196.00</td>
-        <td id="adv-correctie-mei">0.00</td>
-        <td id="adv-opgenomen-mei">0.00</td>
-        <td id="el-start-mei">24.00</td>
-        <td id="el-correctie-mei">0.00</td>
-        <td id="el-opgenomen-mei">0.00</td>
-        <td id="anc-start-mei">0.00</td>
-        <td id="anc-correctie-mei">0.00</td>
-        <td id="anc-opgenomen-mei">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="june">Juni</td>
-        <td id="detail-percentage-juni">100</td>
-        <td id="cascade-beschikbaar-juni">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-juni">196.00</td>
-        <td id="adv-correctie-juni">0.00</td>
-        <td id="adv-opgenomen-juni">0.00</td>
-        <td id="el-start-juni">24.00</td>
-        <td id="el-correctie-juni">0.00</td>
-        <td id="el-opgenomen-juni">0.00</td>
-        <td id="anc-start-juni">0.00</td>
-        <td id="anc-correctie-juni">0.00</td>
-        <td id="anc-opgenomen-juni">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="july">Juli</td>
-        <td id="detail-percentage-juli">100</td>
-        <td id="cascade-beschikbaar-juli">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-juli">196.00</td>
-        <td id="adv-correctie-juli">0.00</td>
-        <td id="adv-opgenomen-juli">0.00</td>
-        <td id="el-start-juli">24.00</td>
-        <td id="el-correctie-juli">0.00</td>
-        <td id="el-opgenomen-juli">0.00</td>
-        <td id="anc-start-juli">0.00</td>
-        <td id="anc-correctie-juli">0.00</td>
-        <td id="anc-opgenomen-juli">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="august">Augustus</td>
-        <td id="detail-percentage-augustus">100</td>
-        <td id="cascade-beschikbaar-augustus">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-augustus">196.00</td>
-        <td id="adv-correctie-augustus">0.00</td>
-        <td id="adv-opgenomen-augustus">0.00</td>
-        <td id="el-start-augustus">24.00</td>
-        <td id="el-correctie-augustus">0.00</td>
-        <td id="el-opgenomen-augustus">0.00</td>
-        <td id="anc-start-augustus">0.00</td>
-        <td id="anc-correctie-augustus">0.00</td>
-        <td id="anc-opgenomen-augustus">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="september">September</td>
-        <td id="detail-percentage-september">100</td>
-        <td id="cascade-beschikbaar-september">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-september">196.00</td>
-        <td id="adv-correctie-september">0.00</td>
-        <td id="adv-opgenomen-september">0.00</td>
-        <td id="el-start-september">24.00</td>
-        <td id="el-correctie-september">0.00</td>
-        <td id="el-opgenomen-september">0.00</td>
-        <td id="anc-start-september">0.00</td>
-        <td id="anc-correctie-september">0.00</td>
-        <td id="anc-opgenomen-september">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="october">Oktober</td>
-        <td id="detail-percentage-oktober">100</td>
-        <td id="cascade-beschikbaar-oktober">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-oktober">196.00</td>
-        <td id="adv-correctie-oktober">0.00</td>
-        <td id="adv-opgenomen-oktober">0.00</td>
-        <td id="el-start-oktober">24.00</td>
-        <td id="el-correctie-oktober">0.00</td>
-        <td id="el-opgenomen-oktober">0.00</td>
-        <td id="anc-start-oktober">0.00</td>
-        <td id="anc-correctie-oktober">0.00</td>
-        <td id="anc-opgenomen-oktober">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="november">November</td>
-        <td id="detail-percentage-november">100</td>
-        <td id="cascade-beschikbaar-november">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-november">196.00</td>
-        <td id="adv-correctie-november">0.00</td>
-        <td id="adv-opgenomen-november">0.00</td>
-        <td id="el-start-november">24.00</td>
-        <td id="el-correctie-november">0.00</td>
-        <td id="el-opgenomen-november">0.00</td>
-        <td id="anc-start-november">0.00</td>
-        <td id="anc-correctie-november">0.00</td>
-        <td id="anc-opgenomen-november">0.00</td>
-      </tr>
-      <tr>
-        <td data-i18n="december">December</td>
-        <td id="detail-percentage-december">100</td>
-        <td id="cascade-beschikbaar-december">220.00</td>
-        <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
-        <td id="adv-start-december">196.00</td>
-        <td id="adv-correctie-december">0.00</td>
-        <td id="adv-opgenomen-december">0.00</td>
-        <td id="el-start-december">24.00</td>
-        <td id="el-correctie-december">0.00</td>
-        <td id="el-opgenomen-december">0.00</td>
-        <td id="anc-start-december">0.00</td>
-        <td id="anc-correctie-december">0.00</td>
-        <td id="anc-opgenomen-december">0.00</td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="date-selector">
+          <label for="startDate" data-i18n="start_date">Startdatum:</label>
+          <input type="date" id="startDate" onchange="updateStartDate()">
+        </div>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th data-i18n="month">Maand</th>
+            <th data-i18n="percentage">Percentage</th>
+            <th data-i18n="cascade_available">Cascadeverlof beschikbaar</th>
+            <th data-i18n="cascade_taken">Cascadeverlof Opgenomen</th>
+            <th class="detail-kolom" data-i18n="adv_start">ADV Start</th>
+            <th class="detail-kolom" data-i18n="adv_correction">ADV Correctie</th>
+            <th class="detail-kolom" data-i18n="adv_taken">ADV Opgenomen</th>
+            <th class="detail-kolom" data-i18n="el_start">EL Start</th>
+            <th class="detail-kolom" data-i18n="el_correction">EL Correctie</th>
+            <th class="detail-kolom" data-i18n="el_taken">EL Opgenomen</th>
+            <th class="detail-kolom" data-i18n="anc_start">ANC Start</th>
+            <th class="detail-kolom" data-i18n="anc_correction">ANC Correctie</th>
+            <th class="detail-kolom" data-i18n="anc_taken">ANC Opgenomen</th>
+          </tr>
+        </thead>
+        <tbody id="details-tabel">
+          <tr>
+            <td data-i18n="january">Januari</td>
+            <td id="detail-percentage-januari">100</td>
+            <td id="cascade-beschikbaar-januari">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-januari">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-januari">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-januari">0.00</td>
+            <td class="detail-kolom" id="el-start-januari">24.00</td>
+            <td class="detail-kolom" id="el-correctie-januari">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-januari">0.00</td>
+            <td class="detail-kolom" id="anc-start-januari">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-januari">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-januari">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="february">Februari</td>
+            <td id="detail-percentage-februari">100</td>
+            <td id="cascade-beschikbaar-februari">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-februari">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-februari">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-februari">0.00</td>
+            <td class="detail-kolom" id="el-start-februari">24.00</td>
+            <td class="detail-kolom" id="el-correctie-februari">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-februari">0.00</td>
+            <td class="detail-kolom" id="anc-start-februari">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-februari">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-februari">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="march">Maart</td>
+            <td id="detail-percentage-maart">100</td>
+            <td id="cascade-beschikbaar-maart">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-maart">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-maart">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-maart">0.00</td>
+            <td class="detail-kolom" id="el-start-maart">24.00</td>
+            <td class="detail-kolom" id="el-correctie-maart">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-maart">0.00</td>
+            <td class="detail-kolom" id="anc-start-maart">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-maart">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-maart">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="april">April</td>
+            <td id="detail-percentage-april">100</td>
+            <td id="cascade-beschikbaar-april">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-april">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-april">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-april">0.00</td>
+            <td class="detail-kolom" id="el-start-april">24.00</td>
+            <td class="detail-kolom" id="el-correctie-april">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-april">0.00</td>
+            <td class="detail-kolom" id="anc-start-april">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-april">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-april">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="may">Mei</td>
+            <td id="detail-percentage-mei">100</td>
+            <td id="cascade-beschikbaar-mei">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-mei">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-mei">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-mei">0.00</td>
+            <td class="detail-kolom" id="el-start-mei">24.00</td>
+            <td class="detail-kolom" id="el-correctie-mei">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-mei">0.00</td>
+            <td class="detail-kolom" id="anc-start-mei">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-mei">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-mei">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="june">Juni</td>
+            <td id="detail-percentage-juni">100</td>
+            <td id="cascade-beschikbaar-juni">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-juni">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-juni">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-juni">0.00</td>
+            <td class="detail-kolom" id="el-start-juni">24.00</td>
+            <td class="detail-kolom" id="el-correctie-juni">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-juni">0.00</td>
+            <td class="detail-kolom" id="anc-start-juni">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-juni">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-juni">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="july">Juli</td>
+            <td id="detail-percentage-juli">100</td>
+            <td id="cascade-beschikbaar-juli">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-juli">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-juli">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-juli">0.00</td>
+            <td class="detail-kolom" id="el-start-juli">24.00</td>
+            <td class="detail-kolom" id="el-correctie-juli">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-juli">0.00</td>
+            <td class="detail-kolom" id="anc-start-juli">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-juli">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-juli">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="august">Augustus</td>
+            <td id="detail-percentage-augustus">100</td>
+            <td id="cascade-beschikbaar-augustus">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-augustus">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-augustus">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-augustus">0.00</td>
+            <td class="detail-kolom" id="el-start-augustus">24.00</td>
+            <td class="detail-kolom" id="el-correctie-augustus">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-augustus">0.00</td>
+            <td class="detail-kolom" id="anc-start-augustus">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-augustus">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-augustus">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="september">September</td>
+            <td id="detail-percentage-september">100</td>
+            <td id="cascade-beschikbaar-september">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-september">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-september">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-september">0.00</td>
+            <td class="detail-kolom" id="el-start-september">24.00</td>
+            <td class="detail-kolom" id="el-correctie-september">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-september">0.00</td>
+            <td class="detail-kolom" id="anc-start-september">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-september">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-september">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="october">Oktober</td>
+            <td id="detail-percentage-oktober">100</td>
+            <td id="cascade-beschikbaar-oktober">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-oktober">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-oktober">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-oktober">0.00</td>
+            <td class="detail-kolom" id="el-start-oktober">24.00</td>
+            <td class="detail-kolom" id="el-correctie-oktober">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-oktober">0.00</td>
+            <td class="detail-kolom" id="anc-start-oktober">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-oktober">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-oktober">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="november">November</td>
+            <td id="detail-percentage-november">100</td>
+            <td id="cascade-beschikbaar-november">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-november">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-november">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-november">0.00</td>
+            <td class="detail-kolom" id="el-start-november">24.00</td>
+            <td class="detail-kolom" id="el-correctie-november">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-november">0.00</td>
+            <td class="detail-kolom" id="anc-start-november">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-november">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-november">0.00</td>
+          </tr>
+          <tr>
+            <td data-i18n="december">December</td>
+            <td id="detail-percentage-december">100</td>
+            <td id="cascade-beschikbaar-december">220.00</td>
+            <td><input type="text" class="percentage-input cascade-opgenomen-uren" inputmode="decimal" value="0.00"></td>
+            <td class="detail-kolom" id="adv-start-december">196.00</td>
+            <td class="detail-kolom" id="adv-correctie-december">0.00</td>
+            <td class="detail-kolom" id="adv-opgenomen-december">0.00</td>
+            <td class="detail-kolom" id="el-start-december">24.00</td>
+            <td class="detail-kolom" id="el-correctie-december">0.00</td>
+            <td class="detail-kolom" id="el-opgenomen-december">0.00</td>
+            <td class="detail-kolom" id="anc-start-december">0.00</td>
+            <td class="detail-kolom" id="anc-correctie-december">0.00</td>
+            <td class="detail-kolom" id="anc-opgenomen-december">0.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button type="button" id="toggle-andere-verlof-details" class="action-button verticale-toggle-button" data-i18n="show_details">
+      Toon details
+    </button>
+  </div>
 </div>
