@@ -82,6 +82,46 @@ function updateCascadeBeschikbaarTable() {
     });
 }
 
+function updateAndereVerlofDetailsToggleTekst() {
+    const tabelContainer = document.getElementById('tabel-andere-verlofsoorten');
+    const toggleButton = document.getElementById('toggle-andere-verlof-details');
+
+    if (!tabelContainer || !toggleButton) {
+        return;
+    }
+
+    const detailsOpen = tabelContainer.classList.contains('details-open');
+    const huidigeTaal = document.documentElement.lang || 'nl';
+
+    if (typeof translations !== 'undefined' && translations[huidigeTaal]) {
+        toggleButton.textContent = detailsOpen
+            ? (translations[huidigeTaal].hide_details || 'Verberg details')
+            : (translations[huidigeTaal].show_details || 'Toon details');
+    } else {
+        toggleButton.textContent = detailsOpen ? 'Verberg details' : 'Toon details';
+    }
+}
+
+function toggleAndereVerlofDetails() {
+    const tabelContainer = document.getElementById('tabel-andere-verlofsoorten');
+    if (!tabelContainer) {
+        return;
+    }
+
+    tabelContainer.classList.toggle('details-open');
+    updateAndereVerlofDetailsToggleTekst();
+}
+
+function initializeAndereVerlofDetailsToggle() {
+    const toggleButton = document.getElementById('toggle-andere-verlof-details');
+    if (!toggleButton) {
+        return;
+    }
+
+    toggleButton.addEventListener('click', toggleAndereVerlofDetails);
+    updateAndereVerlofDetailsToggleTekst();
+}
+
 function updateADVTable() {
     const maxADVVerlofElement = document.getElementById('max-adv-verlof');
     if (!maxADVVerlofElement) {
@@ -435,6 +475,8 @@ function beperkCascadeTotBeschikbaar(index) {
 function initializeAndereVerlofsoortenTable() {
     const rows = document.querySelectorAll('#details-tabel tr');
 
+    initializeAndereVerlofDetailsToggle();
+
     rows.forEach((row) => {
         const cascadeInput = row.querySelector('.cascade-opgenomen-uren');
 
@@ -493,4 +535,5 @@ function initializeAndereVerlofsoortenTable() {
     updateELTable();
     updateANCTable();
     updateCascadeBeschikbaarTable();
+    updateAndereVerlofDetailsToggleTekst();
 }
