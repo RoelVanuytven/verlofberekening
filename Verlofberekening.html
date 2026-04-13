@@ -29,13 +29,43 @@
 
 <div class="button-container">
   <button id="clearBtn" class="action-button" data-i18n="clear_data">Gegevens wissen</button>
+
   <button id="exportBtn" class="action-button" data-i18n="export_data">Gegevens exporteren</button>
-  <button id="importBtn" class="action-button" data-i18n="import_data">Gegevens importeren</button>
+
+  <div class="import-with-tooltip">
+    <button id="importBtn" class="action-button" data-i18n="import_data">Gegevens importeren</button>
+
+    <div class="info-tooltip" tabindex="0" aria-label="Uitleg bij exporteren en importeren">
+      ?
+      <div class="info-tooltip-text">
+        Wil je je ingevulde gegevens bewaren om later opnieuw te gebruiken of met iemand te delen, dan kan je ze hier exporteren en later opnieuw importeren. De gegevens worden opgeslagen als een CSV-bestand, zodat je ze eenvoudig kan bewaren, doorsturen en opnieuw opladen.
+      </div>
+    </div>
+  </div>
+
   <input type="file" id="importFile" accept=".csv" style="display: none;">
 </div>
 
 <div class="container">
-  <h1 data-i18n="employment_percentage">Tewerkstellingspercentage</h1>
+  <div class="info-title-row">
+    <h1>Verlofberekening</h1>
+    <div class="info-tooltip" tabindex="0" aria-label="Uitleg over deze pagina">
+      ?
+      <div class="info-tooltip-text">
+        Deze pagina helpt je inschatten welke impact een wijziging in je tewerkstellingspercentage heeft op je verlofrechten. Je ziet hier niet alleen hoeveel uren je in totaal ter beschikking hebt, maar ook hoe de opname van verlof anders doorweegt naargelang je voltijds of deeltijds werkt.
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section-label">
+    <span>Tewerkstellingspercentages</span>
+    <div class="info-tooltip" tabindex="0" aria-label="Uitleg bij de tabel tewerkstellingspercentages">
+      ?
+      <div class="info-tooltip-text">
+        Vul hier per maand het tewerkstellingspercentage van vorig jaar in, samen met de planning voor het huidige jaar. Die gegevens vormen de basis voor de verdere berekeningen op deze pagina en maken zichtbaar hoe een wijziging in je werkregime doorwerkt in je verlof.
+      </div>
+    </div>
+  </div>
 
   <!-- Tabel 1: Tewerkstellingspercentage -->
   <div id="tabel-tewerkstelling-container"></div>
@@ -46,6 +76,16 @@
     <p><strong data-i18n="limited_legal_vacation">Begrensd wettelijk verlof:</strong> <span id="begrensd-wettelijk-verlof">144.00</span>H</p>
   </div>
 
+  <div class="info-section-label">
+    <span>Wettelijk verlof</span>
+    <div class="info-tooltip" tabindex="0" aria-label="Uitleg bij de tabel wettelijk verlof">
+      ?
+      <div class="info-tooltip-text">
+        Deze tabel toont hoeveel wettelijk verlof beschikbaar is op basis van je situatie van vorig jaar, aangevuld met de invloed van je huidige werkregeling. Je kan per maand ingeven hoeveel uren je wil opnemen. Zo zie je meteen dat dezelfde opname zwaarder kan doorwegen in maanden waarin je minder werkt dan in maanden waarin je voltijds aan de slag bent.
+      </div>
+    </div>
+  </div>
+
   <!-- Tabel 2: Wettelijk verlof -->
   <div id="tabel-wettelijk-verlof-container"></div>
 
@@ -54,6 +94,16 @@
     <p><strong data-i18n="max_adv_vacation">Max ADV verlof:</strong> <span id="max-adv-verlof">196.00</span>H</p>
     <p><strong data-i18n="max_extra_vacation">Max extralegaal verlof:</strong> <span id="max-extralegaal-verlof">24.00</span>H</p>
     <p><strong data-i18n="max_seniority_vacation">Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">0.00</span>H</p>
+  </div>
+
+  <div class="info-section-label">
+    <span>Andere verlofsoorten</span>
+    <div class="info-tooltip" tabindex="0" aria-label="Uitleg bij de tabel andere verlofsoorten">
+      ?
+      <div class="info-tooltip-text">
+        Voor deze verlofvormen wordt gekeken naar je tewerkstellingspercentage in het huidige jaar. Je startdatum bij SCK bepaalt daarnaast hoeveel ancienniteitsverlof je hebt opgebouwd. De tabel laat zien hoeveel verlof beschikbaar is en laat je per maand invullen wat je wil opnemen. Via de knop “Toon details” kan je bovendien zien hoe het totale cascadeverlof is samengesteld.
+      </div>
+    </div>
   </div>
 
   <!-- Tabel 3: Andere verlofsoorten -->
