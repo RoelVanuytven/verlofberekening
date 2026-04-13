@@ -11,11 +11,25 @@ const translations = {
         "max_legal_vacation": "Max wettelijk verlof:",
         "limited_legal_vacation": "Begrensd wettelijk verlof:",
         "legal_vacation": "Wettelijk verlof",
+        "legal_vacation_title": "Wettelijk verlof",
         "other_vacation_types": "Andere verlofsoorten",
+        "other_leave_types_title": "Andere verlofsoorten",
         "other_vacation_this_year": "Ander verlof dit jaar:",
         "max_adv_vacation": "Max ADV verlof:",
         "max_extra_vacation": "Max extralegaal verlof:",
         "max_seniority_vacation": "Max ancieniteitsverlof:",
+
+        // Tooltip labels + teksten
+        "tooltip_import_export_label": "Uitleg bij exporteren en importeren",
+        "tooltip_import_export_text": "Wil je je ingevulde gegevens bewaren om later opnieuw te gebruiken of met iemand te delen, dan kan je ze hier exporteren en later opnieuw importeren. De gegevens worden opgeslagen als een CSV-bestand, zodat je ze eenvoudig kan bewaren, doorsturen en opnieuw opladen.",
+        "tooltip_page_label": "Uitleg over deze pagina",
+        "tooltip_page_text": "Deze pagina helpt je inschatten welke impact een wijziging in je tewerkstellingspercentage heeft op je verlofrechten. Je ziet hier niet alleen hoeveel uren je in totaal ter beschikking hebt, maar ook hoe de opname van verlof anders doorweegt naargelang je voltijds of deeltijds werkt.",
+        "tooltip_employment_label": "Uitleg bij de tabel tewerkstellingspercentages",
+        "tooltip_employment_text": "Vul hier per maand het tewerkstellingspercentage van vorig jaar in, samen met de planning voor het huidige jaar. Die gegevens vormen de basis voor de verdere berekeningen op deze pagina en maken zichtbaar hoe een wijziging in je werkregime doorwerkt in je verlof.",
+        "tooltip_legal_leave_label": "Uitleg bij de tabel wettelijk verlof",
+        "tooltip_legal_leave_text": "Deze tabel toont hoeveel wettelijk verlof beschikbaar is op basis van je situatie van vorig jaar, aangevuld met de invloed van je huidige werkregeling. Je kan per maand ingeven hoeveel uren je wil opnemen. Zo zie je meteen dat dezelfde opname zwaarder kan doorwegen in maanden waarin je minder werkt dan in maanden waarin je voltijds aan de slag bent.",
+        "tooltip_other_leave_label": "Uitleg bij de tabel andere verlofsoorten",
+        "tooltip_other_leave_text": "Voor deze verlofvormen wordt gekeken naar je tewerkstellingspercentage in het huidige jaar. Je startdatum bij SCK bepaalt daarnaast hoeveel ancienniteitsverlof je hebt opgebouwd. De tabel laat zien hoeveel verlof beschikbaar is en laat je per maand invullen wat je wil opnemen. Via de knop “Toon details” kan je bovendien zien hoe het totale cascadeverlof is samengesteld.",
 
         // Table headers
         "month": "Maand",
@@ -101,11 +115,25 @@ const translations = {
         "max_legal_vacation": "Congés légaux max :",
         "limited_legal_vacation": "Congés légaux limités :",
         "legal_vacation": "Congés légaux",
+        "legal_vacation_title": "Congés légaux",
         "other_vacation_types": "Autres types de congés",
+        "other_leave_types_title": "Autres types de congés",
         "other_vacation_this_year": "Autres congés cette année :",
         "max_adv_vacation": "Congés ADV max :",
         "max_extra_vacation": "Congés extra-légaux max :",
         "max_seniority_vacation": "Congés d'ancienneté max :",
+
+        // Tooltip labels + teksten
+        "tooltip_import_export_label": "Explication de l’exportation et de l’importation",
+        "tooltip_import_export_text": "Si vous souhaitez conserver les données saisies pour les réutiliser plus tard ou les partager avec quelqu’un, vous pouvez les exporter ici puis les réimporter ultérieurement. Les données sont enregistrées dans un fichier CSV, afin de pouvoir les conserver, les envoyer et les recharger facilement.",
+        "tooltip_page_label": "Explication de cette page",
+        "tooltip_page_text": "Cette page vous aide à estimer l’impact d’un changement de votre pourcentage d’emploi sur vos droits aux congés. Elle montre non seulement le nombre total d’heures disponibles, mais aussi l’effet plus ou moins important d’une prise de congé selon que vous travaillez à temps plein ou à temps partiel.",
+        "tooltip_employment_label": "Explication du tableau des pourcentages d’emploi",
+        "tooltip_employment_text": "Indiquez ici, pour chaque mois, le pourcentage d’emploi de l’année précédente ainsi que la planification pour l’année en cours. Ces données servent de base aux calculs de cette page et montrent clairement comment un changement de régime de travail influence vos congés.",
+        "tooltip_legal_leave_label": "Explication du tableau des congés légaux",
+        "tooltip_legal_leave_text": "Ce tableau montre le volume de congés légaux disponible sur la base de votre situation de l’année précédente, complétée par l’influence de votre régime de travail actuel. Vous pouvez indiquer chaque mois combien d’heures vous souhaitez prendre. Vous verrez ainsi qu’une même prise de congé peut peser davantage pendant les mois travaillés à temps partiel que pendant les mois à temps plein.",
+        "tooltip_other_leave_label": "Explication du tableau des autres congés",
+        "tooltip_other_leave_text": "Pour ces types de congés, c’est votre pourcentage d’emploi de l’année en cours qui est pris en compte. Votre date d’entrée au SCK détermine également le nombre d’heures de congé d’ancienneté accumulées. Le tableau montre combien de congés sont disponibles et vous permet d’indiquer chaque mois ce que vous souhaitez prendre. Le bouton « Afficher les détails » permet en outre de voir la composition du congé cascade total.",
 
         // Table headers
         "month": "Mois",
@@ -191,11 +219,25 @@ const translations = {
         "max_legal_vacation": "Max legal vacation:",
         "limited_legal_vacation": "Limited legal vacation:",
         "legal_vacation": "Legal vacation",
+        "legal_vacation_title": "Legal vacation",
         "other_vacation_types": "Other vacation types",
+        "other_leave_types_title": "Other vacation types",
         "other_vacation_this_year": "Other vacation this year:",
         "max_adv_vacation": "Max ADV vacation:",
         "max_extra_vacation": "Max extra-legal vacation:",
         "max_seniority_vacation": "Max seniority vacation:",
+
+        // Tooltip labels + teksten
+        "tooltip_import_export_label": "Explanation about exporting and importing",
+        "tooltip_import_export_text": "If you want to save your entered data for later use or to share it with someone, you can export it here and import it again later. The data is stored in a CSV file, so you can easily keep it, send it and reload it afterwards.",
+        "tooltip_page_label": "Explanation about this page",
+        "tooltip_page_text": "This page helps you estimate the impact of changes in your employment percentage on your vacation rights. It shows not only how many hours are available in total, but also how taking leave weighs differently depending on whether you work full-time or part-time.",
+        "tooltip_employment_label": "Explanation about the employment percentage table",
+        "tooltip_employment_text": "Enter the employment percentage for each month of the previous year, together with the plan for the current year. This information forms the basis for the calculations on this page and shows how a change in your work schedule affects your leave.",
+        "tooltip_legal_leave_label": "Explanation about the legal vacation table",
+        "tooltip_legal_leave_text": "This table shows how much legal vacation is available based on your situation in the previous year, combined with the influence of your current work schedule. You can enter how many hours you want to take each month. This makes it clear that the same leave entry can weigh more heavily in months when you work part-time than in months when you work full-time.",
+        "tooltip_other_leave_label": "Explanation about the other leave types table",
+        "tooltip_other_leave_text": "For these types of leave, your employment percentage in the current year is taken into account. Your start date at SCK also determines how much seniority leave you have built up. The table shows how much leave is available and lets you enter how much you want to take each month. Via the “Show details” button, you can also see how the total cascade leave is composed.",
 
         // Table headers
         "month": "Month",
