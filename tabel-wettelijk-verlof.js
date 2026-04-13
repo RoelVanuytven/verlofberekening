@@ -25,7 +25,6 @@ function updateTable() {
     let cumulatiefPercentage = 0;
     let vorigeWVStart = 0;
     let vorigeOpgenomenUren = 0;
-    let vorigePercentage = null;
 
     maanden.forEach((maand, index) => {
         const row = document.querySelector(`#verlof-tabel tr:nth-child(${index + 1})`);
@@ -57,34 +56,23 @@ function updateTable() {
             percentageWaarde = isNaN(parseLocaleNumber(percentageInput.value)) ? 0 : parseLocaleNumber(percentageInput.value);
         }
 
-        const percentage = percentageWaarde / 100;
         const opgenomenUren = isNaN(parseLocaleNumber(opgenomenUrenInput.value)) ? 0 : parseLocaleNumber(opgenomenUrenInput.value);
 
         if (detailPercentageCell) {
             detailPercentageCell.textContent = percentageWaarde.toFixed(0);
         }
 
+        // Wettelijk verlof wordt enkel bepaald door het vorige jaar.
+        // Daarom mag WV Start nooit hoger worden dan het begrensd wettelijk verlof.
         let wvStart;
 
         if (index === 0) {
-            wvStart = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
+            wvStart = begrensdWettelijkVerlof;
         } else {
-            const percentageGewijzigd = percentage !== vorigePercentage;
-
-            if (percentageGewijzigd) {
-                const vorigeMaand = maanden[index - 1];
-                const vorigePercentageWVTotaalElement = document.getElementById(`percentage-wv-totaal-${vorigeMaand}`);
-                const vorigePercentageWVTotaal = vorigePercentageWVTotaalElement
-                    ? parseLocaleNumber(vorigePercentageWVTotaalElement.textContent.replace('%', '')) / 100
-                    : 0;
-
-                const totaalVerlofrecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-                wvStart = totaalVerlofrecht * (1 - vorigePercentageWVTotaal);
-            } else {
-                wvStart = Math.max(0, vorigeWVStart - vorigeOpgenomenUren);
-            }
+            wvStart = Math.max(0, vorigeWVStart - vorigeOpgenomenUren);
         }
 
+        wvStart = Math.min(wvStart, begrensdWettelijkVerlof);
         wvStartCell.textContent = wvStart.toFixed(2);
 
         if (opgenomenUren > wvStart) {
@@ -100,8 +88,12 @@ function updateTable() {
 
         wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
 
-        const maandelijksRecht = percentage === 1 ? begrensdWettelijkVerlof : percentage * maxWettelijkVerlof;
-        const percentageWV = maandelijksRecht > 0 ? (parseLocaleNumber(opgenomenUrenInput.value || 0) / maandelijksRecht) * 100 : 0;
+        // Percentage opgenomen wettelijk verlof altijd berekenen op basis van
+        // het begrensd wettelijk verlof van vorig jaar.
+        const percentageWV = begrensdWettelijkVerlof > 0
+            ? (parseLocaleNumber(opgenomenUrenInput.value || 0) / begrensdWettelijkVerlof) * 100
+            : 0;
+
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
 
         cumulatiefPercentage += percentageWV;
@@ -109,7 +101,6 @@ function updateTable() {
 
         vorigeWVStart = wvStart;
         vorigeOpgenomenUren = isNaN(parseLocaleNumber(opgenomenUrenInput.value)) ? 0 : parseLocaleNumber(opgenomenUrenInput.value);
-        vorigePercentage = percentage;
     });
 
     if (typeof updateADVTable === 'function') updateADVTable();
