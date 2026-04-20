@@ -25,6 +25,7 @@ function updateTable() {
     let cumulatiefPercentage = 0;
     let vorigeWVStart = 0;
     let vorigeOpgenomenUren = 0;
+    let vorigePercentageWaarde = null;
 
     maanden.forEach((maand, index) => {
         const row = document.querySelector(`#verlof-tabel tr:nth-child(${index + 1})`);
@@ -62,22 +63,34 @@ function updateTable() {
             detailPercentageCell.textContent = percentageWaarde.toFixed(0);
         }
 
-        // Wettelijk verlof wordt enkel bepaald door het vorige jaar.
-        // Daarom mag WV Start nooit hoger worden dan het begrensd wettelijk verlof.
         let wvStart;
 
         if (index === 0) {
-            wvStart = begrensdWettelijkVerlof;
+            wvStart = percentageWaarde === 100
+                ? begrensdWettelijkVerlof
+                : (percentageWaarde / 100) * maxWettelijkVerlof;
         } else {
-            wvStart = Math.max(0, vorigeWVStart - vorigeOpgenomenUren);
+            const percentageGewijzigd = percentageWaarde !== vorigePercentageWaarde;
+
+            if (percentageGewijzigd) {
+                const totaalVerlofrechtVoorDezeMaand = percentageWaarde === 100
+                    ? begrensdWettelijkVerlof
+                    : (percentageWaarde / 100) * maxWettelijkVerlof;
+
+                wvStart = totaalVerlofrechtVoorDezeMaand * (1 - (cumulatiefPercentage / 100));
+            } else {
+                wvStart = Math.max(0, vorigeWVStart - vorigeOpgenomenUren);
+            }
         }
 
-        wvStart = Math.min(wvStart, begrensdWettelijkVerlof);
+        wvStart = Math.max(0, wvStart);
         wvStartCell.textContent = wvStart.toFixed(2);
 
         if (opgenomenUren > wvStart) {
             opgenomenUrenInput.value = wvStart.toFixed(2);
         }
+
+        const opgenomenUrenBegrensd = isNaN(parseLocaleNumber(opgenomenUrenInput.value)) ? 0 : parseLocaleNumber(opgenomenUrenInput.value);
 
         let wvCorrectie;
         if (index === 0) {
@@ -88,10 +101,12 @@ function updateTable() {
 
         wvCorrectieCell.textContent = wvCorrectie.toFixed(2);
 
-        // Percentage opgenomen wettelijk verlof altijd berekenen op basis van
-        // het begrensd wettelijk verlof van vorig jaar.
-        const percentageWV = begrensdWettelijkVerlof > 0
-            ? (parseLocaleNumber(opgenomenUrenInput.value || 0) / begrensdWettelijkVerlof) * 100
+        const totaalVerlofrechtVoorDezeMaand = percentageWaarde === 100
+            ? begrensdWettelijkVerlof
+            : (percentageWaarde / 100) * maxWettelijkVerlof;
+
+        const percentageWV = totaalVerlofrechtVoorDezeMaand > 0
+            ? (opgenomenUrenBegrensd / totaalVerlofrechtVoorDezeMaand) * 100
             : 0;
 
         percentageWVCell.textContent = `${percentageWV.toFixed(2)}%`;
@@ -100,7 +115,8 @@ function updateTable() {
         percentageWVTotaalCell.textContent = `${cumulatiefPercentage.toFixed(2)}%`;
 
         vorigeWVStart = wvStart;
-        vorigeOpgenomenUren = isNaN(parseLocaleNumber(opgenomenUrenInput.value)) ? 0 : parseLocaleNumber(opgenomenUrenInput.value);
+        vorigeOpgenomenUren = opgenomenUrenBegrensd;
+        vorigePercentageWaarde = percentageWaarde;
     });
 
     if (typeof updateADVTable === 'function') updateADVTable();
