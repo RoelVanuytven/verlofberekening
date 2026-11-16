@@ -181,14 +181,30 @@ function getOpslaanbareGegevens() {
     const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
     const cascadeOpgenomenInputs = document.querySelectorAll('.cascade-opgenomen-uren');
     const startDateInput = document.getElementById('startDate');
+    const bloedGevenInput = document.getElementById('bloedGevenUren');
+    const dertiendeMaandInput = document.getElementById('dertiendeMaandUren');
 
     return {
         vorigJaarPercentages: Array.from(vorigJaarInputs).map(input => input.value || '100'),
         huidigJaarPercentages: Array.from(huidigJaarInputs).map(input => input.value || '100'),
         opgenomenUren: Array.from(opgenomenUrenInputs).map(input => input.value || '0'),
         cascadeOpgenomenUren: Array.from(cascadeOpgenomenInputs).map(input => input.value || '0'),
-        startDate: startDateInput ? startDateInput.value : ''
+        startDate: startDateInput ? startDateInput.value : '',
+        bloedGevenUren: bloedGevenInput ? (bloedGevenInput.value || '0') : '0',
+        dertiendeMaandUren: dertiendeMaandInput ? (dertiendeMaandInput.value || '0') : '0'
     };
+}
+
+const EXTRA_CASCADE_VELDEN = ['bloedGevenUren', 'dertiendeMaandUren'];
+
+function zetExtraCascadeWaarde(id, waarde) {
+    const input = document.getElementById(id);
+    if (!input) {
+        return;
+    }
+
+    const getal = parseLocaleNumber(waarde);
+    input.value = isNaN(getal) ? '0.00' : getal.toFixed(2);
 }
 
 // Sla alle invoerwaarden op in sessionStorage
@@ -200,6 +216,8 @@ function saveToSessionStorage() {
     sessionStorage.setItem('opgenomenUren', JSON.stringify(data.opgenomenUren));
     sessionStorage.setItem('cascadeOpgenomenUren', JSON.stringify(data.cascadeOpgenomenUren));
     sessionStorage.setItem('startDate', data.startDate);
+    sessionStorage.setItem('bloedGevenUren', data.bloedGevenUren);
+    sessionStorage.setItem('dertiendeMaandUren', data.dertiendeMaandUren);
 }
 
 // Laad opgeslagen waarden uit sessionStorage
@@ -253,6 +271,13 @@ function loadFromSessionStorage() {
             setDefaultDate();
         }
     }
+
+    EXTRA_CASCADE_VELDEN.forEach((id) => {
+        const waarde = sessionStorage.getItem(id);
+        if (waarde !== null) {
+            zetExtraCascadeWaarde(id, waarde);
+        }
+    });
 
     if (typeof calculateAverage === 'function') calculateAverage();
     if (typeof updateTable === 'function') updateTable();
@@ -354,6 +379,8 @@ function exportToCSV() {
     let csvContent = 'data:text/csv;charset=utf-8,';
     csvContent += 'type,value\n';
     csvContent += `startDate,${data.startDate}\n`;
+    csvContent += `bloedGevenUren,${data.bloedGevenUren}\n`;
+    csvContent += `dertiendeMaandUren,${data.dertiendeMaandUren}\n`;
 
     data.vorigJaarPercentages.forEach((value, index) => {
         csvContent += `vorigJaarPercentage_${index},${value}\n`;
@@ -397,60 +424,123 @@ function importFromCSV() {
     fileInput.click();
 }
 
+function vertaal(sleutel, standaard) {
+    const taal = document.documentElement.lang || 'nl';
+
+    if (typeof translations !== 'undefined' && translations[taal] && translations[taal][sleutel]) {
+        return translations[taal][sleutel];
+    }
+
+    return standaard;
+}
+
+// Lees een CSV-export in, ook als die intussen in Excel geopend/bewaard werd:
+// BOM, Windows-regeleindes, ';' als scheidingsteken, aanhalingstekens en decimale komma's.
+function parseVerlofCsv(tekst) {
+    const regels = String(tekst)
+        .replace(/^﻿/, '')
+        .split(/\r\n|\r|\n/)
+        .map(regel => regel.trim())
+        .filter(regel => regel !== '');
+
+    const data = {};
+    if (!regels.length) {
+        return data;
+    }
+
+    const scheiding = regels[0].includes(';') && !regels[0].includes(',') ? ';' : ',';
+    const zonderQuotes = waarde => waarde.trim().replace(/^"(.*)"$/, '$1').trim();
+
+    regels.slice(1).forEach((regel) => {
+        const positie = regel.indexOf(scheiding);
+        if (positie === -1) {
+            return;
+        }
+
+        const sleutel = zonderQuotes(regel.slice(0, positie));
+        const waarde = zonderQuotes(regel.slice(positie + 1));
+
+        if (sleutel) {
+            data[sleutel] = waarde;
+        }
+    });
+
+    return data;
+}
+
+// Getal uit de CSV als tekst met punt als decimaalteken (of undefined als het geen getal is)
+function csvGetal(waarde) {
+    if (waarde === undefined || waarde === '') {
+        return undefined;
+    }
+
+    const getal = parseFloat(String(waarde).replace(/\s/g, '').replace(',', '.'));
+    return isNaN(getal) ? undefined : String(getal);
+}
+
+// Datum uit de CSV naar yyyy-mm-dd (ook 1/12/2007 of 01-12-2007 zoals Excel ze bewaart)
+function csvDatum(waarde) {
+    if (!waarde) {
+        return undefined;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(waarde)) {
+        return waarde;
+    }
+
+    const match = waarde.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+    if (match) {
+        return `${match[3]}-${match[2].padStart(2, '0')}-${match[1].padStart(2, '0')}`;
+    }
+
+    return undefined;
+}
+
 // Verwerk geïmporteerd CSV-bestand
 function handleFileImport(event) {
-    const file = event.target.files[0];
+    const fileInput = event.target;
+    const file = fileInput.files[0];
     if (!file) return;
 
     const reader = new FileReader();
 
     reader.onload = function (loadEvent) {
-        const csvData = loadEvent.target.result;
-        const lines = csvData.split('\n');
-        const data = {};
+        const data = parseVerlofCsv(loadEvent.target.result);
+        let aantalIngelezen = 0;
 
-        for (let i = 1; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (line) {
-                const [key, value] = line.split(',');
-                data[key] = value;
-            }
+        const zetGetallen = (inputs, prefix, opmaak) => {
+            inputs.forEach((input, index) => {
+                const value = csvGetal(data[`${prefix}_${index}`]);
+                if (value !== undefined) {
+                    input.value = opmaak ? opmaak(value) : value;
+                    aantalIngelezen++;
+                }
+            });
+        };
+
+        const startDatum = csvDatum(data.startDate);
+        if (startDatum && document.getElementById('startDate')) {
+            document.getElementById('startDate').value = startDatum;
+            aantalIngelezen++;
         }
 
-        if (data.startDate && document.getElementById('startDate')) {
-            document.getElementById('startDate').value = data.startDate;
+        zetGetallen(document.querySelectorAll('#tabel-tewerkstelling tbody tr td:nth-child(2) .percentage-input'), 'vorigJaarPercentage');
+        zetGetallen(document.querySelectorAll('#tabel-tewerkstelling .huidig-percentage-input'), 'huidigJaarPercentage');
+        zetGetallen(document.querySelectorAll('.opgenomen-uren'), 'opgenomenUren', value => parseFloat(value).toFixed(2));
+        zetGetallen(document.querySelectorAll('.cascade-opgenomen-uren'), 'cascadeOpgenomenUren', value => parseFloat(value).toFixed(2));
+
+        // Zelfde bestand later opnieuw kunnen kiezen
+        fileInput.value = '';
+
+        if (aantalIngelezen === 0) {
+            alert(vertaal('import_failed', 'Dit bestand kon niet ingelezen worden. Gebruik een CSV-bestand dat gemaakt werd met "Gegevens exporteren".'));
+            return;
         }
 
-        const vorigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling tbody tr td:nth-child(2) .percentage-input');
-        vorigJaarInputs.forEach((input, index) => {
-            const value = data[`vorigJaarPercentage_${index}`];
-            if (value !== undefined) {
-                input.value = value;
-            }
-        });
-
-        const huidigJaarInputs = document.querySelectorAll('#tabel-tewerkstelling .huidig-percentage-input');
-        huidigJaarInputs.forEach((input, index) => {
-            const value = data[`huidigJaarPercentage_${index}`];
-            if (value !== undefined) {
-                input.value = value;
-            }
-        });
-
-        const opgenomenUrenInputs = document.querySelectorAll('.opgenomen-uren');
-        opgenomenUrenInputs.forEach((input, index) => {
-            const value = data[`opgenomenUren_${index}`];
-            if (value !== undefined) {
-                input.value = value;
-            }
-        });
-
-        const cascadeOpgenomenInputs = document.querySelectorAll('.cascade-opgenomen-uren');
-        cascadeOpgenomenInputs.forEach((input, index) => {
-            const value = data[`cascadeOpgenomenUren_${index}`];
-            if (value !== undefined) {
-                input.value = value;
-            }
+        // Oudere exportbestanden hebben deze velden niet: dan 0
+        EXTRA_CASCADE_VELDEN.forEach((id) => {
+            const value = csvGetal(data[id]);
+            zetExtraCascadeWaarde(id, value !== undefined ? value : '0');
         });
 
         updateStartDate();
@@ -463,7 +553,7 @@ function handleFileImport(event) {
 
         saveToSessionStorage();
 
-        alert('Gegevens succesvol geïmporteerd!');
+        alert(vertaal('import_success', 'Gegevens succesvol geïmporteerd!'));
     };
 
     reader.readAsText(file);
@@ -538,6 +628,11 @@ function bindGlobalEvents() {
 // Initialisatie
 document.addEventListener('DOMContentLoaded', async function () {
     await loadAllPartials();
+
+    // De tabellen worden pas na het laden van de pagina ingevoegd: opnieuw vertalen
+    if (typeof window.translatePage === 'function') {
+        window.translatePage();
+    }
 
     showCookieConsent();
 

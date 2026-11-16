@@ -1,3 +1,130 @@
+// Extra cascadeverlof: vaste uren per jaar, NIET pro rata het tewerkstellingspercentage.
+// Ze worden in deze volgorde opgenomen, na ADV -> EL -> ANC.
+const EXTRA_CASCADE_VERLOF = [
+    { sleutel: 'bg', inputId: 'bloedGevenUren', max: 8 },
+    { sleutel: 'm13', inputId: 'dertiendeMaandUren', max: 144 }
+];
+
+function leesCelWaarde(id) {
+    const cel = document.getElementById(id);
+    const waarde = cel ? parseLocaleNumber(cel.textContent) : NaN;
+    return isNaN(waarde) ? 0 : waarde;
+}
+
+function getExtraCascadeUren(type) {
+    const input = document.getElementById(type.inputId);
+    const waarde = input ? parseLocaleNumber(input.value) : NaN;
+
+    if (isNaN(waarde)) {
+        return 0;
+    }
+
+    return Math.min(type.max, Math.max(0, waarde));
+}
+
+function getExtraCascadeStartVoorMaand(maand) {
+    return EXTRA_CASCADE_VERLOF.reduce((totaal, type) => totaal + leesCelWaarde(`${type.sleutel}-start-${maand}`), 0);
+}
+
+function updateExtraCascadeTable() {
+    EXTRA_CASCADE_VERLOF.forEach((type, typeIndex) => {
+        const jaartotaal = getExtraCascadeUren(type);
+        let vorigeStart = 0;
+        let vorigeOpgenomen = 0;
+
+        MAANDEN.forEach((maand, index) => {
+            const startCell = document.getElementById(`${type.sleutel}-start-${maand}`);
+            const opgenomenCell = document.getElementById(`${type.sleutel}-opgenomen-${maand}`);
+
+            if (!startCell || !opgenomenCell) {
+                return;
+            }
+
+            const start = index === 0 ? jaartotaal : Math.max(0, vorigeStart - vorigeOpgenomen);
+
+            const cascadeInput = document.querySelector(`#details-tabel tr:nth-child(${index + 1}) .cascade-opgenomen-uren`);
+            const cascade = cascadeInput && !isNaN(parseLocaleNumber(cascadeInput.value)) ? parseLocaleNumber(cascadeInput.value) : 0;
+
+            let alOpgenomen = leesCelWaarde(`adv-opgenomen-${maand}`)
+                + leesCelWaarde(`el-opgenomen-${maand}`)
+                + leesCelWaarde(`anc-opgenomen-${maand}`);
+
+            for (let i = 0; i < typeIndex; i++) {
+                alOpgenomen += leesCelWaarde(`${EXTRA_CASCADE_VERLOF[i].sleutel}-opgenomen-${maand}`);
+            }
+
+            const opgenomen = Math.min(Math.max(0, cascade - alOpgenomen), start);
+
+            startCell.textContent = start.toFixed(2);
+            opgenomenCell.textContent = opgenomen.toFixed(2);
+
+            vorigeStart = start;
+            vorigeOpgenomen = opgenomen;
+        });
+    });
+}
+
+function herberekenCascadeverlof() {
+    updateADVTable();
+    updateELTable();
+    updateANCTable();
+}
+
+// Na een wijziging van de extra uren: elke maand opnieuw begrenzen tot wat beschikbaar is
+function beperkAlleCascadeRijen() {
+    MAANDEN.forEach((maand, index) => {
+        herberekenCascadeverlof();
+        beperkCascadeTotBeschikbaar(index);
+    });
+
+    herberekenCascadeverlof();
+}
+
+function toonBegrenzingHint(input) {
+    const hint = document.getElementById(`${input.id}-hint`);
+    if (!hint) {
+        return;
+    }
+
+    hint.classList.add('is-begrensd');
+    clearTimeout(hint._begrenzingTimer);
+    hint._begrenzingTimer = setTimeout(() => hint.classList.remove('is-begrensd'), 1600);
+}
+
+function initializeExtraCascadeInvoer() {
+    EXTRA_CASCADE_VERLOF.forEach((type) => {
+        const input = document.getElementById(type.inputId);
+        if (!input) {
+            return;
+        }
+
+        input.addEventListener('input', function () {
+            normalizeDecimalInputValue(this);
+            const waarde = parseLocaleNumber(this.value);
+
+            if (!isNaN(waarde) && waarde > type.max) {
+                this.value = String(type.max);
+                toonBegrenzingHint(this);
+            } else if (!isNaN(waarde) && waarde < 0) {
+                this.value = '0';
+            }
+
+            herberekenCascadeverlof();
+        });
+
+        input.addEventListener('blur', function () {
+            normalizeDecimalInputValue(this);
+            this.value = getExtraCascadeUren(type).toFixed(2);
+
+            beperkAlleCascadeRijen();
+        });
+
+        input.addEventListener('focus', function () {
+            this.select();
+        });
+    });
+}
+
 function getCascadeVerdelingVoorRij(index) {
     const maand = MAANDEN[index];
     const row = document.querySelector(`#details-tabel tr:nth-child(${index + 1})`);
@@ -77,7 +204,7 @@ function updateCascadeBeschikbaarTable() {
         const elStart = isNaN(parseLocaleNumber(elStartCell.textContent)) ? 0 : parseLocaleNumber(elStartCell.textContent);
         const ancStart = isNaN(parseLocaleNumber(ancStartCell.textContent)) ? 0 : parseLocaleNumber(ancStartCell.textContent);
 
-        const cascadeBeschikbaar = advStart + elStart + ancStart;
+        const cascadeBeschikbaar = advStart + elStart + ancStart + getExtraCascadeStartVoorMaand(maand);
         cascadeBeschikbaarCell.textContent = cascadeBeschikbaar.toFixed(2);
     });
 }
@@ -119,6 +246,12 @@ function initializeAndereVerlofDetailsToggle() {
     }
 
     toggleButton.addEventListener('click', toggleAndereVerlofDetails);
+
+    // Na een taalwissel de knoptekst terug afstemmen op open/dicht
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+        btn.addEventListener('click', updateAndereVerlofDetailsToggleTekst);
+    });
+
     updateAndereVerlofDetailsToggleTekst();
 }
 
@@ -428,6 +561,8 @@ function updateANCTable() {
         vorigePercentage = percentage;
     });
 
+    // ANC is altijd de laatste pro-rata stap: daarna het extra (niet pro rata) cascadeverlof
+    updateExtraCascadeTable();
     updateCascadeBeschikbaarTable();
 
     if (typeof saveToSessionStorage === 'function') {
@@ -458,7 +593,7 @@ function beperkCascadeTotBeschikbaar(index) {
     const elStart = isNaN(parseLocaleNumber(elStartCell.textContent)) ? 0 : parseLocaleNumber(elStartCell.textContent);
     const ancStart = isNaN(parseLocaleNumber(ancStartCell.textContent)) ? 0 : parseLocaleNumber(ancStartCell.textContent);
 
-    const maxCascade = advStart + elStart + ancStart;
+    const maxCascade = advStart + elStart + ancStart + getExtraCascadeStartVoorMaand(maand);
 
     if (cascadeWaarde < 0) {
         cascadeWaarde = 0;
@@ -476,6 +611,7 @@ function initializeAndereVerlofsoortenTable() {
     const rows = document.querySelectorAll('#details-tabel tr');
 
     initializeAndereVerlofDetailsToggle();
+    initializeExtraCascadeInvoer();
 
     rows.forEach((row) => {
         const cascadeInput = row.querySelector('.cascade-opgenomen-uren');
