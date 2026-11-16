@@ -450,6 +450,104 @@ input[type="number"] {
     display: table-cell;
 }
 
+/* Brede tabel (met details) horizontaal laten scrollen i.p.v. af te snijden */
+#tabel-andere-verlofsoorten .andere-verlof-main {
+    overflow-x: auto;
+}
+
+/* Extra cascadekolommen (bloed geven, 13de maand) visueel scheiden */
+#tabel-andere-verlofsoorten th.extra-kolom:nth-last-child(4),
+#tabel-andere-verlofsoorten td.extra-kolom:nth-last-child(4) {
+    border-left: 2px solid var(--secondary-color);
+}
+
+/* ===== EXTRA CASCADEVERLOF (NIET PRO RATA) ===== */
+.extra-cascade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 4px auto 10px;
+    padding: 10px 16px 12px;
+    max-width: 520px;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.extra-cascade-kop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-tooltip.info-tooltip-klein {
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+}
+
+.extra-cascade-velden {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 36px;
+}
+
+.extra-cascade-veld {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 2px;
+}
+
+.extra-cascade-veld label {
+    font-weight: bold;
+    text-align: right;
+}
+
+.uren-invoer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.extra-cascade-input {
+    width: 72px;
+    height: 26px;
+    box-sizing: border-box;
+    padding: 0 4px;
+    font-size: 13px;
+    text-align: center;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.extra-cascade-input:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
+}
+
+.uren-eenheid {
+    font-weight: bold;
+}
+
+.extra-cascade-hint {
+    grid-column: 2;
+    font-size: 12px;
+    color: var(--tertiary-color);
+    transition: color 0.2s ease;
+}
+
+/* Kort oplichten wanneer de invoer begrensd werd tot het maximum */
+.extra-cascade-hint.is-begrensd {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
 /* ===== COOKIE MELDING ===== */
 /* Overlay voor cookie melding */
 .cookie-overlay {

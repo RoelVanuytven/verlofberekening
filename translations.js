@@ -54,6 +54,19 @@ const translations = {
         "anc_start": "ANC Start",
         "anc_correction": "ANC Correctie",
         "anc_taken": "ANC Opgenomen",
+        "bg_start": "BG Start",
+        "bg_taken": "BG Opgenomen",
+        "m13_start": "13M Start",
+        "m13_taken": "13M Opgenomen",
+
+        // Extra cascadeverlof (niet pro rata)
+        "extra_cascade_title": "Extra cascadeverlof (niet pro rata):",
+        "blood_donation": "Bloed geven",
+        "blood_donation_range": "0 tot 8 uur",
+        "thirteenth_month": "13de maand",
+        "thirteenth_month_range": "0 tot 144 uur",
+        "tooltip_extra_cascade_label": "Uitleg bij extra cascadeverlof",
+        "tooltip_extra_cascade_text": "Deze uren tellen volledig mee in je cascadeverlof en worden niet herrekend volgens je tewerkstellingspercentage. Ze worden pas opgenomen nadat je ADV, extralegaal verlof en anciënniteitsverlof op zijn: eerst bloed geven, daarna de 13de maand. Vul het totaal voor dit jaar in.",
 
         // Months
         "january": "Januari",
@@ -75,6 +88,8 @@ const translations = {
         "import_data": "Gegevens importeren",
         "show_details": "Toon details",
         "hide_details": "Verberg details",
+        "import_success": "Gegevens succesvol geïmporteerd!",
+        "import_failed": "Dit bestand kon niet ingelezen worden. Gebruik een CSV-bestand dat gemaakt werd met \"Gegevens exporteren\".",
 
         // Footer
         "rights_reserved": "Alle rechten voorbehouden.",
@@ -158,6 +173,19 @@ const translations = {
         "anc_start": "ANC Début",
         "anc_correction": "ANC Correction",
         "anc_taken": "ANC Pris",
+        "bg_start": "DS Début",
+        "bg_taken": "DS Pris",
+        "m13_start": "13M Début",
+        "m13_taken": "13M Pris",
+
+        // Congé cascade supplémentaire (non proratisé)
+        "extra_cascade_title": "Congé cascade supplémentaire (non proratisé) :",
+        "blood_donation": "Don de sang",
+        "blood_donation_range": "0 à 8 heures",
+        "thirteenth_month": "13e mois",
+        "thirteenth_month_range": "0 à 144 heures",
+        "tooltip_extra_cascade_label": "Explication du congé cascade supplémentaire",
+        "tooltip_extra_cascade_text": "Ces heures s’ajoutent entièrement à votre congé cascade et ne sont pas recalculées selon votre pourcentage d’emploi. Elles ne sont utilisées qu’une fois vos congés ADV, extra-légaux et d’ancienneté épuisés : d’abord le don de sang, ensuite le 13e mois. Indiquez le total pour cette année.",
 
         // Months
         "january": "Janvier",
@@ -179,6 +207,8 @@ const translations = {
         "import_data": "Importer les données",
         "show_details": "Afficher les détails",
         "hide_details": "Masquer les détails",
+        "import_success": "Données importées avec succès !",
+        "import_failed": "Ce fichier n’a pas pu être importé. Utilisez un fichier CSV créé avec « Exporter les données ».",
 
         // Footer
         "rights_reserved": "Tous droits réservés.",
@@ -262,6 +292,19 @@ const translations = {
         "anc_start": "ANC Start",
         "anc_correction": "ANC Correction",
         "anc_taken": "ANC Taken",
+        "bg_start": "BD Start",
+        "bg_taken": "BD Taken",
+        "m13_start": "13M Start",
+        "m13_taken": "13M Taken",
+
+        // Extra cascade leave (not pro rata)
+        "extra_cascade_title": "Extra cascade leave (not pro rata):",
+        "blood_donation": "Blood donation",
+        "blood_donation_range": "0 to 8 hours",
+        "thirteenth_month": "13th month",
+        "thirteenth_month_range": "0 to 144 hours",
+        "tooltip_extra_cascade_label": "Explanation about extra cascade leave",
+        "tooltip_extra_cascade_text": "These hours are fully added to your cascade leave and are not recalculated according to your employment percentage. They are only used once your ADV, extra-legal and seniority leave are used up: first blood donation, then the 13th month. Enter the total for this year.",
 
         // Months
         "january": "January",
@@ -283,6 +326,8 @@ const translations = {
         "import_data": "Import data",
         "show_details": "Show details",
         "hide_details": "Hide details",
+        "import_success": "Data imported successfully!",
+        "import_failed": "This file could not be imported. Use a CSV file created with \"Export data\".",
 
         // Footer
         "rights_reserved": "All rights reserved.",

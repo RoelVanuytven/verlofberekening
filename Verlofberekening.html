@@ -116,6 +116,44 @@
     <p><strong data-i18n="max_seniority_vacation">Max ancieniteitsverlof:</strong> <span id="max-ancieniteits-verlof">0.00</span>H</p>
   </div>
 
+  <!-- Extra cascadeverlof: vaste uren, niet pro rata -->
+  <div class="extra-cascade">
+    <div class="extra-cascade-kop">
+      <strong data-i18n="extra_cascade_title">Extra cascadeverlof (niet pro rata):</strong>
+      <div
+        class="info-tooltip info-tooltip-klein"
+        tabindex="0"
+        aria-label="Uitleg bij extra cascadeverlof"
+        data-i18n-aria-label="tooltip_extra_cascade_label"
+      >
+        ?
+        <div class="info-tooltip-text" data-i18n="tooltip_extra_cascade_text">
+          Deze uren tellen volledig mee in je cascadeverlof en worden niet herrekend volgens je tewerkstellingspercentage. Ze worden pas opgenomen nadat je ADV, extralegaal verlof en anciënniteitsverlof op zijn: eerst bloed geven, daarna de 13de maand. Vul het totaal voor dit jaar in.
+        </div>
+      </div>
+    </div>
+
+    <div class="extra-cascade-velden">
+      <div class="extra-cascade-veld">
+        <label for="bloedGevenUren" data-i18n="blood_donation">Bloed geven</label>
+        <div class="uren-invoer">
+          <input type="text" id="bloedGevenUren" class="extra-cascade-input" inputmode="decimal" autocomplete="off" value="0.00" aria-describedby="bloedGevenUren-hint">
+          <span class="uren-eenheid" aria-hidden="true">H</span>
+        </div>
+        <span class="extra-cascade-hint" id="bloedGevenUren-hint" data-i18n="blood_donation_range">0 tot 8 uur</span>
+      </div>
+
+      <div class="extra-cascade-veld">
+        <label for="dertiendeMaandUren" data-i18n="thirteenth_month">13de maand</label>
+        <div class="uren-invoer">
+          <input type="text" id="dertiendeMaandUren" class="extra-cascade-input" inputmode="decimal" autocomplete="off" value="0.00" aria-describedby="dertiendeMaandUren-hint">
+          <span class="uren-eenheid" aria-hidden="true">H</span>
+        </div>
+        <span class="extra-cascade-hint" id="dertiendeMaandUren-hint" data-i18n="thirteenth_month_range">0 tot 144 uur</span>
+      </div>
+    </div>
+  </div>
+
   <div class="info-section-label">
     <span data-i18n="other_leave_types_title">Andere verlofsoorten</span>
     <div
